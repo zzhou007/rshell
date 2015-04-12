@@ -155,10 +155,10 @@ bool quit(string in)
 	//removes ending white spaces 
 	cmd = cmd.substr(0, end + 1);
 	
-	//this will exit even if exit is followed by other characters ie EXITasdf or EXIT -a
+	//this will exit even if exit is followed by other characters ie exitasdf or exit -a
 	//string cmd = in.substr(start, 4);
 	
-	if (cmd  == "EXIT")
+	if (cmd  == "exit")
 	{
 		return true;
 	}
@@ -170,6 +170,9 @@ int main(int argc, char **argv)
 	for(;;)
 	{
 	finish:
+		char hostname[20];
+		gethostname(hostname, 20);
+		cout << getlogin() << "@" << hostname;
 		string in;
 		cout << "$";
 		getline(cin,in);
@@ -217,7 +220,6 @@ int main(int argc, char **argv)
 		}
 		if (quit(in))
 		{
-			cout << "exit check" << endl;
 			return 0;
 		}	
 		if (execb(in) == -1)
