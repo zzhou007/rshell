@@ -144,6 +144,7 @@ int main(int argc, char **argv)
 	string cmd;
 	for(;;)
 	{
+	finish:
 		string in;
 		cout << "$";
 		getline(cin,in);
@@ -162,10 +163,18 @@ int main(int argc, char **argv)
 				in = in.substr(cut+2, string::npos);
 			
 			}
+			if (orr)
+				if (execb(cmd) != -1)
+					goto finish;
+			if (andd)
+				if (execb(cmd) == -1)
+					goto finish;
+			if (next)
+				execb(cmd);
+
 			next = false;
 			andd = false;
 			orr = false;
-			execb(cmd);	
 			cut = connector(next, orr, andd, in);
 		
 		}
