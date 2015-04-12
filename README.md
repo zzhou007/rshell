@@ -29,3 +29,7 @@ They work form left to right.
 	</tr>
 </table>
 
+## Quitting Program 
+The program can be exited with the EXIT command.
+It will work with connectors. 
+If command has and characters trailing or leading it will not work. 
