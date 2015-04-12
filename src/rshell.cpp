@@ -206,7 +206,8 @@ int main(int argc, char **argv)
 			{
 				if (quit(cmd))
 					exit(0);
-				execb(cmd);
+				if (execb(cmd) == -1)
+					return 0;
 			}
 			next = false;
 			andd = false;
@@ -219,7 +220,8 @@ int main(int argc, char **argv)
 			cout << "exit check" << endl;
 			return 0;
 		}	
-		execb(in);
+		if (execb(in) == -1)
+			return 0;
 	}
 	return 0;
 }
