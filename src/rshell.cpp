@@ -8,7 +8,7 @@ using namespace std;
 //takes in 3 bools and 1 string 
 //outputs the number for the closest connector
 //sets one or none of the 3 connector bools
-int connector(bool next, bool orr, bool andd, string cmd)
+int connector(bool &next, bool &orr, bool &andd, string const cmd)
 {
 	int nexti = cmd.find(";");
 	int orri = cmd.find("||");
@@ -102,7 +102,6 @@ int connector(bool next, bool orr, bool andd, string cmd)
 		}
 	}
 }
-
 //will fork and run cmd
 //will perror if system call faults
 //returns -1 if unable to run command else 0
@@ -140,7 +139,6 @@ int execb (string in)
 		}
 	return 0;
 }
-
 int main(int argc, char **argv)
 {
 	string cmd;
@@ -153,22 +151,22 @@ int main(int argc, char **argv)
 		int cut = connector(next, orr, andd, in);
 		while (cut != -1)
 		{	
-		
 			if (next)
 			{
 				cmd = in.substr(0,cut);
-				in = in.substr(cut+3, string::npos);
+				in = in.substr(cut+1, string::npos);
 			}
 			else
 			{	
 				cmd = in.substr(0,cut);
-				in = in.substr(cut+5, string::npos);
+				in = in.substr(cut+2, string::npos);
+			
 			}
-			cout << "cut " << cut << endl;
-			cout << "in " << in << endl;
-			cout << "cmd " << cmd << endl;
+			next = false;
+			andd = false;
+			orr = false;
 			execb(cmd);	
-			int cut = connector(next, orr, andd, cmd);
+			cut = connector(next, orr, andd, in);
 		
 		}
 		execb(in);
