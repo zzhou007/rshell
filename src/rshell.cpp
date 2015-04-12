@@ -2,6 +2,7 @@
 #include <iostream>
 #include <stdio.h>
 #include <unistd.h>
+#include <stdlib.h>
 #include <sys/wait.h>
 using namespace std;
 
@@ -139,6 +140,30 @@ int execb (string in)
 		}
 	return 0;
 }
+//will output true if program needs to be exited false otherwise
+bool quit(string in)
+{
+	int start = in.find_first_not_of(" \t\f\v\r");
+	if (start == string::npos) 
+		return false;
+	//removes leading white space
+	string cmd = in.substr(start);
+	
+	int end = cmd.find_last_not_of(" \t\f\v\r");
+	if (end == string::npos)
+		return false;
+	//removes ending white spaces 
+	cmd = cmd.substr(0, end + 1);
+	
+	//this will exit even if exit is followed by other characters ie EXITasdf or EXIT -a
+	//string cmd = in.substr(start, 4);
+	
+	if (cmd  == "EXIT")
+	{
+		return true;
+	}
+	return false;
+}
 int main(int argc, char **argv)
 {
 	string cmd;
@@ -164,20 +189,36 @@ int main(int argc, char **argv)
 			
 			}
 			if (orr)
+			{
+				if (quit(cmd))
+					exit(0);
 				if (execb(cmd) != -1)
-					goto finish;
+					return 0;
+			}
 			if (andd)
+			{
+				if (quit(cmd))
+					exit(0);
 				if (execb(cmd) == -1)
-					goto finish;
+					return 0;
+			}
 			if (next)
+			{
+				if (quit(cmd))
+					exit(0);
 				execb(cmd);
-
+			}
 			next = false;
 			andd = false;
 			orr = false;
 			cut = connector(next, orr, andd, in);
 		
 		}
+		if (quit(in))
+		{
+			cout << "exit check" << endl;
+			return 0;
+		}	
 		execb(in);
 	}
 	return 0;
