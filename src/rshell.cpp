@@ -113,8 +113,7 @@ int execb (string in)
 			perror("failed to fork");
 		else if (pid == 0)
 		{
-		
-			char *arg[in.length()];
+			char *arg[99];
 			char *temp = strdup(in.c_str());
 			arg[0] = strtok(temp, " ");
 			char *token = arg[0];
@@ -143,13 +142,13 @@ int execb (string in)
 //will output true if program needs to be exited false otherwise
 bool quit(string in)
 {
-	int start = in.find_first_not_of(" \t\f\v\r");
+	size_t start = in.find_first_not_of(" \t\f\v\r");
 	if (start == string::npos) 
 		return false;
 	//removes leading white space
 	string cmd = in.substr(start);
 	
-	int end = cmd.find_last_not_of(" \t\f\v\r");
+	size_t end = cmd.find_last_not_of(" \t\f\v\r");
 	if (end == string::npos)
 		return false;
 	//removes ending white spaces 
@@ -169,13 +168,15 @@ int main(int argc, char **argv)
 	string cmd;
 	for(;;)
 	{
-	finish:
 		char hostname[20];
 		gethostname(hostname, 20);
 		cout << getlogin() << "@" << hostname;
 		string in;
 		cout << "$";
 		getline(cin,in);
+		size_t comment = in.find("#");
+		if (comment != string::npos)
+			in = in.substr(0, comment);
 		bool next = false, orr = false, andd = false;
 		int cut = connector(next, orr, andd, in);
 		while (cut != -1)
