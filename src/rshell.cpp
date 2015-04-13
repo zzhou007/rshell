@@ -108,6 +108,7 @@ int connector(bool &next, bool &orr, bool &andd, string const cmd)
 //returns -1 if unable to run command else 0
 int execb (string in)
 {
+	int status = 0;
 	pid_t pid = fork();
 		if (pid == -1)
 			perror("failed to fork");
@@ -125,17 +126,24 @@ int execb (string in)
 			int execs = execvp(arg[0], arg);
 			if (execs == -1)
 			{
+				cout << "check 11";
 				perror("cannot execute command");
-				return -1;
+				exit(1);
 			}
 			delete temp;
 		}
 		else 
 		{
-			int waits;
-			waits = wait(NULL);
+			int waits = waitpid(-1, &status, 0);
+			cout << waits << " ";
+			cout << status;
 			if (waits == -1)
 				perror("no child");
+			if (status > 0)
+			{
+				cout << "check hi";
+				return -1;
+			}
 		}
 	return 0;
 }
@@ -168,7 +176,7 @@ int main(int argc, char **argv)
 	string cmd;
 	for(;;)
 	{
-		char hostname[20];
+		finish:char hostname[20];
 		gethostname(hostname, 20);
 		cout << getlogin() << "@" << hostname;
 		string in;
@@ -197,21 +205,21 @@ int main(int argc, char **argv)
 				if (quit(cmd))
 					exit(0);
 				if (execb(cmd) != -1)
-					return 0;
+					goto finish;
 			}
 			if (andd)
 			{
 				if (quit(cmd))
 					exit(0);
 				if (execb(cmd) == -1)
-					return 0;
+					goto finish;
 			}
 			if (next)
 			{
 				if (quit(cmd))
 					exit(0);
 				if (execb(cmd) == -1)
-					return 0;
+					goto finish;
 			}
 			next = false;
 			andd = false;
