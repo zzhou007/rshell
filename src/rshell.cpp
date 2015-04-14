@@ -126,7 +126,6 @@ int execb (string in)
 			int execs = execvp(arg[0], arg);
 			if (execs == -1)
 			{
-				cout << "check 11";
 				perror("cannot execute command");
 				exit(1);
 			}
@@ -135,13 +134,10 @@ int execb (string in)
 		else 
 		{
 			int waits = waitpid(-1, &status, 0);
-			cout << waits << " ";
-			cout << status;
 			if (waits == -1)
 				perror("no child");
 			if (status > 0)
 			{
-				cout << "check hi";
 				return -1;
 			}
 		}
@@ -218,8 +214,7 @@ int main(int argc, char **argv)
 			{
 				if (quit(cmd))
 					exit(0);
-				if (execb(cmd) == -1)
-					goto finish;
+				execv(cmd); //if (execb(cmd) == -1); no if run when success or fail
 			}
 			next = false;
 			andd = false;
@@ -231,8 +226,7 @@ int main(int argc, char **argv)
 		{
 			return 0;
 		}	
-		if (execb(in) == -1)
-			return 0;
+		execb(in); //if (execb(in) == -1); if statement is empty does not matter if succecd or fail 
 	}
 	return 0;
 }
