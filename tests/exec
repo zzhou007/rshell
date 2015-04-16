@@ -1,116 +1,81 @@
-Script started on Thu 16 Apr 2015 01:29:12 AM PDT
-vaio@debian:~/Documents/rshell$ make
-mkdir bin
-cd src; \
-g++ -Wall -Werror -ansi -pedantic -o rshell *.cpp; \
-mv rshell ../bin; \
-cd -; \
-
-/home/vaio/Documents/rshell
-vaio@debian:~/Documents/rshell$ ls
-bin  LICENSE  makefile	README.md  src	tests
+Script started on Thu 16 Apr 2015 01:37:02 AM PDT
 vaio@debian:~/Documents/rshell$ bin/rshell
 vaio@debian$ls
 bin  LICENSE  makefile	README.md  src	tests
-vaio@debian$ls -aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+vaio@debian$                 ls                
+bin  LICENSE  makefile	README.md  src	tests
+vaio@debian$ls           -a
 .  ..  bin  .git  .gitignore  LICENSE  makefile  README.md  src  tests
-vaio@debian$                 pwd         
+vaio@debian$ls        -aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+.  ..  bin  .git  .gitignore  LICENSE  makefile  README.md  src  tests
+vaio@debian$pwd 
 /home/vaio/Documents/rshell
-vaio@debian$ ow  pwd |  | ls
-/home/vaio/Documents/rshell
-vaio@debian$pwd && ls
-/home/vaio/Documents/rshell
-bin  LICENSE  makefile	README.md  src	tests
-vaio@debian$ech o  o ; ls           ;      la || ow  pwd && owd
-
-bin  LICENSE  makefile	README.md  src	tests
+vaio@debian$pwd -a
+pwd: invalid option -- 'a'
+Try 'pwd --help' for more information.
+vaio@debian$a-  -a
 cannot execute command: No such file or directory
-/home/vaio/Documents/rshell
-cannot execute command: No such file or directory
-vaio@debian$pa && pa
-cannot execute command: No such file or directory
-vaio@debian$pa && ls
-cannot execute command: No such file or directory
-vaio@debian$pa || ls
-cannot execute command: No such file or directory
-bin  LICENSE  makefile	README.md  src	tests
 vaio@debian$clear
-[3;J[H[2Jvaio@debian$exit
-vaio@debian:~/Documents/rshell$ bin/rshell
-vaio@debian$exit asdf
+[3;J[H[2Jvaio@debian$echo helllooooooooooooooooooooooooooo
+helllooooooooooooooooooooooooooo
+vaio@debian$pwd || ls
+/home/vaio/Documents/rshell
+vaio@debian$la || ls
 cannot execute command: No such file or directory
-vaio@debian$exit || ls
+bin  LICENSE  makefile	README.md  src	tests
+vaio@debian$ls || pp pppjsdfjaps
+bin  LICENSE  makefile	README.md  src	tests
+vaio@debian$la || pwd
+cannot execute command: No such file or directory
+/home/vaio/Documents/rshell
+vaio@debian$la && ls
+cannot execute command: No such file or directory
+vaio@debian$ls && pwd
+bin  LICENSE  makefile	README.md  src	tests
+/home/vaio/Documents/rshell
+vaio@debian$echo hello     ;     ls ;; pwd
+hello
+bin  LICENSE  makefile	README.md  src	tests
+/home/vaio/Documents/rshell
+vaio@debian$lllll     ;;;;;; echo hello 
+hello
+vaio@debian$|| echo hello 
+hello
+vaio@debian$&& echo e e
+vaio@debian$||||echo e
+e
+vaio@debian$false||fe alse||true && ls ;;;;;;;; pwd
+bin  LICENSE  makefile	README.md  src	tests
+/home/vaio/Documents/rshell
+vaio@debian$                        exit
 vaio@debian:~/Documents/rshell$ bin/rshell
-vaio@debian$ls || exit
-bin  LICENSE  makefile	README.md  src	tests
-vaio@debian$ls && exit
-bin  LICENSE  makefile	README.md  src	tests
+vaio@debian$               exit                            
 vaio@debian:~/Documents/rshell$ bin/rshell
 vaio@debian$ps
   PID TTY          TIME CMD
- 1921 pts/1    00:00:00 bash
- 1955 pts/1    00:00:00 rshell
- 1956 pts/1    00:00:00 ps
-vaio@debian$ll #asdfasdf
-cannot execute command: No such file or directory
-vaio@debian$##
-vaio@debian$######
-vaio@debian$#lsadfkdsj##jlkaf#
-vaio@debian$ls #klfajsdlfja;lsgj; wjegao
-bin  LICENSE  makefile	README.md  src	tests
-vaio@debian$ls ; pwd #fasjdfhjashgl;a g
-bin  LICENSE  makefile	README.md  src	tests
-/home/vaio/Documents/rshell
-vaio@debian$;;;;;ks  ks || ls 
-cannot execute command: No such file or directory
-bin  LICENSE  makefile	README.md  src	tests
-vaio@debian$|| ls
-bin  LICENSE  makefile	README.md  src	tests
-vaio@debian$$W  && ls
-vaio@debian$|||||||||s ls
-cannot execute command: No such file or directory
-vaio@debian$||||||ls
-bin  LICENSE  makefile	README.md  src	tests
-vaio@debian$echo hellooooooooooo && hi || hi
-hellooooooooooo
-cannot execute command: No such file or directory
-cannot execute command: No such file or directory
+ 2062 pts/1    00:00:00 bash
+ 2115 pts/1    00:00:00 rshell
+ 2116 pts/1    00:00:00 ps
 vaio@debian$clear
-[3;J[H[2Jvaio@debian$                   exit                             
-vaio@debian:~/Documents/rshell$ ls
+[3;J[H[2Jvaio@debian$ls || ls
 bin  LICENSE  makefile	README.md  src	tests
-vaio@debian:~/Documents/rshell$ git add src
-vaio@debian:~/Documents/rshell$ gi[K[Kls 
+vaio@debian$#################
+vaio@debian$#
+vaio@debian$ls #jakdghkja hsgjawehgjahgkj skjd lghakhdgkjaslgkja##
 bin  LICENSE  makefile	README.md  src	tests
-vaio@debian:~/Documents/rshell$ cd src
-vaio@debian:~/Documents/rshell/src$ ls
-a.out  rshell.cpp
-vaio@debian:~/Documents/rshell/src$ git re[Km [K[K[K[K[K[K[Kgit status 
-On branch exec
-Changes to be committed:
-  (use "git reset HEAD <file>..." to unstage)
+vaio@debian$             #            # akdjf;kl
+vaio@debian$            pwd           # || jadsjf lkadsjflkaj eflkjawe 
+/home/vaio/Documents/rshell
+vaio@debian$                               ls                        || #klfjadslkfj alkjfklsdj flk
+bin  LICENSE  makefile	README.md  src	tests
+vaio@debian$clear
+[3;J[H[2Jvaio@debian$exit =a
+cannot execute command: No such file or directory
+vaio@debian$                    ls || exit
+bin  LICENSE  makefile	README.md  src	tests
+vaio@debian$ls && exit
+bin  LICENSE  makefile	README.md  src	tests
+vaio@debian:~/Documents/rshell$ exit
+exit
 
-	[32mmodified:   rshell.cpp[m
-
-Changes not staged for commit:
-  (use "git add <file>..." to update what will be committed)
-  (use "git checkout -- <file>..." to discard changes in working directory)
-
-	[31mmodified:   ../tests/exec[m
-
-Untracked files:
-  (use "git add <file>..." to include in what will be committed)
-
-	[31m../bin/[m
-
-vaio@debian:~/Documents/rshell/src$ git add exec
-fatal: pathspec 'exec' did not match any files
-vaio@debian:~/Documents/rshell/src$ git add //[K[K../tests/exec
-vaio@debian:~/Documents/rshell/src$ ls
-a.out  rshell.cpp
-vaio@debian:~/Documents/rshell/src$ git status
-On branch exec
-Changes to be committed:
-  (use "git reset HEAD <file>..." to unstage)
-
-	[32mmodified:   rshell.cpp
+Script done on Thu 16 Apr 2015 01:40:13 AM PDT
