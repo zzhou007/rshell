@@ -1,316 +1,116 @@
-Script started on Thu 16 Apr 2015 01:17:47 AM PDT
-vaio@debian:~/Documents/rshell$ rs[K[Kbin/rshell
-vaio@debian$ls -a
-.  ..  bin  .git  .gitignore  LICENSE  makefile  README.md  rshell  src  tests
-vaio@debian$ls 
-bin  LICENSE  makefile	README.md  rshell  src	tests
-vaio@debian$pwd
+Script started on Thu 16 Apr 2015 01:29:12 AM PDT
+vaio@debian:~/Documents/rshell$ make
+mkdir bin
+cd src; \
+g++ -Wall -Werror -ansi -pedantic -o rshell *.cpp; \
+mv rshell ../bin; \
+cd -; \
+
 /home/vaio/Documents/rshell
+vaio@debian:~/Documents/rshell$ ls
+bin  LICENSE  makefile	README.md  src	tests
+vaio@debian:~/Documents/rshell$ bin/rshell
+vaio@debian$ls
+bin  LICENSE  makefile	README.md  src	tests
+vaio@debian$ls -aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+.  ..  bin  .git  .gitignore  LICENSE  makefile  README.md  src  tests
+vaio@debian$                 pwd         
+/home/vaio/Documents/rshell
+vaio@debian$ ow  pwd |  | ls
+/home/vaio/Documents/rshell
+vaio@debian$pwd && ls
+/home/vaio/Documents/rshell
+bin  LICENSE  makefile	README.md  src	tests
+vaio@debian$ech o  o ; ls           ;      la || ow  pwd && owd
+
+bin  LICENSE  makefile	README.md  src	tests
+cannot execute command: No such file or directory
+/home/vaio/Documents/rshell
+cannot execute command: No such file or directory
+vaio@debian$pa && pa
+cannot execute command: No such file or directory
+vaio@debian$pa && ls
+cannot execute command: No such file or directory
+vaio@debian$pa || ls
+cannot execute command: No such file or directory
+bin  LICENSE  makefile	README.md  src	tests
 vaio@debian$clear
-[3;J[H[2Jvaio@debian$ls
-bin  LICENSE  makefile	README.md  rshell  src	tests
-vaio@debian$ls || ls
-bin  LICENSE  makefile	README.md  rshell  src	tests
-vaio@debian$la || ls
-cannot execute command: No such file or directory
-bin  LICENSE  makefile	README.md  rshell  src	tests
-vaio@debian$ls  pwd && ls ; la || ls || ls ; ls
-/home/vaio/Documents/rshell
-bin  LICENSE  makefile	README.md  rshell  src	tests
-cannot execute command: No such file or directory
-bin  LICENSE  makefile	README.md  rshell  src	tests
-vaio@debian$pwd ; pwd 
-/home/vaio/Documents/rshell
-/home/vaio/Documents/rshell
-vaio@debian$pw  ls -aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa; echo hello 
-.  ..  bin  .git  .gitignore  LICENSE  makefile  README.md  rshell  src  tests
-hello
-vaio@debian$               ls               
-bin  LICENSE  makefile	README.md  rshell  src	tests
-vaio@debian$ls                \   ;ls                            ;                          ;a    ka    l ; la \ || ls
-bin  LICENSE  makefile	README.md  rshell  src	tests
-bin  LICENSE  makefile	README.md  rshell  src	tests
-cannot execute command: No such file or directory
-bin  LICENSE  makefile	README.md  rshell  src	tests
-vaio@debian$ck lear
 [3;J[H[2Jvaio@debian$exit
-vaio@debian:~/Documents/rshell$ bin/rshell[5Pclearbin/rshell
-vaio@debian$ls                 exut  t ot    it                               
+vaio@debian:~/Documents/rshell$ bin/rshell
+vaio@debian$exit asdf
+cannot execute command: No such file or directory
+vaio@debian$exit || ls
 vaio@debian:~/Documents/rshell$ bin/rshell
 vaio@debian$ls || exit
-bin  LICENSE  makefile	README.md  rshell  src	tests
-vaio@debian$la || exit
-cannot execute command: No such file or directory
+bin  LICENSE  makefile	README.md  src	tests
+vaio@debian$ls && exit
+bin  LICENSE  makefile	README.md  src	tests
 vaio@debian:~/Documents/rshell$ bin/rshell
-vaio@debian$clear
-[3;J[H[2Jvaio@debian$#
-vaio@debian$#
+vaio@debian$ps
+  PID TTY          TIME CMD
+ 1921 pts/1    00:00:00 bash
+ 1955 pts/1    00:00:00 rshell
+ 1956 pts/1    00:00:00 ps
+vaio@debian$ll #asdfasdf
+cannot execute command: No such file or directory
 vaio@debian$##
-vaio@debian$ls #ls
-bin  LICENSE  makefile	README.md  rshell  src	tests
-vaio@debian$#exit
-vaio@debian$ls                                        #exit
-bin  LICENSE  makefile	README.md  rshell  src	tests
-vaio@debian$ls          # asdf askljdfjaslk;d ja;sd
-bin  LICENSE  makefile	README.md  rshell  src	tests
-vaio@debian$ajsdjf;asdjf;slaj
+vaio@debian$######
+vaio@debian$#lsadfkdsj##jlkaf#
+vaio@debian$ls #klfajsdlfja;lsgj; wjegao
+bin  LICENSE  makefile	README.md  src	tests
+vaio@debian$ls ; pwd #fasjdfhjashgl;a g
+bin  LICENSE  makefile	README.md  src	tests
+/home/vaio/Documents/rshell
+vaio@debian$;;;;;ks  ks || ls 
 cannot execute command: No such file or directory
+bin  LICENSE  makefile	README.md  src	tests
+vaio@debian$|| ls
+bin  LICENSE  makefile	README.md  src	tests
+vaio@debian$$W  && ls
+vaio@debian$|||||||||s ls
+cannot execute command: No such file or directory
+vaio@debian$||||||ls
+bin  LICENSE  makefile	README.md  src	tests
+vaio@debian$echo hellooooooooooo && hi || hi
+hellooooooooooo
 cannot execute command: No such file or directory
 cannot execute command: No such file or directory
 vaio@debian$clear
-[3;J[H[2Jvaio@debian$&&
-vaio@debian$ls  ture&&as
-cannot execute command: No such file or directory
-vaio@debian$false && as
-vaio@debian$clear
-[3;J[H[2Jvaio@debian$l s  s -r
-tests  src  rshell  README.md  makefile  LICENSE  bin
-vaio@debian$ls -aR
-.:
-.  ..  bin  .git  .gitignore  LICENSE  makefile  README.md  rshell  src  tests
-
-./bin:
-.  ..  rshell
-
-./.git:
-.  ..  branches  COMMIT_EDITMSG  config  description  HEAD  hooks  index  info	logs  objects  packed-refs  refs
-
-./.git/branches:
-.  ..
-
-./.git/hooks:
-.   applypatch-msg.sample  post-update.sample	  pre-commit.sample	     pre-push.sample	update.sample
-..  commit-msg.sample	   pre-applypatch.sample  prepare-commit-msg.sample  pre-rebase.sample
-
-./.git/info:
-.  ..  exclude
-
-./.git/logs:
-.  ..  HEAD  refs
-
-./.git/logs/refs:
-.  ..  heads  remotes
-
-./.git/logs/refs/heads:
-.  ..  exec  master
-
-./.git/logs/refs/remotes:
-.  ..  origin
-
-./.git/logs/refs/remotes/origin:
-.  ..  exec  HEAD
-
-./.git/objects:
-.   01	14  1b	20  2c	34  39	42  47	4a  5c	61  69	71  7b	87  8c	91  a6	b0  b8	c6  cc	cf  de	e9  f9	info
-..  0c	15  1c	27  2f	36  41	43  49	58  60	62  70	72  7d	8b  8f	9c  a8	b3  b9	c8  ce	dc  e1	f6  fa	pack
-
-./.git/objects/01:
-.  ..  c3dbbaad1aab892c56b763988b1e3da0567a7a
-
-./.git/objects/0c:
-.  ..  8a6450582e6dac467ffdabead26e93de8b6eee
-
-./.git/objects/14:
-.  ..  9e5899bba314e51f34806ae5ebfc3024183efc
-
-./.git/objects/15:
-.  ..  688d96ec20799651d8c7ecb10376bf92016d53
-
-./.git/objects/1b:
-.  ..  24e06bffa999dc03f1f3251e65dfe14a4d92ad
-
-./.git/objects/1c:
-.  ..  15cd859ed63cae84c11c0a3242e96f5b979718
-
-./.git/objects/20:
-.  ..  75327251a2b85deff13788d1d5dd45c9136e3f
-
-./.git/objects/27:
-.  ..  24f6baeba58687d269296b964575981bde01e0
-
-./.git/objects/2c:
-.  ..  b52b7073cc6a35db1244b785b64b6ae8873629
-
-./.git/objects/2f:
-.  ..  9a9d73aa0d11533d3fb4f35da1b6c2202bbd4b
-
-./.git/objects/34:
-.  ..  9e033399d0cca570862a7a4acecb9a00ad5393
-
-./.git/objects/36:
-.  ..  309227cddf1fcdec7eac974bc1f6c36398e91b
-
-./.git/objects/39:
-.  ..  d4213214b1baf3052b312807e5a3d2d2a4e8f8
-
-./.git/objects/41:
-.  ..  36d590176b1bdef89ca9765d8884b2385ef2f3
-
-./.git/objects/42:
-.  ..  872754eee86daca23517de53a6daf2a7bea317
-
-./.git/objects/43:
-.  ..  0f29a8f65793a0ad09ce92779527391d49e79b
-
-./.git/objects/47:
-.  ..  2c42543cfec705d47153f4b8eaa7c055f77b04
-
-./.git/objects/49:
-.  ..  4fb474cad5400e03352a965a7a0ff7ef7cd18a
-
-./.git/objects/4a:
-.  ..  87e1783ce1c966ac50a151c6d17dd94ebfecf0
-
-./.git/objects/58:
-.  ..  9fe5a56e85995d237ef19866cabd1469c02687
-
-./.git/objects/5c:
-.  ..  19e9427f202a0879cc38088ceae5f9c318c618
-
-./.git/objects/60:
-.  ..  1c8adc1481c082ee0696368c2e8843765d060e
-
-./.git/objects/61:
-.  ..  9c27156e9fb95e316b2e337a08162d9315851b  ebc544267fe7bc5a3fe6a356e9cc11d89d6f27
-
-./.git/objects/62:
-.  ..  951c2736a8c921550dd9666701c418c9280ef2
-
-./.git/objects/69:
-.  ..  81e99bc31a3fc1383257e0322612aeafa22705
-
-./.git/objects/70:
-.  ..  1e958b209d25aa7c190363df8e0e915eb10767
-
-./.git/objects/71:
-.  ..  78cf099a71ba3da66ec27d433303b1909bb2c7
-
-./.git/objects/72:
-.  ..  db9ec562d2789e0c097235e53e42b69a6f93b0
-
-./.git/objects/7b:
-.  ..  286d6e0301ef7486879dd82b8f357aa1de63ad
-
-./.git/objects/7d:
-.  ..  c6f73529154686d8da12b7ab3324990142570e
-
-./.git/objects/87:
-.  ..  a89a5e55b12045e42d65537c997143dd6c056f
-
-./.git/objects/8b:
-.  ..  5c448fe0fcae453e1f6b01fed7330e5c4ea53c  d43c48b6c97b97473dca40c2de820526fdfe0c
-
-./.git/objects/8c:
-.  ..  db8451d9b90c1d4000c6f22eb86471a4568be6
-
-./.git/objects/8f:
-.  ..  6703767d2b831102122c13bf41aac26daa2c87  f240471c20233017d42fa661c83e55b41039cd
-
-./.git/objects/91:
-.  ..  9564d7db03844888b957ce2377c1e0d5c40327
-
-./.git/objects/9c:
-.  ..  8a6c15ab569702a193d57538d61ad05457f6e5
-
-./.git/objects/a6:
-.  ..  09a6e0028dc8c5c2b63fc61bb79fe13d0c4477
-
-./.git/objects/a8:
-.  ..  098344659484d0397fecb3ec7e41baa3d2638f
-
-./.git/objects/b0:
-.  ..  47cc6ef3c64e783fbeb52ec7aa88146bef33f9
-
-./.git/objects/b3:
-.  ..  cedf001016912089d15d04f7506b8e3d0a501f
-
-./.git/objects/b8:
-.  ..  bd0267bdf1a5e02793430b53cbbebd6c257f6f
-
-./.git/objects/b9:
-.  ..  b76215d1c9b5b40815e3fb6bd68c4bd12f9807
-
-./.git/objects/c6:
-.  ..  970bb327564961d01ae5bf5785b08babd707cf
-
-./.git/objects/c8:
-.  ..  680c712afba4a8abd61ddaca008e29b244880b
-
-./.git/objects/cc:
-.  ..  e5bd44b6f6d1b40d8ae8d3b40650211152c857
-
-./.git/objects/ce:
-.  ..  602b94d085bb03fd3e09cc900228639b5bfd4f
-
-./.git/objects/cf:
-.  ..  8ec6dddd1356cb783fb4fbdf23c56d08e01db7
-
-./.git/objects/dc:
-.  ..  07f8bb1c0d1f7493c368cc0f3179367d927041  fea6b5f0dc9667f0dd748da0ba37306f7c79aa
-
-./.git/objects/de:
-.  ..  7db2dc4b2a1dd59ac49fa6f95a5b3cabf04ee7
-
-./.git/objects/e1:
-.  ..  d2dc4ebdbe7245394c9c8fccf46c97dc1e56ec
-
-./.git/objects/e9:
-.  ..  c255bbd33616ded852c78a879b7c3a8fdbadce
-
-./.git/objects/f6:
-.  ..  e142f948d214f38f71c383f8f1b6143d1d6e80
-
-./.git/objects/f9:
-.  ..  3b11736a0af0eda9618ce6f912609db157c8f2
-
-./.git/objects/fa:
-.  ..  4ffe30131d880ad558ae059974d1b62a856fd9  d40416d3f81981bc88d63c09aaf430c6b86746
-
-./.git/objects/info:
-.  ..
-
-./.git/objects/pack:
-.  ..
-
-./.git/refs:
-.  ..  heads  remotes  tags
-
-./.git/refs/heads:
-.  ..  exec  master
-
-./.git/refs/remotes:
-.  ..  origin
-
-./.git/refs/remotes/origin:
-.  ..  exec  HEAD
-
-./.git/refs/tags:
-.  ..
-
-./src:
-.  ..  a.out  rshell.cpp
-
-./tests:
-.  ..  exec
-vaio@debian$clear
-[3;J[H[2Jvaio@debian$ls
-bin  LICENSE  makefile	README.md  rshell  src	tests
-vaio@debian$la la la la
-cannot execute command: No such file or directory
-vaio@debian$fkjawf
-cannot execute command: No such file or directory
-vaio@debian$jlfkak || ls
-cannot execute command: No such file or directory
-bin  LICENSE  makefile	README.md  rshell  src	tests
-vaio@debian$;;;;;; ls
-bin  LICENSE  makefile	README.md  rshell  src	tests
-vaio@debian$;; || ;s ll
-cannot execute command: No such file or directory
-vaio@debian$&& asdf
-vaio@debian$$hello 
-cannot execute command: No such file or directory
-vaio@debian$asdf    exit
-vaio@debian:~/Documents/rshell$ exit
-exit
-
-Script done on Thu 16 Apr 2015 01:21:47 AM PDT
+[3;J[H[2Jvaio@debian$                   exit                             
+vaio@debian:~/Documents/rshell$ ls
+bin  LICENSE  makefile	README.md  src	tests
+vaio@debian:~/Documents/rshell$ git add src
+vaio@debian:~/Documents/rshell$ gi[K[Kls 
+bin  LICENSE  makefile	README.md  src	tests
+vaio@debian:~/Documents/rshell$ cd src
+vaio@debian:~/Documents/rshell/src$ ls
+a.out  rshell.cpp
+vaio@debian:~/Documents/rshell/src$ git re[Km [K[K[K[K[K[K[Kgit status 
+On branch exec
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+
+	[32mmodified:   rshell.cpp[m
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	[31mmodified:   ../tests/exec[m
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+	[31m../bin/[m
+
+vaio@debian:~/Documents/rshell/src$ git add exec
+fatal: pathspec 'exec' did not match any files
+vaio@debian:~/Documents/rshell/src$ git add //[K[K../tests/exec
+vaio@debian:~/Documents/rshell/src$ ls
+a.out  rshell.cpp
+vaio@debian:~/Documents/rshell/src$ git status
+On branch exec
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+
+	[32mmodified:   rshell.cpp

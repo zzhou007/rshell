@@ -214,7 +214,7 @@ int main(int argc, char **argv)
 			{
 				if (quit(cmd))
 					exit(0);
-				execv(cmd); //if (execb(cmd) == -1); no if run when success or fail
+				execb(cmd); //if (execb(cmd) == -1); no if run when success or fail
 			}
 			next = false;
 			andd = false;
