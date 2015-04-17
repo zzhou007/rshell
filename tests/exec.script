@@ -1,0 +1,128 @@
+Script started on Fri 17 Apr 2015 12:17:49 PM PDT
+vaio@debian:~/Documents/rshell$ bin/rshell 
+vaio@debian$ls
+a.out  bin  LICENSE  makefile  README.md  src  tests  world.cpp
+vaio@debian$              ls                 
+a.out  bin  LICENSE  makefile  README.md  src  tests  world.cpp
+vaio@debian$./a.iu  out
+Hello :D
+vaio@debian$                 ./a.out               
+Hello :D
+vaio@debian$pwd
+/home/vaio/Documents/rshell
+vaio@debian$                      echo hello
+hello
+vaio@debian$ls -a
+.  ..  a.out  bin  .git  .gitignore  LICENSE  makefile	README.md  src	tests  world.cpp
+vaio@debian$ls -aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaal
+total 72
+drwxr-xr-x 6 vaio vaio  4096 Apr 17 12:15 .
+drwxr-xr-x 5 vaio vaio  4096 Apr 11 22:38 ..
+-rwxr-xr-x 1 vaio vaio  8376 Apr 17 12:15 a.out
+drwxr-xr-x 2 vaio vaio  4096 Apr 17 12:14 bin
+drwxr-xr-x 8 vaio vaio  4096 Apr 16 01:48 .git
+-rw-r--r-- 1 vaio vaio   242 Apr  7 23:10 .gitignore
+-rw-r--r-- 1 vaio vaio 18047 Apr  7 23:10 LICENSE
+-rw-r--r-- 1 vaio vaio   240 Apr 16 01:46 makefile
+-rw-r--r-- 1 vaio vaio  1038 Apr 16 01:46 README.md
+drwxr-xr-x 2 vaio vaio  4096 Apr 17 12:14 src
+drwxr-xr-x 2 vaio vaio  4096 Apr 17 12:17 tests
+-rw-r--r-- 1 vaio vaio    98 Apr 17 12:15 world.cpp
+vaio@debian$;ls
+a.out  bin  LICENSE  makefile  README.md  src  tests  world.cpp
+vaio@debian$;         ls
+a.out  bin  LICENSE  makefile  README.md  src  tests  world.cpp
+vaio@debian$          ;         ls
+a.out  bin  LICENSE  makefile  README.md  src  tests  world.cpp
+vaio@debian$ls && ls
+a.out  bin  LICENSE  makefile  README.md  src  tests  world.cpp
+a.out  bin  LICENSE  makefile  README.md  src  tests  world.cpp
+vaio@debian$ls&&ls
+a.out  bin  LICENSE  makefile  README.md  src  tests  world.cpp
+a.out  bin  LICENSE  makefile  README.md  src  tests  world.cpp
+vaio@debian$ls&&ls                                       &&                   ls
+a.out  bin  LICENSE  makefile  README.md  src  tests  world.cpp
+a.out  bin  LICENSE  makefile  README.md  src  tests  world.cpp
+a.out  bin  LICENSE  makefile  README.md  src  tests  world.cpp
+vaio@debian$&&ls
+vaio@debian$     &&          ls
+vaio@debian$||ls
+a.out  bin  LICENSE  makefile  README.md  src  tests  world.cpp
+vaio@debian$||        ls  
+a.out  bin  LICENSE  makefile  README.md  src  tests  world.cpp
+vaio@debian$               || ls
+a.out  bin  LICENSE  makefile  README.md  src  tests  world.cpp
+vaio@debian$||ls     &&         la ||    pwd
+a.out  bin  LICENSE  makefile  README.md  src  tests  world.cpp
+cannot execute command: No such file or directory
+/home/vaio/Documents/rshell
+vaio@debian$bwa || ls
+cannot execute command: No such file or directory
+a.out  bin  LICENSE  makefile  README.md  src  tests  world.cpp
+vaio@debian$bwa||ls
+cannot execute command: No such file or directory
+a.out  bin  LICENSE  makefile  README.md  src  tests  world.cpp
+vaio@debian$bwa||echo hello ; || ls
+cannot execute command: No such file or directory
+hello
+a.out  bin  LICENSE  makefile  README.md  src  tests  world.cpp
+vaio@debian$||la
+cannot execute command: No such file or directory
+vaio@debian$||; ls&&true  && pwd |  | ls; echo hello ; echo helo ;;; && ls
+a.out  bin  LICENSE  makefile  README.md  src  tests  world.cpp
+/home/vaio/Documents/rshell
+vaio@debian$|||l
+cannot execute command: No such file or directory
+vaio@debian$| ls $$$   &&& ls
+a.out  bin  LICENSE  makefile  README.md  src  tests  world.cpp
+cannot execute command: No such file or directory
+vaio@debian$||;||true && ls
+a.out  bin  LICENSE  makefile  README.md  src  tests  world.cpp
+vaio@debian$#
+vaio@debian$
+vaio@debian$##
+vaio@debian$
+vaio@debian$######
+vaio@debian$ls # ls ] \ ; ||
+a.out  bin  LICENSE  makefile  README.md  src  tests  world.cpp
+vaio@debian$                 #          ls pwd exit
+vaio@debian$||./a.out
+Hello :D
+vaio@debian$ls && ./a.out
+a.out  bin  LICENSE  makefile  README.md  src  tests  world.cpp
+Hello :D
+vaio@debian$||exit
+vaio@debian:~/Documents/rshell$ bin/rshell 
+vaio@debian$ls ||    || exit
+a.out  bin  LICENSE  makefile  README.md  src  tests  world.cpp
+vaio@debian$ls && exit
+a.out  bin  LICENSE  makefile  README.md  src  tests  world.cpp
+vaio@debian:~/Documents/rshell$ bin/rshell 
+vaio@debian$                                       exit                         
+vaio@debian:~/Documents/rshell$ bin/rshell 
+vaio@debian$ e x i t
+cannot execute command: No such file or directory
+vaio@debian$ex         
+vaio@debian$ clear
+[3;J[H[2Jvaio@debian$ls  -lR  -a -r 
+total 72
+-rw-r--r-- 1 vaio vaio    98 Apr 17 12:15 world.cpp
+drwxr-xr-x 2 vaio vaio  4096 Apr 17 12:17 tests
+drwxr-xr-x 2 vaio vaio  4096 Apr 17 12:14 src
+-rw-r--r-- 1 vaio vaio  1038 Apr 16 01:46 README.md
+-rw-r--r-- 1 vaio vaio   240 Apr 16 01:46 makefile
+-rw-r--r-- 1 vaio vaio 18047 Apr  7 23:10 LICENSE
+-rw-r--r-- 1 vaio vaio   242 Apr  7 23:10 .gitignore
+drwxr-xr-x 8 vaio vaio  4096 Apr 16 01:48 .git
+drwxr-xr-x 2 vaio vaio  4096 Apr 17 12:14 bin
+-rwxr-xr-x 1 vaio vaio  8376 Apr 17 12:15 a.out
+drwxr-xr-x 5 vaio vaio  4096 Apr 11 22:38 ..
+drwxr-xr-x 6 vaio vaio  4096 Apr 17 12:15 .
+vaio@debian$ls ls ls
+ls: cannot access ls: No such file or directory
+ls: cannot access ls: No such file or directory
+vaio@debian$exit
+vaio@debian:~/Documents/rshell$ exit
+exit
+
+Script done on Fri 17 Apr 2015 12:22:46 PM PDT
