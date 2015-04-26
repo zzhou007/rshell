@@ -145,6 +145,46 @@ namespace ls
 		}
 	}
 
+	void listrecall(std::string file)
+	{
+		//list all files/dir in cur dir
+		std::string newdir = file;
+		std::cout << newdir << ":" << std::endl;
+		std::vector<std::string> dirpath;
+		listall(newdir);
+		std::cout << std::endl;
+		if (NULL == (dir = opendir(file.c_str())))
+		{
+			perror("no such directory.");
+		}
+		errno = 0;
+		while (NULL != (dirfiles = readdir(dir)))
+		{
+			std::string name = dirfiles->d_name;
+			if (name != "." && name != "..") 
+				dirpath.push_back(name);
+		}
+		if (errno != 0)
+		{
+			perror("directory read error");
+		}
+		if (-1 == closedir(dir))
+		{
+			perror("close directory error");
+		}
+		std::sort(dirpath.begin(), dirpath.end());
+		for (size_t i = 0; i < dirpath.size(); i++)
+		{
+			std::string path = file + "/" + dirpath.at(i);
+			if (stat(path.c_str(), &s) == -1)
+			{
+				perror("stat error");
+			}
+			if ((s.st_mode & S_IFMT) == S_IFDIR)
+				listrecall(path);
+		}
+	}
+
 }
 
 

@@ -108,6 +108,18 @@ int main(int argc, char** argv)
 			else
 				ls::listrec(filesdir.at(0));
 		}
+		if (a && R && !l)
+		{
+			if (filesdir.size() > 1)
+				for (size_t i = 0; i < filesdir.size(); i++)
+				{
+					ls::listrecall(filesdir.at(i));
+				}
+			else if (filesdir.size() == 0)
+				ls::listrecall(".");
+			else
+				ls::listrecall(filesdir.at(0));
+		}
 	}
 	return 0;
 }
