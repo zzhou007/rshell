@@ -38,7 +38,7 @@ If command has and characters trailing or leading it will not work.
 Program will always be in english.
 Program does not tell you what commands you inputed when wrong.
 
-### Edge
+### Edge Cases
 If nothing is put before the connector, if is assumed to be false.
 || [command] assuming command is a valid bash command, it will run. 
 && [command] command will not run 
