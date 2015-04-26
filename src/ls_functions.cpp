@@ -29,8 +29,10 @@ namespace ls
 		else
 		{
 			if ((s.st_mode & S_IFMT) == S_IFREG)
+			{
 				std::cout << file << std::endl;
-			return;
+				return;
+			}
 		}
 		//goes to dir and prints out content
 		std::vector<std::string> output;
@@ -71,8 +73,11 @@ namespace ls
 		else
 		{
 			if ((s.st_mode & S_IFMT) == S_IFREG)
+			{
 				std::cout << file << std::endl;
-			return;
+				return;
+			}
+		
 		}
 		//goes to dir and prints out content 
 		std::vector<std::string> output;
@@ -88,7 +93,7 @@ namespace ls
 		}
 		if (errno != 0)
 		{
-		perror("directory read error");
+			perror("directory read error");
 		}
 		if (-1 == closedir(dir))
 		{
@@ -102,31 +107,22 @@ namespace ls
 
 	void listrec(std::string file)
 	{
-		//just print file if not dir
-		if (-1 == stat(file.c_str(), &s))
-		{
-			perror("stat error");
-			exit(1);
-		}
-		else
-		{
-			if ((s.st_mode & S_IFMT) == S_IFREG)
-				std::cout << file << std::endl;
-			return;
-		}
-		//prints all files rec
-		std::vector<std::string> output;
+		//list files/dir in cur dir
+		std::string newdir = file;
+		std::cout << newdir << ":" << std::endl;
+		std::vector<std::string> dirpath;
+		list(newdir);
+		std::cout << std::endl;
 		if (NULL == (dir = opendir(file.c_str())))
 		{
 			perror("no such directory.");
 		}
-
 		errno = 0;
-		while(NULL != (dirfiles = readdir(dir)))
+		while (NULL != (dirfiles = readdir(dir)))
 		{
 			std::string name = dirfiles->d_name;
 			if (name.find(".") != 0)
-				output.push_back(name);
+				dirpath.push_back(name);
 		}
 		if (errno != 0)
 		{
@@ -136,11 +132,17 @@ namespace ls
 		{
 			perror("close directory error");
 		}
-		std::sort(output.begin(), output.end());
-		for (size_t i = 0; i < output.size(); i++)
-			std::cout << output.at(i) << "  ";
-		std::cout << std::endl;
-
+		std::sort(dirpath.begin(), dirpath.end());
+		for (size_t i = 0; i < dirpath.size(); i++)
+		{
+			std::string path = file + "/" + dirpath.at(i);
+			if (stat(path.c_str(), &s) == -1)
+			{
+				perror("stat error");
+			}
+			if ((s.st_mode & S_IFMT) == S_IFDIR)
+				listrec(path);
+		}
 	}
 
 }

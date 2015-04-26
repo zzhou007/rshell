@@ -3,7 +3,8 @@
 
 namespace ls 
 {
-	void list(std::string dir_name);
-	void listall(std::string dir_name);
+	void list(std::string dir_name_or_file);
+	void listall(std::string dir_name_or_file);
+	void listrec(std::string dir_name_or_file);
 }
 #endif
