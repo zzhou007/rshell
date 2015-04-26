@@ -67,7 +67,10 @@ You can add a folder or a directory after ls or after flags.
 
 ### Bugs
 My ls program is in alphabetical order while unix ls program is in different order.
-The `-l` flag does not count the total of hard links unlike bash ls.
+The `-l` flag's total vale is by finding the sum of the memory of all files.
+This value is slightly different from bash's implementations of ls.
+The total value is in b.
+The `-l` flag will cause an extra newline at the very end of the output.
 
 ### Edge Cases
 You can combine flags and files or dir. 
