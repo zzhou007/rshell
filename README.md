@@ -40,8 +40,8 @@ Program does not tell you what commands you inputed when wrong.
 
 ### Edge Cases
 If nothing is put before the connector, if is assumed to be false.
-|| [command] assuming command is a valid bash command, it will run. 
-&& [command] command will not run 
+`||` [command] assuming command is a valid bash command, it will run. 
+`&&` [command] command will not run 
 
 # ls
 ls program from unix rewritten in cpp it lists files and dir.
@@ -51,26 +51,27 @@ Just type `make` to build or `make ls` to only compile ls.
 Type `bin/ls` to run followed by flags and/or files/dir.
 
 ### Flags
-Currently my ls program only supports the flags -R -a and -l.
-You can type them in after a (-).
+Currently my ls program only supports the flags `-R` `-a` and `-l`.
+You can type them in after a `-`.
 There must be no extra spaces.
-It has to be after the (-) or ls will act as if it is a dir or file.
-You can add multiple flags with extra (-) followed by the flag followed by a space and another (-) followed my a flag.
-ie -a -R
+It has to be after the `-` or ls will act as if it is a dir or file.
+You can add multiple flags with extra `-` followed by the flag followed by a space and another `-` followed my a flag.
+ie `-a` `-R`
 You can also add other flags after the previous flag as long as there are no spaces.
-ie -aRl
+ie `-aRl`
 You can repeat the same flags without error. 
-ie -aaaaaRlaa
+ie `-aaaaaRlaa`
 
 ### Folders and Dir
 You can add a folder or a directory after ls or after flags.
 
 ### Bugs
-My ls program is in alphabetical order while unix ls program is in different order
+My ls program is in alphabetical order while unix ls program is in different order.
+The `-l` flag does not count the total of hard links unlike bash ls.
 
 ### Edge Cases
 You can combine flags and files or dir. 
 You can add flags then dir or dir then flags. 
 You can even have flags followed by a dir followed by more flags.
-ie ls -a ~/ -R .. -l
+ie `ls -a ~/ -R .. -l`
 If a flag is not valid, ls will not output anything.
