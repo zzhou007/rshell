@@ -213,6 +213,8 @@ namespace ls
 
 	unsigned longestsize;
 
+	unsigned longestlink;
+
 	void listextra(std::string file)
 	{	
 		if (stat(file.c_str(), &s) == -1)
@@ -308,6 +310,12 @@ namespace ls
 					
 					//hard links
 					f.hardlinks = s.st_nlink;
+					unsigned temp_link = 0;
+					for (size_t i = s.st_nlink; i > 0; i/=10)
+						temp_link++;
+					if (temp_link > longestlink)
+						longestlink = temp_link;
+
 
 					//size
 					f.size = s.st_size;
@@ -346,6 +354,7 @@ namespace ls
 			for (size_t i = 0; i < fileinfolist.size(); i++)
 			{
 				std::cout << fileinfolist.at(i).permissions << " "
+					<< std::setw(longestlink) << std::right
 					<< fileinfolist.at(i).hardlinks << " "
 					<< fileinfolist.at(i).user << " "
 					<< fileinfolist.at(i).group << " "
@@ -455,7 +464,11 @@ namespace ls
 				
 				//hard links
 				f.hardlinks = s.st_nlink;
-
+				unsigned temp_link = 0;
+				for (size_t i = s.st_nlink; i > 0; i/=10)
+					temp_link++;
+				if (temp_link > longestlink)
+					longestlink = temp_link;
 				//size
 				f.size = s.st_size;
 				totalspace = totalspace + s.st_size;
@@ -492,6 +505,7 @@ namespace ls
 			for (size_t i = 0; i < fileinfolist.size(); i++)
 			{
 				std::cout << fileinfolist.at(i).permissions << " "
+					<< std::setw(longestlink) << std::right
 					<< fileinfolist.at(i).hardlinks << " "
 					<< fileinfolist.at(i).user << " "
 					<< fileinfolist.at(i).group << " "
@@ -541,6 +555,8 @@ namespace ls
 		for (size_t i = 0; i < dirpath.size(); i++)
 		{
 			totalspace = 0;
+			longestsize = 0;
+			longestlink = 0;
 			std::string path = file + "/" + dirpath.at(i);
 			if (stat(path.c_str(), &s) == -1)
 				perror("stat error");
@@ -548,6 +564,51 @@ namespace ls
 			{
 				listextrarec(path);
 			}
+		}
+
+	}
+
+	void listextrarecall(std::string file)
+	{
+		//list all files/dir in cur dir
+		std::string newdir = file;
+		std::cout << newdir << ":" << std::endl;
+		std::vector<std::string> dirpath;
+		listextraall(newdir);
+		//exit if file
+		if (-1 == stat(file.c_str(), &s))
+		{
+			perror("stat error");
+			exit(1);
+		}
+		else
+			if ((s.st_mode & S_IFMT) == S_IFREG)
+				return;
+		std::cout << std::endl;
+		if (NULL == (dir = opendir(file.c_str())))
+			perror("no such directory.");
+		errno = 0;
+		while (NULL != (dirfiles = readdir(dir)))
+		{
+			std::string name = dirfiles->d_name;
+			if (name != "." && name != "..") 
+				dirpath.push_back(name);
+		}
+		if (errno != 0)
+			perror("directory read error");
+		if (-1 == closedir(dir))
+			perror("close directory error");
+		std::sort(dirpath.begin(), dirpath.end());
+		for (size_t i = 0; i < dirpath.size(); i++)
+		{
+			totalspace = 0;
+			longestsize = 0;
+			longestlink = 0;
+			std::string path = file + "/" + dirpath.at(i);
+			if (stat(path.c_str(), &s) == -1)
+				perror("stat error");
+			if ((s.st_mode & S_IFMT) == S_IFDIR)
+				listextrarecall(path);
 		}
 
 	}

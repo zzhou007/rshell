@@ -10,5 +10,6 @@ namespace ls
 	void listextra(std::string dir_name_or_file);
 	void listextraall(std::string dir_name_or_file);
 	void listextrarec(std::string dir_name_or_file);
+	void listextrarecall(std::string dir_name_or_file);
 }
 #endif
