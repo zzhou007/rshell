@@ -19,5 +19,11 @@ ls: src/ls.cpp src/ls_functions.cpp src/ls.h
 	mv ls ../bin; \
 	cd -; \
 
+cp: src/cp.cpp src/Timer.h
+	cd src; \
+	g++ $(CFLAGS) cp cp.cpp ; \
+	mv cp ../bin; \
+	cd -; \
+
 clean:
 	rm -rf bin
