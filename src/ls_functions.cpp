@@ -491,8 +491,12 @@ namespace ls
 					longestsize = temp_length;
 
 				//get group name and username
-				passwd *userid = getpwuid(s.st_uid);
-				group *groupid = getgrgid(s.st_gid);
+				passwd *userid;
+				group *groupid;
+				if (NULL == (userid = getpwuid(s.st_uid)))
+					perror("get user id fail");
+				if (NULL == (groupid = getgrgid(s.st_gid)))
+					perror("get group id fail");
 				f.user = userid->pw_name;
 				f.group = groupid->gr_name;
 
