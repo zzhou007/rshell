@@ -242,8 +242,10 @@ namespace ls
 			f.size = s.st_size;
 
 			//get group name and username
-			passwd *userid = getpwuid(s.st_uid);
-			group *groupid = getgrgid(s.st_gid);
+			if (NULL == passwd *userid = getpwuid(s.st_uid))
+				perror("userid fail");
+			if (NULL == upid = getgrgid(s.st_gid))
+				perror("group id fail");
 			f.user = userid->pw_name;
 			f.group = groupid->gr_name;
 
@@ -396,7 +398,7 @@ namespace ls
 			f.size = s.st_size;
 
 			//get group name and username
-			passwd *userid = getpwuid(s.st_uid);
+			if (NULL == passwd *userid = getpwuid(s.st_uid);
 			group *groupid = getgrgid(s.st_gid);
 			f.user = userid->pw_name;
 			f.group = groupid->gr_name;
