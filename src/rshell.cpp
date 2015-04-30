@@ -173,8 +173,12 @@ int main(int argc, char **argv)
 	for(;;)
 	{
 		finish:char hostname[20];
-		gethostname(hostname, 20);
-		cout << getlogin() << "@" << hostname;
+		if (-1 == (gethostname(hostname, 20)))
+			perror("get hostname fail");
+		char* log;
+		if (NULL == (log = getlogin()))
+			perror("get login fail");
+		cout << log << "@" << hostname;
 		string in;
 		cout << "$";
 		getline(cin,in);
