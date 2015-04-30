@@ -1,0 +1,822 @@
+Script started on Fri 17 Apr 2015 04:00:25 PM PDT
+vaio@debian:~/Documents/rshell$ bin/rshell
+vaio@debian$ls
+a.out  bin  LICENSE  makefile  README.md  src  tests  world.cpp
+vaio@debian$         ls        
+a.out  bin  LICENSE  makefile  README.md  src  tests  world.cpp
+vaio@debian$ls        -a
+.  ..  a.out  bin  .git  .gitignore  LICENSE  makefile	README.md  src	tests  world.cpp
+vaio@debian$ls    -a -l
+total 72
+drwxr-xr-x 6 vaio vaio  4096 Apr 17 12:15 .
+drwxr-xr-x 5 vaio vaio  4096 Apr 11 22:38 ..
+-rwxr-xr-x 1 vaio vaio  8376 Apr 17 12:15 a.out
+drwxr-xr-x 2 vaio vaio  4096 Apr 17 12:14 bin
+drwxr-xr-x 8 vaio vaio  4096 Apr 17 12:35 .git
+-rw-r--r-- 1 vaio vaio   242 Apr  7 23:10 .gitignore
+-rw-r--r-- 1 vaio vaio 18047 Apr  7 23:10 LICENSE
+-rw-r--r-- 1 vaio vaio   240 Apr 16 01:46 makefile
+-rw-r--r-- 1 vaio vaio  1038 Apr 16 01:46 README.md
+drwxr-xr-x 2 vaio vaio  4096 Apr 17 12:14 src
+drwxr-xr-x 2 vaio vaio  4096 Apr 17 12:23 tests
+-rw-r--r-- 1 vaio vaio    98 Apr 17 12:15 world.cpp
+vaio@debian$ls -alR
+.:
+total 72
+drwxr-xr-x 6 vaio vaio  4096 Apr 17 12:15 .
+drwxr-xr-x 5 vaio vaio  4096 Apr 11 22:38 ..
+-rwxr-xr-x 1 vaio vaio  8376 Apr 17 12:15 a.out
+drwxr-xr-x 2 vaio vaio  4096 Apr 17 12:14 bin
+drwxr-xr-x 8 vaio vaio  4096 Apr 17 12:35 .git
+-rw-r--r-- 1 vaio vaio   242 Apr  7 23:10 .gitignore
+-rw-r--r-- 1 vaio vaio 18047 Apr  7 23:10 LICENSE
+-rw-r--r-- 1 vaio vaio   240 Apr 16 01:46 makefile
+-rw-r--r-- 1 vaio vaio  1038 Apr 16 01:46 README.md
+drwxr-xr-x 2 vaio vaio  4096 Apr 17 12:14 src
+drwxr-xr-x 2 vaio vaio  4096 Apr 17 12:23 tests
+-rw-r--r-- 1 vaio vaio    98 Apr 17 12:15 world.cpp
+
+./bin:
+total 24
+drwxr-xr-x 2 vaio vaio  4096 Apr 17 12:14 .
+drwxr-xr-x 6 vaio vaio  4096 Apr 17 12:15 ..
+-rwxr-xr-x 1 vaio vaio 15512 Apr 17 12:14 rshell
+
+./.git:
+total 64
+drwxr-xr-x  8 vaio vaio 4096 Apr 17 12:35 .
+drwxr-xr-x  6 vaio vaio 4096 Apr 17 12:15 ..
+drwxr-xr-x  2 vaio vaio 4096 Apr  7 23:10 branches
+-rw-r--r--  1 vaio vaio   12 Apr 17 12:32 COMMIT_EDITMSG
+-rw-r--r--  1 vaio vaio  263 Apr  7 23:10 config
+-rw-r--r--  1 vaio vaio   73 Apr  7 23:10 description
+-rw-r--r--  1 vaio vaio   96 Apr 17 12:35 FETCH_HEAD
+-rw-r--r--  1 vaio vaio   23 Apr 16 01:45 HEAD
+drwxr-xr-x  2 vaio vaio 4096 Apr  7 23:10 hooks
+-rw-r--r--  1 vaio vaio  488 Apr 17 12:35 index
+drwxr-xr-x  2 vaio vaio 4096 Apr  7 23:10 info
+drwxr-xr-x  3 vaio vaio 4096 Apr  7 23:10 logs
+drwxr-xr-x 81 vaio vaio 4096 Apr 17 12:35 objects
+-rw-r--r--  1 vaio vaio   41 Apr 17 12:35 ORIG_HEAD
+-rw-r--r--  1 vaio vaio  107 Apr  7 23:10 packed-refs
+drwxr-xr-x  5 vaio vaio 4096 Apr  7 23:10 refs
+
+./.git/branches:
+total 8
+drwxr-xr-x 2 vaio vaio 4096 Apr  7 23:10 .
+drwxr-xr-x 8 vaio vaio 4096 Apr 17 12:35 ..
+
+./.git/hooks:
+total 48
+drwxr-xr-x 2 vaio vaio 4096 Apr  7 23:10 .
+drwxr-xr-x 8 vaio vaio 4096 Apr 17 12:35 ..
+-rwxr-xr-x 1 vaio vaio  452 Apr  7 23:10 applypatch-msg.sample
+-rwxr-xr-x 1 vaio vaio  896 Apr  7 23:10 commit-msg.sample
+-rwxr-xr-x 1 vaio vaio  189 Apr  7 23:10 post-update.sample
+-rwxr-xr-x 1 vaio vaio  398 Apr  7 23:10 pre-applypatch.sample
+-rwxr-xr-x 1 vaio vaio 1642 Apr  7 23:10 pre-commit.sample
+-rwxr-xr-x 1 vaio vaio 1239 Apr  7 23:10 prepare-commit-msg.sample
+-rwxr-xr-x 1 vaio vaio 1352 Apr  7 23:10 pre-push.sample
+-rwxr-xr-x 1 vaio vaio 4951 Apr  7 23:10 pre-rebase.sample
+-rwxr-xr-x 1 vaio vaio 3611 Apr  7 23:10 update.sample
+
+./.git/info:
+total 12
+drwxr-xr-x 2 vaio vaio 4096 Apr  7 23:10 .
+drwxr-xr-x 8 vaio vaio 4096 Apr 17 12:35 ..
+-rw-r--r-- 1 vaio vaio  240 Apr  7 23:10 exclude
+
+./.git/logs:
+total 16
+drwxr-xr-x 3 vaio vaio 4096 Apr  7 23:10 .
+drwxr-xr-x 8 vaio vaio 4096 Apr 17 12:35 ..
+-rw-r--r-- 1 vaio vaio 3784 Apr 17 12:35 HEAD
+drwxr-xr-x 4 vaio vaio 4096 Apr  7 23:10 refs
+
+./.git/logs/refs:
+total 16
+drwxr-xr-x 4 vaio vaio 4096 Apr  7 23:10 .
+drwxr-xr-x 3 vaio vaio 4096 Apr  7 23:10 ..
+drwxr-xr-x 2 vaio vaio 4096 Apr  7 23:12 heads
+drwxr-xr-x 3 vaio vaio 4096 Apr  7 23:10 remotes
+
+./.git/logs/refs/heads:
+total 16
+drwxr-xr-x 2 vaio vaio 4096 Apr  7 23:12 .
+drwxr-xr-x 4 vaio vaio 4096 Apr  7 23:10 ..
+-rw-r--r-- 1 vaio vaio 2951 Apr 16 01:44 exec
+-rw-r--r-- 1 vaio vaio  660 Apr 17 12:35 master
+
+./.git/logs/refs/remotes:
+total 12
+drwxr-xr-x 3 vaio vaio 4096 Apr  7 23:10 .
+drwxr-xr-x 4 vaio vaio 4096 Apr  7 23:10 ..
+drwxr-xr-x 2 vaio vaio 4096 Apr 16 01:48 origin
+
+./.git/logs/refs/remotes/origin:
+total 20
+drwxr-xr-x 2 vaio vaio 4096 Apr 16 01:48 .
+drwxr-xr-x 3 vaio vaio 4096 Apr  7 23:10 ..
+-rw-r--r-- 1 vaio vaio 2272 Apr 16 01:44 exec
+-rw-r--r-- 1 vaio vaio  178 Apr  7 23:10 HEAD
+-rw-r--r-- 1 vaio vaio  435 Apr 17 12:35 master
+
+./.git/objects:
+total 324
+drwxr-xr-x 81 vaio vaio 4096 Apr 17 12:35 .
+drwxr-xr-x  8 vaio vaio 4096 Apr 17 12:35 ..
+drwxr-xr-x  2 vaio vaio 4096 Apr 12 17:21 01
+drwxr-xr-x  2 vaio vaio 4096 Apr 16 01:48 07
+drwxr-xr-x  2 vaio vaio 4096 Apr 12 22:11 0c
+drwxr-xr-x  2 vaio vaio 4096 Apr 12 16:49 14
+drwxr-xr-x  2 vaio vaio 4096 Apr  7 23:10 15
+drwxr-xr-x  2 vaio vaio 4096 Apr  7 23:10 1b
+drwxr-xr-x  2 vaio vaio 4096 Apr  8 00:04 1c
+drwxr-xr-x  2 vaio vaio 4096 Apr 16 01:34 1e
+drwxr-xr-x  2 vaio vaio 4096 Apr 17 12:23 1f
+drwxr-xr-x  2 vaio vaio 4096 Apr  8 00:05 20
+drwxr-xr-x  2 vaio vaio 4096 Apr 12 14:48 27
+drwxr-xr-x  2 vaio vaio 4096 Apr 12 22:11 2c
+drwxr-xr-x  2 vaio vaio 4096 Apr 12 16:49 2f
+drwxr-xr-x  2 vaio vaio 4096 Apr 12 17:21 34
+drwxr-xr-x  2 vaio vaio 4096 Apr 12 14:46 36
+drwxr-xr-x  2 vaio vaio 4096 Apr 11 21:53 39
+drwxr-xr-x  2 vaio vaio 4096 Apr 16 01:23 3f
+drwxr-xr-x  2 vaio vaio 4096 Apr 13 20:07 41
+drwxr-xr-x  2 vaio vaio 4096 Apr 12 14:43 42
+drwxr-xr-x  2 vaio vaio 4096 Apr 13 20:07 43
+drwxr-xr-x  2 vaio vaio 4096 Apr 16 01:25 45
+drwxr-xr-x  2 vaio vaio 4096 Apr 13 20:06 47
+drwxr-xr-x  2 vaio vaio 4096 Apr 12 17:22 49
+drwxr-xr-x  2 vaio vaio 4096 Apr 12 14:45 4a
+drwxr-xr-x  2 vaio vaio 4096 Apr 17 12:35 55
+drwxr-xr-x  2 vaio vaio 4096 Apr 11 22:11 58
+drwxr-xr-x  2 vaio vaio 4096 Apr 11 17:37 5c
+drwxr-xr-x  2 vaio vaio 4096 Apr 16 01:44 5e
+drwxr-xr-x  2 vaio vaio 4096 Apr  8 00:04 60
+drwxr-xr-x  2 vaio vaio 4096 Apr 11 22:10 61
+drwxr-xr-x  2 vaio vaio 4096 Apr 12 22:11 62
+drwxr-xr-x  2 vaio vaio 4096 Apr 17 12:24 66
+drwxr-xr-x  2 vaio vaio 4096 Apr 11 21:05 69
+drwxr-xr-x  2 vaio vaio 4096 Apr 16 01:34 6b
+drwxr-xr-x  2 vaio vaio 4096 Apr 12 16:49 70
+drwxr-xr-x  2 vaio vaio 4096 Apr 11 22:24 71
+drwxr-xr-x  2 vaio vaio 4096 Apr 12 22:11 72
+drwxr-xr-x  2 vaio vaio 4096 Apr 16 01:43 7a
+drwxr-xr-x  2 vaio vaio 4096 Apr 11 21:53 7b
+drwxr-xr-x  2 vaio vaio 4096 Apr 12 14:43 7d
+drwxr-xr-x  2 vaio vaio 4096 Apr 16 01:34 81
+drwxr-xr-x  2 vaio vaio 4096 Apr 11 21:53 87
+drwxr-xr-x  2 vaio vaio 4096 Apr 12 14:43 8b
+drwxr-xr-x  2 vaio vaio 4096 Apr  7 23:10 8c
+drwxr-xr-x  2 vaio vaio 4096 Apr 12 17:21 8f
+drwxr-xr-x  2 vaio vaio 4096 Apr 11 17:37 91
+drwxr-xr-x  2 vaio vaio 4096 Apr 17 12:35 9b
+drwxr-xr-x  2 vaio vaio 4096 Apr 12 14:49 9c
+drwxr-xr-x  2 vaio vaio 4096 Apr 16 01:23 9d
+drwxr-xr-x  2 vaio vaio 4096 Apr 12 14:46 a6
+drwxr-xr-x  2 vaio vaio 4096 Apr 11 22:24 a8
+drwxr-xr-x  2 vaio vaio 4096 Apr 16 01:34 ae
+drwxr-xr-x  2 vaio vaio 4096 Apr 11 22:23 b0
+drwxr-xr-x  2 vaio vaio 4096 Apr 12 14:43 b3
+drwxr-xr-x  2 vaio vaio 4096 Apr  7 23:10 b8
+drwxr-xr-x  2 vaio vaio 4096 Apr 11 22:11 b9
+drwxr-xr-x  2 vaio vaio 4096 Apr 11 21:53 c6
+drwxr-xr-x  2 vaio vaio 4096 Apr 11 17:37 c8
+drwxr-xr-x  2 vaio vaio 4096 Apr 16 01:43 c9
+drwxr-xr-x  2 vaio vaio 4096 Apr 11 22:11 cc
+drwxr-xr-x  2 vaio vaio 4096 Apr  7 23:10 ce
+drwxr-xr-x  2 vaio vaio 4096 Apr 12 17:21 cf
+drwxr-xr-x  2 vaio vaio 4096 Apr 16 01:23 d2
+drwxr-xr-x  2 vaio vaio 4096 Apr 16 01:44 da
+drwxr-xr-x  2 vaio vaio 4096 Apr 12 17:22 dc
+drwxr-xr-x  2 vaio vaio 4096 Apr 13 20:07 de
+drwxr-xr-x  2 vaio vaio 4096 Apr 16 01:44 df
+drwxr-xr-x  2 vaio vaio 4096 Apr 16 01:25 e1
+drwxr-xr-x  2 vaio vaio 4096 Apr 17 12:24 e3
+drwxr-xr-x  2 vaio vaio 4096 Apr 17 12:24 e4
+drwxr-xr-x  2 vaio vaio 4096 Apr 16 01:33 e6
+drwxr-xr-x  2 vaio vaio 4096 Apr  8 00:05 e9
+drwxr-xr-x  2 vaio vaio 4096 Apr 17 12:35 eb
+drwxr-xr-x  2 vaio vaio 4096 Apr 16 01:23 f4
+drwxr-xr-x  2 vaio vaio 4096 Apr 12 17:22 f6
+drwxr-xr-x  2 vaio vaio 4096 Apr 11 17:37 f9
+drwxr-xr-x  2 vaio vaio 4096 Apr 12 14:49 fa
+drwxr-xr-x  2 vaio vaio 4096 Apr  7 23:10 info
+drwxr-xr-x  2 vaio vaio 4096 Apr  7 23:10 pack
+
+./.git/objects/01:
+total 12
+drwxr-xr-x  2 vaio vaio 4096 Apr 12 17:21 .
+drwxr-xr-x 81 vaio vaio 4096 Apr 17 12:35 ..
+-r--r--r--  1 vaio vaio  158 Apr 12 17:21 c3dbbaad1aab892c56b763988b1e3da0567a7a
+
+./.git/objects/07:
+total 12
+drwxr-xr-x  2 vaio vaio 4096 Apr 16 01:48 .
+drwxr-xr-x 81 vaio vaio 4096 Apr 17 12:35 ..
+-r--r--r--  1 vaio vaio  129 Apr 16 01:48 0cc4d47aa1d1ac664dab4798ec358bce629fcd
+
+./.git/objects/0c:
+total 12
+drwxr-xr-x  2 vaio vaio 4096 Apr 12 22:11 .
+drwxr-xr-x 81 vaio vaio 4096 Apr 17 12:35 ..
+-r--r--r--  1 vaio vaio 1456 Apr 12 22:11 8a6450582e6dac467ffdabead26e93de8b6eee
+
+./.git/objects/14:
+total 12
+drwxr-xr-x  2 vaio vaio 4096 Apr 12 16:49 .
+drwxr-xr-x 81 vaio vaio 4096 Apr 17 12:35 ..
+-r--r--r--  1 vaio vaio  181 Apr 12 16:49 9e5899bba314e51f34806ae5ebfc3024183efc
+
+./.git/objects/15:
+total 12
+drwxr-xr-x  2 vaio vaio 4096 Apr  7 23:10 .
+drwxr-xr-x 81 vaio vaio 4096 Apr 17 12:35 ..
+-r--r--r--  1 vaio vaio  120 Apr  7 23:10 688d96ec20799651d8c7ecb10376bf92016d53
+
+./.git/objects/1b:
+total 12
+drwxr-xr-x  2 vaio vaio 4096 Apr  7 23:10 .
+drwxr-xr-x 81 vaio vaio 4096 Apr 17 12:35 ..
+-r--r--r--  1 vaio vaio   36 Apr  7 23:10 24e06bffa999dc03f1f3251e65dfe14a4d92ad
+
+./.git/objects/1c:
+total 12
+drwxr-xr-x  2 vaio vaio 4096 Apr  8 00:04 .
+drwxr-xr-x 81 vaio vaio 4096 Apr 17 12:35 ..
+-r--r--r--  1 vaio vaio  101 Apr  8 00:04 15cd859ed63cae84c11c0a3242e96f5b979718
+
+./.git/objects/1e:
+total 16
+drwxr-xr-x  2 vaio vaio 4096 Apr 16 01:34 .
+drwxr-xr-x 81 vaio vaio 4096 Apr 17 12:35 ..
+-r--r--r--  1 vaio vaio   49 Apr 16 01:34 1b5c90386884e6d3aeb0f4394399bf3ad2bddb
+-r--r--r--  1 vaio vaio  154 Apr 16 01:34 d2087a5a446402918ccd8e10d0ab6344f5a2f5
+
+./.git/objects/1f:
+total 12
+drwxr-xr-x  2 vaio vaio 4096 Apr 17 12:23 .
+drwxr-xr-x 81 vaio vaio 4096 Apr 17 12:35 ..
+-r--r--r--  1 vaio vaio  967 Apr 17 12:23 ff038ea1c09cc3c66e776af7e5b37c3301a372
+
+./.git/objects/20:
+total 12
+drwxr-xr-x  2 vaio vaio 4096 Apr  8 00:05 .
+drwxr-xr-x 81 vaio vaio 4096 Apr 17 12:35 ..
+-r--r--r--  1 vaio vaio   55 Apr  8 00:05 75327251a2b85deff13788d1d5dd45c9136e3f
+
+./.git/objects/27:
+total 12
+drwxr-xr-x  2 vaio vaio 4096 Apr 12 14:48 .
+drwxr-xr-x 81 vaio vaio 4096 Apr 17 12:35 ..
+-r--r--r--  1 vaio vaio 1336 Apr 12 14:48 24f6baeba58687d269296b964575981bde01e0
+
+./.git/objects/2c:
+total 12
+drwxr-xr-x  2 vaio vaio 4096 Apr 12 22:11 .
+drwxr-xr-x 81 vaio vaio 4096 Apr 17 12:35 ..
+-r--r--r--  1 vaio vaio  152 Apr 12 22:11 b52b7073cc6a35db1244b785b64b6ae8873629
+
+./.git/objects/2f:
+total 12
+drwxr-xr-x  2 vaio vaio 4096 Apr 12 16:49 .
+drwxr-xr-x 81 vaio vaio 4096 Apr 17 12:35 ..
+-r--r--r--  1 vaio vaio   54 Apr 12 16:49 9a9d73aa0d11533d3fb4f35da1b6c2202bbd4b
+
+./.git/objects/34:
+total 12
+drwxr-xr-x  2 vaio vaio 4096 Apr 12 17:21 .
+drwxr-xr-x 81 vaio vaio 4096 Apr 17 12:35 ..
+-r--r--r--  1 vaio vaio 1383 Apr 12 17:21 9e033399d0cca570862a7a4acecb9a00ad5393
+
+./.git/objects/36:
+total 12
+drwxr-xr-x  2 vaio vaio 4096 Apr 12 14:46 .
+drwxr-xr-x 81 vaio vaio 4096 Apr 17 12:35 ..
+-r--r--r--  1 vaio vaio  182 Apr 12 14:46 309227cddf1fcdec7eac974bc1f6c36398e91b
+
+./.git/objects/39:
+total 12
+drwxr-xr-x  2 vaio vaio 4096 Apr 11 21:53 .
+drwxr-xr-x 81 vaio vaio 4096 Apr 17 12:35 ..
+-r--r--r--  1 vaio vaio  181 Apr 11 21:53 d4213214b1baf3052b312807e5a3d2d2a4e8f8
+
+./.git/objects/3f:
+total 12
+drwxr-xr-x  2 vaio vaio 4096 Apr 16 01:23 .
+drwxr-xr-x 81 vaio vaio 4096 Apr 17 12:35 ..
+-r--r--r--  1 vaio vaio  211 Apr 16 01:23 6c125177657204fe87b195a6bc324aa92cf4f5
+
+./.git/objects/41:
+total 12
+drwxr-xr-x  2 vaio vaio 4096 Apr 13 20:07 .
+drwxr-xr-x 81 vaio vaio 4096 Apr 17 12:35 ..
+-r--r--r--  1 vaio vaio   55 Apr 13 20:07 36d590176b1bdef89ca9765d8884b2385ef2f3
+
+./.git/objects/42:
+total 12
+drwxr-xr-x  2 vaio vaio 4096 Apr 12 14:43 .
+drwxr-xr-x 81 vaio vaio 4096 Apr 17 12:35 ..
+-r--r--r--  1 vaio vaio   54 Apr 12 14:43 872754eee86daca23517de53a6daf2a7bea317
+
+./.git/objects/43:
+total 12
+drwxr-xr-x  2 vaio vaio 4096 Apr 13 20:07 .
+drwxr-xr-x 81 vaio vaio 4096 Apr 17 12:35 ..
+-r--r--r--  1 vaio vaio  180 Apr 13 20:07 0f29a8f65793a0ad09ce92779527391d49e79b
+
+./.git/objects/45:
+total 16
+drwxr-xr-x  2 vaio vaio 4096 Apr 16 01:25 .
+drwxr-xr-x 81 vaio vaio 4096 Apr 17 12:35 ..
+-r--r--r--  1 vaio vaio 6254 Apr 16 01:25 03eafecab0ebcbbb7c2ef498dd2b14a23595e9
+
+./.git/objects/47:
+total 12
+drwxr-xr-x  2 vaio vaio 4096 Apr 13 20:06 .
+drwxr-xr-x 81 vaio vaio 4096 Apr 17 12:35 ..
+-r--r--r--  1 vaio vaio 1487 Apr 13 20:06 2c42543cfec705d47153f4b8eaa7c055f77b04
+
+./.git/objects/49:
+total 12
+drwxr-xr-x  2 vaio vaio 4096 Apr 12 17:22 .
+drwxr-xr-x 81 vaio vaio 4096 Apr 17 12:35 ..
+-r--r--r--  1 vaio vaio  154 Apr 12 17:22 4fb474cad5400e03352a965a7a0ff7ef7cd18a
+
+./.git/objects/4a:
+total 12
+drwxr-xr-x  2 vaio vaio 4096 Apr 12 14:45 .
+drwxr-xr-x 81 vaio vaio 4096 Apr 17 12:35 ..
+-r--r--r--  1 vaio vaio  388 Apr 12 14:45 87e1783ce1c966ac50a151c6d17dd94ebfecf0
+
+./.git/objects/55:
+total 12
+drwxr-xr-x  2 vaio vaio 4096 Apr 17 12:35 .
+drwxr-xr-x 81 vaio vaio 4096 Apr 17 12:35 ..
+-r--r--r--  1 vaio vaio  211 Apr 17 12:35 444c02c3482458917e6063462a7efe8b22f01f
+
+./.git/objects/58:
+total 12
+drwxr-xr-x  2 vaio vaio 4096 Apr 11 22:11 .
+drwxr-xr-x 81 vaio vaio 4096 Apr 17 12:35 ..
+-r--r--r--  1 vaio vaio  182 Apr 11 22:11 9fe5a56e85995d237ef19866cabd1469c02687
+
+./.git/objects/5c:
+total 12
+drwxr-xr-x  2 vaio vaio 4096 Apr 11 17:37 .
+drwxr-xr-x 81 vaio vaio 4096 Apr 17 12:35 ..
+-r--r--r--  1 vaio vaio  401 Apr 11 17:37 19e9427f202a0879cc38088ceae5f9c318c618
+
+./.git/objects/5e:
+total 12
+drwxr-xr-x  2 vaio vaio 4096 Apr 16 01:44 .
+drwxr-xr-x 81 vaio vaio 4096 Apr 17 12:35 ..
+-r--r--r--  1 vaio vaio  152 Apr 16 01:44 251a2d9b5ebc25d4a36b8f40ea606189962820
+
+./.git/objects/60:
+total 12
+drwxr-xr-x  2 vaio vaio 4096 Apr  8 00:04 .
+drwxr-xr-x 81 vaio vaio 4096 Apr 17 12:35 ..
+-r--r--r--  1 vaio vaio  120 Apr  8 00:04 1c8adc1481c082ee0696368c2e8843765d060e
+
+./.git/objects/61:
+total 16
+drwxr-xr-x  2 vaio vaio 4096 Apr 11 22:10 .
+drwxr-xr-x 81 vaio vaio 4096 Apr 17 12:35 ..
+-r--r--r--  1 vaio vaio 1008 Apr 11 21:05 9c27156e9fb95e316b2e337a08162d9315851b
+-r--r--r--  1 vaio vaio 1037 Apr 11 22:10 ebc544267fe7bc5a3fe6a356e9cc11d89d6f27
+
+./.git/objects/62:
+total 12
+drwxr-xr-x  2 vaio vaio 4096 Apr 12 22:11 .
+drwxr-xr-x 81 vaio vaio 4096 Apr 17 12:35 ..
+-r--r--r--  1 vaio vaio  182 Apr 12 22:11 951c2736a8c921550dd9666701c418c9280ef2
+
+./.git/objects/66:
+total 12
+drwxr-xr-x  2 vaio vaio 4096 Apr 17 12:24 .
+drwxr-xr-x 81 vaio vaio 4096 Apr 17 12:35 ..
+-r--r--r--  1 vaio vaio   81 Apr 17 12:24 e9b1bfa64719165f3934e6a9e296c80d0ed73a
+
+./.git/objects/69:
+total 12
+drwxr-xr-x  2 vaio vaio 4096 Apr 11 21:05 .
+drwxr-xr-x 81 vaio vaio 4096 Apr 17 12:35 ..
+-r--r--r--  1 vaio vaio  181 Apr 11 21:05 81e99bc31a3fc1383257e0322612aeafa22705
+
+./.git/objects/6b:
+total 12
+drwxr-xr-x  2 vaio vaio 4096 Apr 16 01:34 .
+drwxr-xr-x 81 vaio vaio 4096 Apr 17 12:35 ..
+-r--r--r--  1 vaio vaio   54 Apr 16 01:34 8b5621151d432448d5444b488095a2e7e3d1ac
+
+./.git/objects/70:
+total 12
+drwxr-xr-x  2 vaio vaio 4096 Apr 12 16:49 .
+drwxr-xr-x 81 vaio vaio 4096 Apr 17 12:35 ..
+-r--r--r--  1 vaio vaio  163 Apr 12 16:49 1e958b209d25aa7c190363df8e0e915eb10767
+
+./.git/objects/71:
+total 12
+drwxr-xr-x  2 vaio vaio 4096 Apr 11 22:24 .
+drwxr-xr-x 81 vaio vaio 4096 Apr 17 12:35 ..
+-r--r--r--  1 vaio vaio  152 Apr 11 22:24 78cf099a71ba3da66ec27d433303b1909bb2c7
+
+./.git/objects/72:
+total 12
+drwxr-xr-x  2 vaio vaio 4096 Apr 12 22:11 .
+drwxr-xr-x 81 vaio vaio 4096 Apr 17 12:35 ..
+-r--r--r--  1 vaio vaio   55 Apr 12 22:11 db9ec562d2789e0c097235e53e42b69a6f93b0
+
+./.git/objects/7a:
+total 12
+drwxr-xr-x  2 vaio vaio 4096 Apr 16 01:43 .
+drwxr-xr-x 81 vaio vaio 4096 Apr 17 12:35 ..
+-r--r--r--  1 vaio vaio  520 Apr 16 01:43 ddb066548f2454429866a8f59810979a2f26c4
+
+./.git/objects/7b:
+total 12
+drwxr-xr-x  2 vaio vaio 4096 Apr 11 21:53 .
+drwxr-xr-x 81 vaio vaio 4096 Apr 17 12:35 ..
+-r--r--r--  1 vaio vaio   55 Apr 11 21:53 286d6e0301ef7486879dd82b8f357aa1de63ad
+
+./.git/objects/7d:
+total 12
+drwxr-xr-x  2 vaio vaio 4096 Apr 12 14:43 .
+drwxr-xr-x 81 vaio vaio 4096 Apr 17 12:35 ..
+-r--r--r--  1 vaio vaio  182 Apr 12 14:43 c6f73529154686d8da12b7ab3324990142570e
+
+./.git/objects/81:
+total 12
+drwxr-xr-x  2 vaio vaio 4096 Apr 16 01:34 .
+drwxr-xr-x 81 vaio vaio 4096 Apr 17 12:35 ..
+-r--r--r--  1 vaio vaio 1044 Apr 16 01:34 81e56822e9b32f53671749b6b4f2fd4d3f2678
+
+./.git/objects/87:
+total 12
+drwxr-xr-x  2 vaio vaio 4096 Apr 11 21:53 .
+drwxr-xr-x 81 vaio vaio 4096 Apr 17 12:35 ..
+-r--r--r--  1 vaio vaio  161 Apr 11 21:53 a89a5e55b12045e42d65537c997143dd6c056f
+
+./.git/objects/8b:
+total 16
+drwxr-xr-x  2 vaio vaio 4096 Apr 12 14:43 .
+drwxr-xr-x 81 vaio vaio 4096 Apr 17 12:35 ..
+-r--r--r--  1 vaio vaio  164 Apr  8 00:05 5c448fe0fcae453e1f6b01fed7330e5c4ea53c
+-r--r--r--  1 vaio vaio  183 Apr 12 14:43 d43c48b6c97b97473dca40c2de820526fdfe0c
+
+./.git/objects/8c:
+total 16
+drwxr-xr-x  2 vaio vaio 4096 Apr  7 23:10 .
+drwxr-xr-x 81 vaio vaio 4096 Apr 17 12:35 ..
+-r--r--r--  1 vaio vaio 7713 Apr  7 23:10 db8451d9b90c1d4000c6f22eb86471a4568be6
+
+./.git/objects/8f:
+total 16
+drwxr-xr-x  2 vaio vaio 4096 Apr 12 17:21 .
+drwxr-xr-x 81 vaio vaio 4096 Apr 17 12:35 ..
+-r--r--r--  1 vaio vaio   55 Apr 12 17:21 6703767d2b831102122c13bf41aac26daa2c87
+-r--r--r--  1 vaio vaio 1353 Apr 12 16:49 f240471c20233017d42fa661c83e55b41039cd
+
+./.git/objects/91:
+total 12
+drwxr-xr-x  2 vaio vaio 4096 Apr 11 17:37 .
+drwxr-xr-x 81 vaio vaio 4096 Apr 17 12:35 ..
+-r--r--r--  1 vaio vaio  182 Apr 11 17:37 9564d7db03844888b957ce2377c1e0d5c40327
+
+./.git/objects/9b:
+total 12
+drwxr-xr-x  2 vaio vaio 4096 Apr 17 12:35 .
+drwxr-xr-x 81 vaio vaio 4096 Apr 17 12:35 ..
+-r--r--r--  1 vaio vaio   56 Apr 17 12:35 62b8dbdbfa23cffe02ba30f27a585213479765
+
+./.git/objects/9c:
+total 12
+drwxr-xr-x  2 vaio vaio 4096 Apr 12 14:49 .
+drwxr-xr-x 81 vaio vaio 4096 Apr 17 12:35 ..
+-r--r--r--  1 vaio vaio  182 Apr 12 14:49 8a6c15ab569702a193d57538d61ad05457f6e5
+
+./.git/objects/9d:
+total 12
+drwxr-xr-x  2 vaio vaio 4096 Apr 16 01:23 .
+drwxr-xr-x 81 vaio vaio 4096 Apr 17 12:35 ..
+-r--r--r--  1 vaio vaio  151 Apr 16 01:23 e0c85dccf478c01d93990b8cd763b19eb583f4
+
+./.git/objects/a6:
+total 12
+drwxr-xr-x  2 vaio vaio 4096 Apr 12 14:46 .
+drwxr-xr-x 81 vaio vaio 4096 Apr 17 12:35 ..
+-r--r--r--  1 vaio vaio  152 Apr 12 14:46 09a6e0028dc8c5c2b63fc61bb79fe13d0c4477
+
+./.git/objects/a8:
+total 12
+drwxr-xr-x  2 vaio vaio 4096 Apr 11 22:24 .
+drwxr-xr-x 81 vaio vaio 4096 Apr 17 12:35 ..
+-r--r--r--  1 vaio vaio  182 Apr 11 22:24 098344659484d0397fecb3ec7e41baa3d2638f
+
+./.git/objects/ae:
+total 12
+drwxr-xr-x  2 vaio vaio 4096 Apr 16 01:34 .
+drwxr-xr-x 81 vaio vaio 4096 Apr 17 12:35 ..
+-r--r--r--  1 vaio vaio  211 Apr 16 01:34 feb17c866c3e58c7e0854605912645f1eb2fe4
+
+./.git/objects/b0:
+total 12
+drwxr-xr-x  2 vaio vaio 4096 Apr 11 22:23 .
+drwxr-xr-x 81 vaio vaio 4096 Apr 17 12:35 ..
+-r--r--r--  1 vaio vaio  302 Apr 11 22:23 47cc6ef3c64e783fbeb52ec7aa88146bef33f9
+
+./.git/objects/b3:
+total 12
+drwxr-xr-x  2 vaio vaio 4096 Apr 12 14:43 .
+drwxr-xr-x 81 vaio vaio 4096 Apr 17 12:35 ..
+-r--r--r--  1 vaio vaio 1332 Apr 12 14:43 cedf001016912089d15d04f7506b8e3d0a501f
+
+./.git/objects/b8:
+total 12
+drwxr-xr-x  2 vaio vaio 4096 Apr  7 23:10 .
+drwxr-xr-x 81 vaio vaio 4096 Apr 17 12:35 ..
+-r--r--r--  1 vaio vaio  163 Apr  7 23:10 bd0267bdf1a5e02793430b53cbbebd6c257f6f
+
+./.git/objects/b9:
+total 12
+drwxr-xr-x  2 vaio vaio 4096 Apr 11 22:11 .
+drwxr-xr-x 81 vaio vaio 4096 Apr 17 12:35 ..
+-r--r--r--  1 vaio vaio   55 Apr 11 22:11 b76215d1c9b5b40815e3fb6bd68c4bd12f9807
+
+./.git/objects/c6:
+total 12
+drwxr-xr-x  2 vaio vaio 4096 Apr 11 21:53 .
+drwxr-xr-x 81 vaio vaio 4096 Apr 17 12:35 ..
+-r--r--r--  1 vaio vaio  995 Apr 11 21:53 970bb327564961d01ae5bf5785b08babd707cf
+
+./.git/objects/c8:
+total 12
+drwxr-xr-x  2 vaio vaio 4096 Apr 11 17:37 .
+drwxr-xr-x 81 vaio vaio 4096 Apr 17 12:35 ..
+-r--r--r--  1 vaio vaio  173 Apr 11 17:37 680c712afba4a8abd61ddaca008e29b244880b
+
+./.git/objects/c9:
+total 12
+drwxr-xr-x  2 vaio vaio 4096 Apr 16 01:43 .
+drwxr-xr-x 81 vaio vaio 4096 Apr 17 12:35 ..
+-r--r--r--  1 vaio vaio  777 Apr 16 01:43 b5ce9feb9c79a4c4acc0e8b8012a4a2ee5f050
+
+./.git/objects/cc:
+total 12
+drwxr-xr-x  2 vaio vaio 4096 Apr 11 22:11 .
+drwxr-xr-x 81 vaio vaio 4096 Apr 17 12:35 ..
+-r--r--r--  1 vaio vaio  189 Apr 11 22:11 e5bd44b6f6d1b40d8ae8d3b40650211152c857
+
+./.git/objects/ce:
+total 12
+drwxr-xr-x  2 vaio vaio 4096 Apr  7 23:10 .
+drwxr-xr-x 81 vaio vaio 4096 Apr 17 12:35 ..
+-r--r--r--  1 vaio vaio  124 Apr  7 23:10 602b94d085bb03fd3e09cc900228639b5bfd4f
+
+./.git/objects/cf:
+total 12
+drwxr-xr-x  2 vaio vaio 4096 Apr 12 17:21 .
+drwxr-xr-x 81 vaio vaio 4096 Apr 17 12:35 ..
+-r--r--r--  1 vaio vaio  181 Apr 12 17:21 8ec6dddd1356cb783fb4fbdf23c56d08e01db7
+
+./.git/objects/d2:
+total 12
+drwxr-xr-x  2 vaio vaio 4096 Apr 16 01:23 .
+drwxr-xr-x 81 vaio vaio 4096 Apr 17 12:35 ..
+-r--r--r--  1 vaio vaio   49 Apr 16 01:23 71e6c7a0dd3a3a2c2635a7a8e8474814f8d7a5
+
+./.git/objects/da:
+total 12
+drwxr-xr-x  2 vaio vaio 4096 Apr 16 01:44 .
+drwxr-xr-x 81 vaio vaio 4096 Apr 17 12:35 ..
+-r--r--r--  1 vaio vaio   49 Apr 16 01:44 675fecb4f95354ae42499ca38561ae94596319
+
+./.git/objects/dc:
+total 16
+drwxr-xr-x  2 vaio vaio 4096 Apr 12 17:22 .
+drwxr-xr-x 81 vaio vaio 4096 Apr 17 12:35 ..
+-r--r--r--  1 vaio vaio  181 Apr 12 17:22 07f8bb1c0d1f7493c368cc0f3179367d927041
+-r--r--r--  1 vaio vaio  166 Apr 11 21:05 fea6b5f0dc9667f0dd748da0ba37306f7c79aa
+
+./.git/objects/de:
+total 12
+drwxr-xr-x  2 vaio vaio 4096 Apr 13 20:07 .
+drwxr-xr-x 81 vaio vaio 4096 Apr 17 12:35 ..
+-r--r--r--  1 vaio vaio  182 Apr 13 20:07 7db2dc4b2a1dd59ac49fa6f95a5b3cabf04ee7
+
+./.git/objects/df:
+total 12
+drwxr-xr-x  2 vaio vaio 4096 Apr 16 01:44 .
+drwxr-xr-x 81 vaio vaio 4096 Apr 17 12:35 ..
+-r--r--r--  1 vaio vaio  211 Apr 16 01:44 ea182d94c166cf99596cd5ec2b6fcac2c4ff58
+
+./.git/objects/e1:
+total 16
+drwxr-xr-x  2 vaio vaio 4096 Apr 16 01:25 .
+drwxr-xr-x 81 vaio vaio 4096 Apr 17 12:35 ..
+-r--r--r--  1 vaio vaio  175 Apr 12 14:49 d2dc4ebdbe7245394c9c8fccf46c97dc1e56ec
+-r--r--r--  1 vaio vaio 1485 Apr 16 01:25 f3678b4ea44bc5825e0f25a034435a10197dcd
+
+./.git/objects/e3:
+total 12
+drwxr-xr-x  2 vaio vaio 4096 Apr 17 12:24 .
+drwxr-xr-x 81 vaio vaio 4096 Apr 17 12:35 ..
+-r--r--r--  1 vaio vaio  159 Apr 17 12:24 0cf29b2c1346ae5a393b47ada9cceebefe9ac3
+
+./.git/objects/e4:
+total 12
+drwxr-xr-x  2 vaio vaio 4096 Apr 17 12:24 .
+drwxr-xr-x 81 vaio vaio 4096 Apr 17 12:35 ..
+-r--r--r--  1 vaio vaio  211 Apr 17 12:24 48155a6c5226cd7beaf62a5ca7fefc87a4daa7
+
+./.git/objects/e6:
+total 12
+drwxr-xr-x  2 vaio vaio 4096 Apr 16 01:33 .
+drwxr-xr-x 81 vaio vaio 4096 Apr 17 12:35 ..
+-r--r--r--  1 vaio vaio   15 Apr 16 01:33 9de29bb2d1d6434b8b29ae775ad8c2e48c5391
+
+./.git/objects/e9:
+total 12
+drwxr-xr-x  2 vaio vaio 4096 Apr  8 00:05 .
+drwxr-xr-x 81 vaio vaio 4096 Apr 17 12:35 ..
+-r--r--r--  1 vaio vaio  181 Apr  8 00:05 c255bbd33616ded852c78a879b7c3a8fdbadce
+
+./.git/objects/eb:
+total 12
+drwxr-xr-x  2 vaio vaio 4096 Apr 17 12:35 .
+drwxr-xr-x 81 vaio vaio 4096 Apr 17 12:35 ..
+-r--r--r--  1 vaio vaio  151 Apr 17 12:35 ae8e5fd0bde57a01cc4100d362a6a26350eefc
+
+./.git/objects/f4:
+total 12
+drwxr-xr-x  2 vaio vaio 4096 Apr 16 01:23 .
+drwxr-xr-x 81 vaio vaio 4096 Apr 17 12:35 ..
+-r--r--r--  1 vaio vaio 2947 Apr 16 01:23 f3eb487c5f05dea6b6aaaab445e5c6bb39b4d2
+
+./.git/objects/f6:
+total 12
+drwxr-xr-x  2 vaio vaio 4096 Apr 12 17:22 .
+drwxr-xr-x 81 vaio vaio 4096 Apr 17 12:35 ..
+-r--r--r--  1 vaio vaio  151 Apr 12 17:22 e142f948d214f38f71c383f8f1b6143d1d6e80
+
+./.git/objects/f9:
+total 12
+drwxr-xr-x  2 vaio vaio 4096 Apr 11 17:37 .
+drwxr-xr-x 81 vaio vaio 4096 Apr 17 12:35 ..
+-r--r--r--  1 vaio vaio   55 Apr 11 17:37 3b11736a0af0eda9618ce6f912609db157c8f2
+
+./.git/objects/fa:
+total 16
+drwxr-xr-x  2 vaio vaio 4096 Apr 12 14:49 .
+drwxr-xr-x 81 vaio vaio 4096 Apr 17 12:35 ..
+-r--r--r--  1 vaio vaio   54 Apr 11 21:05 4ffe30131d880ad558ae059974d1b62a856fd9
+-r--r--r--  1 vaio vaio   55 Apr 12 14:49 d40416d3f81981bc88d63c09aaf430c6b86746
+
+./.git/objects/info:
+total 8
+drwxr-xr-x  2 vaio vaio 4096 Apr  7 23:10 .
+drwxr-xr-x 81 vaio vaio 4096 Apr 17 12:35 ..
+
+./.git/objects/pack:
+total 8
+drwxr-xr-x  2 vaio vaio 4096 Apr  7 23:10 .
+drwxr-xr-x 81 vaio vaio 4096 Apr 17 12:35 ..
+
+./.git/refs:
+total 20
+drwxr-xr-x 5 vaio vaio 4096 Apr  7 23:10 .
+drwxr-xr-x 8 vaio vaio 4096 Apr 17 12:35 ..
+drwxr-xr-x 2 vaio vaio 4096 Apr 17 12:35 heads
+drwxr-xr-x 3 vaio vaio 4096 Apr  7 23:10 remotes
+drwxr-xr-x 2 vaio vaio 4096 Apr 17 12:36 tags
+
+./.git/refs/heads:
+total 16
+drwxr-xr-x 2 vaio vaio 4096 Apr 17 12:35 .
+drwxr-xr-x 5 vaio vaio 4096 Apr  7 23:10 ..
+-rw-r--r-- 1 vaio vaio   41 Apr 16 01:44 exec
+-rw-r--r-- 1 vaio vaio   41 Apr 17 12:35 master
+
+./.git/refs/remotes:
+total 12
+drwxr-xr-x 3 vaio vaio 4096 Apr  7 23:10 .
+drwxr-xr-x 5 vaio vaio 4096 Apr  7 23:10 ..
+drwxr-xr-x 2 vaio vaio 4096 Apr 17 12:36 origin
+
+./.git/refs/remotes/origin:
+total 20
+drwxr-xr-x 2 vaio vaio 4096 Apr 17 12:36 .
+drwxr-xr-x 3 vaio vaio 4096 Apr  7 23:10 ..
+-rw-r--r-- 1 vaio vaio   41 Apr 16 01:44 exec
+-rw-r--r-- 1 vaio vaio   32 Apr  7 23:10 HEAD
+-rw-r--r-- 1 vaio vaio   41 Apr 17 12:35 master
+
+./.git/refs/tags:
+total 12
+drwxr-xr-x 2 vaio vaio 4096 Apr 17 12:36 .
+drwxr-xr-x 5 vaio vaio 4096 Apr  7 23:10 ..
+-rw-r--r-- 1 vaio vaio   41 Apr 17 12:36 hw0
+
+./src:
+total 12
+drwxr-xr-x 2 vaio vaio 4096 Apr 17 12:14 .
+drwxr-xr-x 6 vaio vaio 4096 Apr 17 12:15 ..
+-rw-r--r-- 1 vaio vaio 4046 Apr 16 01:46 rshell.cpp
+
+./tests:
+total 32
+drwxr-xr-x 2 vaio vaio  4096 Apr 17 12:23 .
+drwxr-xr-x 6 vaio vaio  4096 Apr 17 12:15 ..
+-rw-r--r-- 1 vaio vaio 24576 Apr 17 16:01 exec.script
+vaio@debian$ls -aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+.  ..  a.out  bin  .git  .gitignore  LICENSE  makefile	README.md  src	tests  world.cpp
+vaio@debian$ps
+  PID TTY          TIME CMD
+ 1316 pts/1    00:00:00 bash
+ 1317 pts/1    00:00:00 rshell
+ 1324 pts/1    00:00:00 ps
+vaio@debian$echo hello
+hello
+vaio@debian$bin/rshell
+vaio@debian$ls
+a.out  bin  LICENSE  makefile  README.md  src  tests  world.cpp
+vaio@debian$exit
+vaio@debian$ls
+a.out  bin  LICENSE  makefile  README.md  src  tests  world.cpp
+vaio@debian$c echo hello hello 
+hello hello
+vaio@debian$pwd || ls
+/home/vaio/Documents/rshell
+vaio@debian$pwd   a || ls
+cannot execute command: No such file or directory
+a.out  bin  LICENSE  makefile  README.md  src  tests  world.cpp
+vaio@debian$ls || asdfasdfadsfa
+a.out  bin  LICENSE  makefile  README.md  src  tests  world.cpp
+vaio@debian$asdfasfasdfa && ls
+cannot execute command: No such file or directory
+vaio@debian$ls && asdfadsfasf
+a.out  bin  LICENSE  makefile  README.md  src  tests  world.cpp
+cannot execute command: No such file or directory
+vaio@debian$echo ;   hi ; ls
+hi
+a.out  bin  LICENSE  makefile  README.md  src  tests  world.cpp
+vaio@debian$;;;ls
+a.out  bin  LICENSE  makefile  README.md  src  tests  world.cpp
+vaio@debian$||kls   ls
+a.out  bin  LICENSE  makefile  README.md  src  tests  world.cpp
+vaio@debian$&&ls
+vaio@debian$ll; ls && ls ||       la || ls &&& la
+cannot execute command: No such file or directory
+a.out  bin  LICENSE  makefile  README.md  src  tests  world.cpp
+cannot execute command: No such file or directory
+a.out  bin  LICENSE  makefile  README.md  src  tests  world.cpp
+cannot execute command: No such file or directory
+vaio@debian$&&&
+vaio@debian$|||
+cannot execute command: No such file or directory
+vaio@debian$ls &&& ls
+a.out  bin  LICENSE  makefile  README.md  src  tests  world.cpp
+cannot execute command: No such file or directory
+vaio@debian$||||ls
+a.out  bin  LICENSE  makefile  README.md  src  tests  world.cpp
+vaio@debian$|||| ls
+cannot execute command: No such file or directory
+vaio@debian$clear
+[3;J[H[2Jvaio@debian$a.out
+cannot execute command: No such file or directory
+vaio@debian$./a.out
+Hello :D
+vaio@debian$#
+vaio@debian$####
+vaio@debian$###alsdjflkasdjlfaskjfd
+vaio@debian$adfjld      pwd # ls
+/home/vaio/Documents/rshell
+vaio@debian$
+vaio@debian$
+vaio@debian$exit - a
+cannot execute command: No such file or directory
+vaio@debian$ls || exit
+a.out  bin  LICENSE  makefile  README.md  src  tests  world.cpp
+vaio@debian$la |  | exit
+cannot execute command: No such file or directory
+vaio@debian:~/Documents/rshell$ bin/rshell
+vaio@debian$la && exit
+cannot execute command: No such file or directory
+vaio@debian$ls && exit
+a.out  bin  LICENSE  makefile  README.md  src  tests  world.cpp
+vaio@debian:~/Documents/rshell$ bin/rshell
+vaio@debian$ls || la | && ks  ls ; ls
+a.out  bin  LICENSE  makefile  README.md  src  tests  world.cpp
+vaio@debian$;;;;;;;;;||ls
+a.out  bin  LICENSE  makefile  README.md  src  tests  world.cpp
+vaio@debian$;;&& echo hello ; la || exit
+vaio@debian$echo hello
+hello
+vaio@debian$&& exit
+vaio@debian$exit
+vaio@debian:~/Documents/rshell$ exit
+exit
+
+Script done on Fri 17 Apr 2015 04:05:17 PM PDT
