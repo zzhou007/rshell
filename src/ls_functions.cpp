@@ -242,9 +242,9 @@ namespace ls
 			f.size = s.st_size;
 
 			//get group name and username
-			if (NULL == passwd *userid = getpwuid(s.st_uid))
+			if (NULL == (passwd *userid = getpwuid(s.st_uid)))
 				perror("userid fail");
-			if (NULL == upid = getgrgid(s.st_gid))
+			if (NULL == groupid = getgrgid(s.st_gid))
 				perror("group id fail");
 			f.user = userid->pw_name;
 			f.group = groupid->gr_name;
@@ -329,8 +329,10 @@ namespace ls
 						longestsize = temp;
 
 					//get group name and username
-					passwd *userid = getpwuid(s.st_uid);
-					group *groupid = getgrgid(s.st_gid);
+					if (NULL == passwd *userid = getpwuid(s.st_uid))
+						perror("user id fail");
+					if (NULL == group *groupid = getgrgid(s.st_gid)
+						perror("group id fail");
 					f.user = userid->pw_name;
 					f.group = groupid->gr_name;
 
@@ -398,8 +400,10 @@ namespace ls
 			f.size = s.st_size;
 
 			//get group name and username
-			if (NULL == passwd *userid = getpwuid(s.st_uid);
-			group *groupid = getgrgid(s.st_gid);
+			if (NULL == passwd *userid = getpwuid(s.st_uid))
+				perror("userid fail");
+			if (NULL == group *groupid = getgrgid(s.st_gid))
+				perror("group id fail");
 			f.user = userid->pw_name;
 			f.group = groupid->gr_name;
 
