@@ -113,7 +113,10 @@ namespace ls
 		//goes to dir and prints out content
 		std::vector<std::string> output;
 		if (NULL == (dir = opendir(file.c_str())))
+		{
 			perror("no such directory.");
+			exit(1);
+		}
 		errno = 0;
 		while(NULL != (dirfiles = readdir(dir)))
 		{
@@ -122,9 +125,15 @@ namespace ls
 				output.push_back(name);
 		}
 		if (errno != 0)
+		{
 			perror("directory read error");
+			exit(1);
+		}
 		if (-1 == closedir(dir))
+		{
 			perror("close directory error");
+			exit(1);
+		}
 		std::sort(output.begin(), output.end());
 		int line = 0;
 		int colw = longest(output);
@@ -150,7 +159,10 @@ namespace ls
 		//goes to dir and prints out content 
 		std::vector<std::string> output;
 		if (NULL == (dir = opendir(file.c_str())))
+		{
 			perror("no such directory.");
+			exit(1);
+		}
 		errno = 0;
 		while(NULL != (dirfiles = readdir(dir)))
 		{
@@ -158,9 +170,15 @@ namespace ls
 			output.push_back(name);
 		}
 		if (errno != 0)
+		{
 			perror("directory read error");
+			exit(1);
+		}
 		if (-1 == closedir(dir))
+		{
 			perror("close directory error");
+			exit(1);
+		}
 		std::sort(output.begin(), output.end());
 		int line = 0;
 		int colw = longest(output);
@@ -191,7 +209,10 @@ namespace ls
 		list(newdir);
 		std::cout << std::endl;
 		if (NULL == (dir = opendir(file.c_str())))
+		{
 			perror("no such directory.");
+			exit(1);
+		}
 		errno = 0;
 		while (NULL != (dirfiles = readdir(dir)))
 		{
@@ -200,15 +221,24 @@ namespace ls
 				dirpath.push_back(name);
 		}
 		if (errno != 0)
+		{
 			perror("directory read error");
+			exit(1);
+		}
 		if (-1 == closedir(dir))
+		{
 			perror("close directory error");
+			exit(1);
+		}
 		std::sort(dirpath.begin(), dirpath.end());
 		for (size_t i = 0; i < dirpath.size(); i++)
 		{
 			std::string path = file + "/" + dirpath.at(i);
 			if (stat(path.c_str(), &s) == -1)
+			{
 				perror("stat error");
+				exit(1);
+			}
 			if ((s.st_mode & S_IFMT) == S_IFDIR)
 				listrec(path);
 		}
@@ -225,7 +255,10 @@ namespace ls
 		listall(newdir);
 		std::cout << std::endl;
 		if (NULL == (dir = opendir(file.c_str())))
+		{
 			perror("no such directory.");
+			exit(1);
+		}
 		errno = 0;
 		while (NULL != (dirfiles = readdir(dir)))
 		{
@@ -234,15 +267,24 @@ namespace ls
 				dirpath.push_back(name);
 		}
 		if (errno != 0)
+		{
 			perror("directory read error");
+			exit(1);
+		}
 		if (-1 == closedir(dir))
+		{
 			perror("close directory error");
+			exit(1);
+		}
 		std::sort(dirpath.begin(), dirpath.end());
 		for (size_t i = 0; i < dirpath.size(); i++)
 		{
 			std::string path = file + "/" + dirpath.at(i);
 			if (stat(path.c_str(), &s) == -1)
+			{
 				perror("stat error");
+				exit(1);
+			}
 			if ((s.st_mode & S_IFMT) == S_IFDIR)
 				listrecall(path);
 		}
@@ -300,7 +342,10 @@ namespace ls
 	{	
 		int color = 0;
 		if (stat(file.c_str(), &s) == -1)
+		{
 			perror("stat error");
+			exit(1);
+		}
 		if ((s.st_mode & S_IFMT) == S_IFREG)
 		{
 			fileinfo f;
@@ -327,9 +372,15 @@ namespace ls
 			passwd *userid;
 			group *groupid;
 			if (NULL == (userid = getpwuid(s.st_uid)))
+			{
 				perror("userid fail");
+				exit(1);
+			}
 			if (NULL == (groupid = getgrgid(s.st_gid)))
+			{
 				perror("group id fail");
+				exit(1);
+			}
 			f.user = userid->pw_name;
 			f.group = groupid->gr_name;
 
@@ -365,7 +416,10 @@ namespace ls
 		{
 			std::vector<fileinfo> fileinfolist;
 			if (NULL == (dir = opendir(file.c_str())))
+			{
 				perror("no such dirctory.");
+				exit(1);
+			}
 			errno = 0;
 			while (NULL != (dirfiles = readdir(dir)))
 			{
@@ -378,7 +432,10 @@ namespace ls
 					f.name = temp;
 					temp = file + "/" + temp;
 					if (stat(temp.c_str(), &s) == -1)
+					{
 						perror("stat error");
+						exit(1);
+					}
 					//what type of file is it? stores in permissions
 					if ((s.st_mode & S_IFMT) == S_IFDIR)
 						f.permissions += "d";
@@ -424,9 +481,15 @@ namespace ls
 					passwd *userid;
 					group *groupid;
 					if (NULL == (userid = getpwuid(s.st_uid)))
+					{
 						perror("user id fail");
+						exit(1);
+					}
 					if (NULL == (groupid = getgrgid(s.st_gid)))
+					{
 						perror("group id fail");
+						exit(1);
+					}
 					f.user = userid->pw_name;
 					f.group = groupid->gr_name;
 
@@ -453,9 +516,15 @@ namespace ls
 				}
 			}
 			if (errno != 0)
+			{
 				perror("directory read error");
+				exit(1);
+			}
 			if (-1 == closedir(dir))
+			{
 				perror("close directory error");
+				exit(1);
+			}
 			std::cout << "total " << totalspace/2 << std::endl;
 			std::sort(fileinfolist.begin(), fileinfolist.end(), sortalpha);
 			for (size_t i = 0; i < fileinfolist.size(); i++)
@@ -483,7 +552,10 @@ namespace ls
 	{
 		int color = 0;
 		if (stat(file.c_str(), &s) == -1)
+		{
 			perror("stat error");
+			exit(1);
+		}
 		if ((s.st_mode & S_IFMT) == S_IFREG)
 		{
 			fileinfo f;
@@ -509,9 +581,15 @@ namespace ls
 			passwd *userid;
 			group *groupid;
 			if (NULL == (userid = getpwuid(s.st_uid)))
+			{
 				perror("userid fail");
+				exit(1);
+			}
 			if (NULL == (groupid = getgrgid(s.st_gid)))
+			{
 				perror("group id fail");
+				exit(1);
+			}
 			f.user = userid->pw_name;
 			f.group = groupid->gr_name;
 
@@ -548,7 +626,10 @@ namespace ls
 		{
 			std::vector<fileinfo> fileinfolist;
 			if (NULL == (dir = opendir(file.c_str())))
+			{
 				perror("no such dirctory.");
+				exit(1);
+			}
 			errno = 0;
 			while (NULL != (dirfiles = readdir(dir)))
 			{
@@ -560,7 +641,10 @@ namespace ls
 				f.name = temp;
 				temp = file + "/" + temp;
 				if (stat(temp.c_str(), &s) == -1)
+				{
 					perror("stat error");
+					exit(1);
+				}
 			
 				//what type of file is it? stores in permissions
 				if ((s.st_mode & S_IFMT) == S_IFDIR)
@@ -605,9 +689,15 @@ namespace ls
 				passwd *userid;
 				group *groupid;
 				if (NULL == (userid = getpwuid(s.st_uid)))
+				{
 					perror("get user id fail");
+					exit(1);
+				}
 				if (NULL == (groupid = getgrgid(s.st_gid)))
+				{
 					perror("get group id fail");
+					exit(1);
+				}
 				f.user = userid->pw_name;
 				f.group = groupid->gr_name;
 
@@ -633,9 +723,15 @@ namespace ls
 				fileinfolist.push_back(f);
 			}
 			if (errno != 0)
+			{
 				perror("directory read error");
+				exit(1);
+			}
 			if (-1 == closedir(dir))
+			{
 				perror("close directory error");
+				exit(1);
+			}
 			std::sort(fileinfolist.begin(), fileinfolist.end(), sortalpha);
 			std::cout << "total " << totalspace/2 << std::endl;
 			for (size_t i = 0; i < fileinfolist.size(); i++)
@@ -677,7 +773,10 @@ namespace ls
 			if ((s.st_mode & S_IFMT) == S_IFREG)
 				return;
 		if (NULL == (dir = opendir(file.c_str())))
+		{
 			perror("no such directory.");
+			exit(1);
+		}
 		errno = 0;
 		while (NULL != (dirfiles = readdir(dir)))
 		{
@@ -686,9 +785,15 @@ namespace ls
 				dirpath.push_back(name);
 		}
 		if (errno != 0)
+		{
 			perror("directory read error");
+			exit(1);
+		}
 		if (-1 == closedir(dir))
+		{
 			perror("close directory error");
+			exit(1);
+		}
 		std::sort(dirpath.begin(), dirpath.end());
 		for (size_t i = 0; i < dirpath.size(); i++)
 		{
@@ -697,7 +802,10 @@ namespace ls
 			longestlink = 0;
 			std::string path = file + "/" + dirpath.at(i);
 			if (stat(path.c_str(), &s) == -1)
+			{
 				perror("stat error");
+				exit(1);
+			}
 			if ((s.st_mode & S_IFMT) == S_IFDIR)
 			{
 				listextrarec(path);
@@ -724,7 +832,10 @@ namespace ls
 				return;
 		std::cout << std::endl;
 		if (NULL == (dir = opendir(file.c_str())))
+		{
 			perror("no such directory.");
+			exit(1);
+		}
 		errno = 0;
 		while (NULL != (dirfiles = readdir(dir)))
 		{
@@ -733,9 +844,15 @@ namespace ls
 				dirpath.push_back(name);
 		}
 		if (errno != 0)
+		{
 			perror("directory read error");
+			exit(1);
+		}
 		if (-1 == closedir(dir))
+		{
 			perror("close directory error");
+			exit(1);
+		}
 		std::sort(dirpath.begin(), dirpath.end());
 		for (size_t i = 0; i < dirpath.size(); i++)
 		{
@@ -744,12 +861,14 @@ namespace ls
 			longestlink = 0;
 			std::string path = file + "/" + dirpath.at(i);
 			if (stat(path.c_str(), &s) == -1)
+			{
 				perror("stat error");
+				exit(1);
+			}
 			if ((s.st_mode & S_IFMT) == S_IFDIR)
 				listextrarecall(path);
 		}
 
 	}
 }
-
 
