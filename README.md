@@ -75,3 +75,8 @@ You can add flags then dir or dir then flags.
 You can even have flags followed by a dir followed by more flags.
 ie `ls -a ~/ -R .. -l`
 If a flag is not valid, ls will not output anything.
+`ls' assumes the terminal is 80 char across.
+The columns are all one size.
+If the name of a file is more than 80 char across there will only be one column of the length of the largest size.
+
+

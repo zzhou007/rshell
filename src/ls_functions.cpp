@@ -64,7 +64,9 @@ namespace ls
 	
 	//function prints dir or file name with color
 	//path is path to dir or file
-	void printcolor(std::string name, std::string path)
+	//width sets colum width 
+	//assumes terminal is 80 char across
+	void printcolor(std::string name, std::string path, int w)
 	{
 		if (-1 == stat(path.c_str(), &s))
 		{
@@ -74,21 +76,36 @@ namespace ls
 		if (name.find(".") == 0)
 		{
 			if ((s.st_mode & S_IFMT) & S_IFDIR)
-				std::cout << HIDDEN << DIRC << name  << REG << "  ";
+				std::cout << HIDDEN << DIRC 
+					<< std::setw(w) << std::left << name  << REG << "  ";
 			else if (s.st_mode & S_IXUSR)
-				std::cout << HIDDEN << EXE << name  << REG << "  ";
+				std::cout << HIDDEN << EXE 
+					<< std::setw(w) << std::left << name  << REG << "  ";
 			else 
-				std::cout << HIDDEN << name << REG << "  ";
+				std::cout << HIDDEN 
+					<< std::setw(w) << std::left << name << REG << "  ";
 			return;
 		}
 		if ((s.st_mode & S_IFMT) & S_IFDIR)
-			std::cout << DIRC << name << REG << "  ";
+			std::cout << DIRC 
+				<< std::setw(w) << std::left << name << REG << "  ";
 		else if (s.st_mode & S_IXUSR)
-			std::cout << EXE << name << REG << "  ";
+			std::cout << EXE 
+				<< std::setw(w) << std::left << name << REG << "  ";
 		else 
-			std::cout << name << "  ";
+			std::cout << std::setw(w) << std::left << name << "  ";
 	}
-
+	
+	int longest(std::vector<std::string> v)
+	{
+		unsigned l = 0;
+		for (size_t i = 0; i < v.size(); i++)
+		{
+			if (v.at(i).length() > l)
+				l = v.at(i).length();
+		}
+		return l;
+	}
 	void list(std::string file)
 	{
 		if (printfd(file))
@@ -109,8 +126,20 @@ namespace ls
 		if (-1 == closedir(dir))
 			perror("close directory error");
 		std::sort(output.begin(), output.end());
+		int line = 0;
+		int colw = longest(output);
 		for (size_t i = 0; i < output.size(); i++)
-			printcolor(output.at(i), file + "/" + output.at(i));
+		{
+			printcolor(output.at(i), file + "/" + output.at(i), colw);
+			line += colw;
+			if (colw > 80)
+				std::cout << std::endl;
+			else if (line + colw > 80)
+			{
+				line = 0;
+				std::cout << std::endl;
+			}
+		}
 		std::cout << std::endl;
 	}
 
@@ -133,8 +162,20 @@ namespace ls
 		if (-1 == closedir(dir))
 			perror("close directory error");
 		std::sort(output.begin(), output.end());
+		int line = 0;
+		int colw = longest(output);
 		for (size_t i = 0; i < output.size(); i++)
-			printcolor(output.at(i), file + "/" + output.at(i));	
+		{
+			printcolor(output.at(i), file + "/" + output.at(i), colw);
+			line += colw;
+			if (line > 80)
+				std::cout << std::endl;
+			else if (line + colw > 80)
+			{
+				line = 0;
+				std::cout << std::endl;
+			}
+		}
 		//std::cout << output.at(i) << "  ";
 		std::cout << std::endl;
 	}
