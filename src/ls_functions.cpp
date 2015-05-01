@@ -249,11 +249,11 @@ namespace ls
 		return name1.name < name2.name;
 	}
 
-	unsigned totalspace;
+	unsigned totalspace = 0;
 
-	unsigned longestsize;
+	unsigned longestsize = 0;
 
-	unsigned longestlink;
+	unsigned longestlink = 0;
 
 	void listextra(std::string file)
 	{	
@@ -372,7 +372,7 @@ namespace ls
 
 					//size
 					f.size = s.st_size;
-					totalspace = totalspace + s.st_size;
+					totalspace = totalspace + s.st_blocks;
 					unsigned temp = 0;
 					for (size_t i = s.st_size; i > 0; i/=10)
 						temp++;
@@ -415,7 +415,7 @@ namespace ls
 				perror("directory read error");
 			if (-1 == closedir(dir))
 				perror("close directory error");
-			std::cout << "total " << totalspace << std::endl;
+			std::cout << "total " << totalspace/2 << std::endl;
 			std::sort(fileinfolist.begin(), fileinfolist.end(), sortalpha);
 			for (size_t i = 0; i < fileinfolist.size(); i++)
 			{
@@ -553,7 +553,7 @@ namespace ls
 					longestlink = temp_link;
 				//size
 				f.size = s.st_size;
-				totalspace = totalspace + s.st_size;
+				totalspace = totalspace + s.st_blocks;
 				unsigned temp_length = 0;
 				for (size_t i = s.st_size; i > 0; i/= 10)
 					temp_length++;
@@ -596,7 +596,7 @@ namespace ls
 			if (-1 == closedir(dir))
 				perror("close directory error");
 			std::sort(fileinfolist.begin(), fileinfolist.end(), sortalpha);
-			std::cout << "total " << totalspace << std::endl;
+			std::cout << "total " << totalspace/2 << std::endl;
 			for (size_t i = 0; i < fileinfolist.size(); i++)
 			{
 				std::cout << fileinfolist.at(i).permissions << " "
