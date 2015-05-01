@@ -18,12 +18,22 @@
 
 #include "ls.h"
 namespace ls
-{
+{	
+	//green
+	#define EXE "\033[32m"
+	//blue
+	#define DIRC "\033[34m"
+	#define REG "\033[0m"
+	//gray back
+	#define HIDDEN "\033[47m"
+
 	DIR *dir;
 	struct stat s;
 	struct dirent *dirfiles;
 	
-	void list(std::string file)
+	//this checks if it is a file or a dir if it is a file it returns true
+	//returns false if it is a dir
+	bool printfd(std::string file)
 	{
 		//just print file if not dir
 		if (-1 == stat(file.c_str(), &s))
@@ -31,14 +41,58 @@ namespace ls
 			perror("stat error");
 			exit(1);
 		}
-		else
+		if ((s.st_mode & S_IFMT) == S_IFREG)
 		{
-			if ((s.st_mode & S_IFMT) == S_IFREG)
+			if (file.find(".") == 0)
 			{
-				std::cout << file << std::endl;
-				return;
+				if (s.st_mode & S_IXUSR)
+					std::cout << HIDDEN << EXE << file << REG << "  " << std::endl;
+				else
+					std::cout << HIDDEN << file << REG << "  " << std::endl;
+				return true;
 			}
+			if (s.st_mode & S_IXUSR)
+				std::cout << EXE << file << REG << "  " << std::endl;
+			else
+				std::cout << file << "  " << std::endl;
+			return true;
+
 		}
+		return false;
+
+	}
+	
+	//function prints dir or file name with color
+	//path is path to dir or file
+	void printcolor(std::string name, std::string path)
+	{
+		if (-1 == stat(path.c_str(), &s))
+		{
+			perror("output with color fail");
+			exit(1);
+		}
+		if (name.find(".") == 0)
+		{
+			if ((s.st_mode & S_IFMT) & S_IFDIR)
+				std::cout << HIDDEN << DIRC << name  << REG << "  ";
+			else if (s.st_mode & S_IXUSR)
+				std::cout << HIDDEN << EXE << name  << REG << "  ";
+			else 
+				std::cout << HIDDEN << name << REG << "  ";
+			return;
+		}
+		if ((s.st_mode & S_IFMT) & S_IFDIR)
+			std::cout << DIRC << name << REG << "  ";
+		else if (s.st_mode & S_IXUSR)
+			std::cout << EXE << name << REG << "  ";
+		else 
+			std::cout << name << "  ";
+	}
+
+	void list(std::string file)
+	{
+		if (printfd(file))
+			return;
 		//goes to dir and prints out content
 		std::vector<std::string> output;
 		if (NULL == (dir = opendir(file.c_str())))
@@ -56,27 +110,14 @@ namespace ls
 			perror("close directory error");
 		std::sort(output.begin(), output.end());
 		for (size_t i = 0; i < output.size(); i++)
-			std::cout << output.at(i) << "  ";
+			printcolor(output.at(i), file + "/" + output.at(i));
 		std::cout << std::endl;
 	}
 
 	void listall(std::string file)
 	{
-		//just print file if not dir
-		if (-1 == stat(file.c_str(), &s))
-		{
-			perror("stat error");
-			exit(1);
-		}
-		else
-		{
-			if ((s.st_mode & S_IFMT) == S_IFREG)
-			{
-				std::cout << file << std::endl;
-				return;
-			}
-		
-		}
+		if(printfd(file))
+			return;
 		//goes to dir and prints out content 
 		std::vector<std::string> output;
 		if (NULL == (dir = opendir(file.c_str())))
@@ -93,27 +134,15 @@ namespace ls
 			perror("close directory error");
 		std::sort(output.begin(), output.end());
 		for (size_t i = 0; i < output.size(); i++)
-			std::cout << output.at(i) << "  ";
+			printcolor(output.at(i), file + "/" + output.at(i));	
+		//std::cout << output.at(i) << "  ";
 		std::cout << std::endl;
 	}
 
 	void listrec(std::string file)
 	{
-		//just print file if not dir
-		if (-1 == stat(file.c_str(), &s))
-		{
-			perror("stat error");
-			exit(1);
-		}
-		else
-		{
-			if ((s.st_mode & S_IFMT) == S_IFREG)
-			{
-				std::cout << file << std::endl;
-				return;
-			}
-		
-		}
+		if (printfd(file))
+			return;
 		//list files/dir in cur dir
 		std::string newdir = file;
 		std::cout << newdir << ":" << std::endl;
@@ -146,21 +175,8 @@ namespace ls
 
 	void listrecall(std::string file)
 	{
-		//just print file if not dir
-		if (-1 == stat(file.c_str(), &s))
-		{
-			perror("stat error");
-			exit(1);
-		}
-		else
-		{
-			if ((s.st_mode & S_IFMT) == S_IFREG)
-			{
-				std::cout << file << std::endl;
-				return;
-			}
-		
-		}
+		if (printfd(file))
+			return;
 		//list all files/dir in cur dir
 		std::string newdir = file;
 		std::cout << newdir << ":" << std::endl;
@@ -202,7 +218,31 @@ namespace ls
 		std::string time_time;
 		int hardlinks;
 		int size;
+		//depending on the int the color changes
+		//0 no color
+		//1 hidden
+		//12 hidden + dir
+		//13 hidden + exec
+		//2 dir
+		//3 exec
+		int color;
 	};
+
+	void printextracolor(int color, std::string name)
+	{
+		if (color == 1)
+			std::cout << HIDDEN << name << REG;
+		else if (color == 12)
+			std::cout << HIDDEN << DIRC << name << REG;
+		else if (color == 13)
+			std::cout << HIDDEN << EXE << name << REG;
+		else if (color == 2)
+			std::cout << DIRC << name << REG;
+		else if (color == 3)
+			std::cout << EXE << name << REG;
+		else 
+			std::cout << name;
+	}
 	//comparison to sort struct by file name	
 	bool sortalpha(const fileinfo &name1, const fileinfo &name2)
 	{
@@ -217,6 +257,7 @@ namespace ls
 
 	void listextra(std::string file)
 	{	
+		int color = 0;
 		if (stat(file.c_str(), &s) == -1)
 			perror("stat error");
 		if ((s.st_mode & S_IFMT) == S_IFREG)
@@ -261,6 +302,13 @@ namespace ls
 			strftime(buffer, 80, "%R", timeinfo);
 			f.time_time = buffer;
 
+			//calculate color
+			if (s.st_mode & S_IXUSR)
+				color += 3;
+			if (f.name.find(".") == 0)
+				color += 10;
+
+			//output 
 			std::cout << f.permissions << " "
 				<< f.hardlinks << " "
 				<< f.user << " "
@@ -268,9 +316,9 @@ namespace ls
 				<< f.size << " "
 				<< f.time_m << " "
 				<< f.time_d << " "
-				<< f.time_time << " "
-				<< f.name
-				<< std::endl;
+				<< f.time_time << " ";
+			printextracolor(color, f.name);
+			std::cout << std::endl;
 		}
 		else
 		{
@@ -280,6 +328,7 @@ namespace ls
 			errno = 0;
 			while (NULL != (dirfiles = readdir(dir)))
 			{
+				color = 0;
 				fileinfo f;
 				//what is the file name
 				std::string temp = dirfiles->d_name;
@@ -349,6 +398,15 @@ namespace ls
 					f.time_d = buffer;
 					strftime(buffer, 80, "%R", timeinfo);
 					f.time_time = buffer;
+					
+					//calculate color
+					if ((s.st_mode & S_IFMT) == S_IFDIR)
+						color += 2;
+					else if (s.st_mode & S_IXUSR)
+						color += 3;
+					if (f.name.find(".") == 0)
+						color += 10;
+					f.color = color;
 
 					fileinfolist.push_back(f);
 				}
@@ -371,15 +429,18 @@ namespace ls
 					<< fileinfolist.at(i).time_m << " "
 					<< std::setw(2) << std::right
 					<< fileinfolist.at(i).time_d << " "
-					<< fileinfolist.at(i).time_time << " "
-					<< fileinfolist.at(i).name
-					<< std::endl;
+					<< fileinfolist.at(i).time_time << " ";
+					//<< fileinfolist.at(i).name
+					//<< std::endl;
+				printextracolor(fileinfolist.at(i).color, fileinfolist.at(i).name);
+				std::cout << std::endl;
 			}
 		}
 	}
 	
 	void listextraall(std::string file)
 	{
+		int color = 0;
 		if (stat(file.c_str(), &s) == -1)
 			perror("stat error");
 		if ((s.st_mode & S_IFMT) == S_IFREG)
@@ -423,6 +484,12 @@ namespace ls
 			strftime(buffer, 80, "%R", timeinfo);
 			f.time_time = buffer;
 
+			//calculate color
+			if (s.st_mode & S_IXUSR)
+				color += 3;
+			if (f.name.find(".") == 0)
+				color += 10;
+			
 			std::cout << f.permissions << " "
 				<< f.hardlinks << " "
 				<< f.user << " "
@@ -430,9 +497,11 @@ namespace ls
 				<< f.size << " "
 				<< f.time_m << " "
 				<< f.time_d << " "
-				<< f.time_time << " "
-				<< f.name
-				<< std::endl;
+				<< f.time_time << " ";
+				//<< f.name
+				//<< std::endl;
+			printextracolor(color, f.name);
+			std::cout << std::endl;
 		}
 		else
 		{
@@ -442,6 +511,7 @@ namespace ls
 			errno = 0;
 			while (NULL != (dirfiles = readdir(dir)))
 			{
+				color = 0;
 				fileinfo f;
 				f.name = file;
 				//what is the file name
@@ -510,6 +580,15 @@ namespace ls
 				strftime(buffer, 80, "%R", timeinfo);
 				f.time_time = buffer;
 
+				//calculate color
+				if ((s.st_mode & S_IFMT) == S_IFDIR)
+					color += 2;
+				else if (s.st_mode & S_IXUSR)
+					color += 3;
+				if (f.name.find(".") == 0)
+					color += 10;
+				f.color = color;
+				
 				fileinfolist.push_back(f);
 			}
 			if (errno != 0)
@@ -530,9 +609,11 @@ namespace ls
 					<< fileinfolist.at(i).time_m << " "
 					<< std::setw(2) << std::right
 					<< fileinfolist.at(i).time_d << " "
-					<< fileinfolist.at(i).time_time << " "
-					<< fileinfolist.at(i).name
-					<< std::endl;
+					<< fileinfolist.at(i).time_time;
+					//<< fileinfolist.at(i).name
+					//<< std::endl;
+				printextracolor(fileinfolist.at(i).color, fileinfolist.at(i).name);
+				std::cout << std::endl;
 			}
 		}
 	}
