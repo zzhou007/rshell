@@ -5,6 +5,12 @@ all:
 	cd src; \
 	g++ $(CFLAGS) rshell rshell.cpp; \
 	g++ $(CFLAGS) ls ls_functions.cpp ls.cpp; \
+	g++ $(CFLAGS) cp cp.cpp ; \
+	g++ $(CFLAGS) rm rm.cpp; \
+	g++ $(CFLAGS) mv mv.cpp; \
+	mv mv ../bin; \
+	mv cp ../bin; \
+	mv rm ../bin; \
 	mv ls ../bin; \
 	mv rshell ../bin; \
 	cd -; \
@@ -23,6 +29,18 @@ cp: src/cp.cpp src/Timer.h
 	cd src; \
 	g++ $(CFLAGS) cp cp.cpp ; \
 	mv cp ../bin; \
+	cd -; \
+
+rm: src/rm.cpp
+	cd src; \
+	g++ $(CFLAGS) rm rm.cpp; \
+	mv rm ../bin; \
+	cd -; \
+
+mv: src/mv.cpp
+	cd src; \
+	g++ $(CFLAGS) mv mv.cpp; \
+	mv mv ../bin; \
 	cd -; \
 
 clean:
