@@ -110,16 +110,19 @@ int connector(bool &next, bool &orr, bool &andd, string const cmd)
 //returns -1 if unable to run command else 0
 int execb (string in)
 {
-	bool redirio = false;
-	if (in.find("|") != string::npos || 
-		in.find("<") != string::npos ||
-		in.find(">") != string::npos)
-	{
-		redirect::redir(in);
-		redirio = true;
-	}
+	int currentp = 0;
 	int status = 0;
-	pid_t pid = fork();
+	bool first = true, last = true;
+	bool redirio = true;
+	do
+	{
+		if (in.find("|") != string::npos || 
+			in.find("<") != string::npos ||
+			in.find(">") != string::npos)
+		{
+			redirect::redir(in, currentp, first, last, redirio);
+		}
+		pid_t pid = fork();
 		if (pid == -1)
 			perror("failed to fork");
 		else if (pid == 0)
@@ -141,18 +144,19 @@ int execb (string in)
 			}
 			delete temp;
 		}
-		else 
-		{
-			int waits = waitpid(-1, &status, 0);
-			if (waits == -1)
-				perror("no child");
-			if (status > 0)
-			{
-				return -1;
-			}
-		}
-	if (redirio)
-		redirect::ioend();
+		currentp++;
+		if (redirio)
+			redirect::ioend();
+	}
+	while(!last);
+	int waits = waitpid(-1, &status, 0);
+	if (waits == -1)
+		perror("no child");
+	if (status > 0)
+	{
+		return -1;
+	}
+	redirect::restoreallfd();
 	return 0;
 }
 //will output true if program needs to be exited false otherwise
