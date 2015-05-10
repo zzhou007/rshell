@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <sys/wait.h>
 #include "redirect.h"
+#include <limits.h>
 using namespace std;
 
 //takes in 3 bools and 1 string 
@@ -110,13 +111,15 @@ int connector(bool &next, bool &orr, bool &andd, string const cmd)
 //returns -1 if unable to run command else 0
 int execb (string in)
 {
+	//at beginning 
 	int currentp = 0;
 	int status = 0;
 	bool first = true, last = true;
-	bool redirio = true;
+	bool redirio = false;
 	do
 	{
-		if (in.find("|") != string::npos || 
+		if (!first || !last || !redirio ||
+			in.find("|") != string::npos || 
 			in.find("<") != string::npos ||
 			in.find(">") != string::npos)
 		{
@@ -157,6 +160,7 @@ int execb (string in)
 		return -1;
 	}
 	redirect::restoreallfd();
+	redirect::clearvector();
 	return 0;
 }
 //will output true if program needs to be exited false otherwise
@@ -200,6 +204,8 @@ int main(int argc, char **argv)
 		string in;
 		cout << "$";
 		getline(cin,in);
+		//flush getline
+		cin.clear();
 		size_t comment = in.find("#");
 		if (comment != string::npos)
 			in = in.substr(0, comment);

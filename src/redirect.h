@@ -7,6 +7,7 @@ namespace redirect
 	void redir(std::string &command, int currentp, bool &first, bool &last, bool &redirioi);
 	void ioend();
 	void restoreallfd();
+	void clearvector();
 
 }
 #endif

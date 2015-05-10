@@ -47,7 +47,7 @@ namespace redirect
 		if (end != std::string::npos)
 		{
 			//removes ending white spaces 
-			cmd = s.substr(0, end + 1);
+			cmd = cmd.substr(0, end + 1);
 		}
 		s = cmd;
 		
@@ -84,6 +84,8 @@ namespace redirect
 		else
 			rhs = run.substr(p + 1);
 		
+		//remove space debug
+		//std::cout << "rhs " << rhs << std::endl;
 		removespace(rhs);
 		run = run.substr(0,p);
 		removespace(run);
@@ -91,42 +93,49 @@ namespace redirect
 
 	}
 
-	int fdold = 0;
+	int iofdold = 0;
 	bool in = false, out = false, appen = false;
 	//run changes to the lhs
 	void iostart(std::string &run)
 	{
-		int fdnew = 0;
+		int iofdnew = 0;
 		std::string rhs = seperaterio(in, out, appen, run);
+		//seperateio debug
+		//std::cout << "rhs " << rhs << std::endl
+		//	<< "in out appen " << in << out << appen << std::endl
+		//	<< "run " << run << std::endl;
 		//std::cout << "rhs " << rhs << "run " << run << std::endl;
 		if (in)
 		{
-			if (-1 == (fdold = dup(0)))
+			if (-1 == (iofdold = dup(0)))
 				perror("save fdold");
 			if (-1 == close(0))
 				perror("close 1");
-			fdnew = open(rhs.c_str(), O_RDONLY);
-			if (fdnew == -1)
+			iofdnew = open(rhs.c_str(), O_RDONLY);
+			if (iofdnew == -1)
 				perror("open 1");
 		}
 		if (out)
 		{
-			if (-1 == (fdold = dup(1)))
+			if (-1 == (iofdold = dup(1)))
 				perror("save fdold (1)");
+			//std::cout << "vector error here" << std::endl;
 			if (-1 == close(1))
 				perror("close 2");
-			fdnew = open(rhs.c_str(), O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
-			if (fdnew == -1)
+			//std::cout << "rhs " << rhs << std::endl;
+			iofdnew = open(rhs.c_str(), O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
+			//std::cout << "vector error here2" << std::endl;
+			if (iofdnew == -1)
 				perror("open 2");
 		}
 		if (appen)
 		{
-			if (-1 == (fdold = dup(1)))
+			if (-1 == (iofdold = dup(1)))
 				perror("save fd appen");
 			if (-1 == close(1))
 				perror("close 3");
-			fdnew = open(rhs.c_str(), O_WRONLY | O_CREAT | O_APPEND, S_IRUSR | S_IWUSR);
-			if (fdnew == -1)
+			iofdnew = open(rhs.c_str(), O_WRONLY | O_CREAT | O_APPEND, S_IRUSR | S_IWUSR);
+			if (iofdnew == -1)
 				perror("open 3");
 		}
 	}
@@ -137,14 +146,14 @@ namespace redirect
 		{
 			if (-1 == close(0))
 				perror("close 5");
-			if (-1 == dup2(fdold, 0))
+			if (-1 == dup2(iofdold, 0))
 				perror("dup2 1");
 		}
 		if (out || appen)
 		{
 			if (-1 == close(1))
 				perror("close 4");
-			if (-1 == dup2(fdold, 1))
+			if (-1 == dup2(iofdold, 1))
 				perror("dup2 2");
 		}
 	}
@@ -166,15 +175,19 @@ namespace redirect
 	}
 	void pipestart(segment &s, bool first, segment &p)
 	{
-		
+		//save read and write end of pipe	
 		if (-1 == (s.oldfd[0] = dup(0)))
 			perror("save fd 0");	
 		if (-1  == (s.oldfd[1] = dup(1)))
 			perror("save fd 1");
+		//close write end of fd
+		//set write end to write end of pipe
 		if (-1 == close(1))
 			perror("close 5");
 		if (-1 == dup2(s.fd[1], 1))
 			perror("dup2 3");
+		//if not first also close read end of fd
+		//set read end of fd to read end of pipe
 		if (!first)
 		{
 			if (-1 == close(0))
@@ -188,83 +201,97 @@ namespace redirect
 	
 	void redir(std::string &command, int currentp, bool &first, bool &last, bool &redirio)
 	{
-		first = false;
-		last = false;
+		//sets all bool values
+		if (currentp == 0)
+			first = true;
+		else
+			first = false;
+		
+		if (v.size() == 1 || (unsigned)currentp == v.size() - 1)
+			last = true;
+		else 
+			last = false;
+		//incase redirio was true on first run set to false
 		redirio = false;
 		segment temp;
 		in = false;
 		out = false;
 		appen = false;
+		bool ispipe = false;
 		std::string run;
-		//this loop seperates command into pieces 
-		//pieces are based off |
-		do
+		//only redirect io if first
+		//no construct pipe vector if first
+		if (first)
 		{
-			run = seperatep(command);
-			temp.command = run;
-			//make pipe for vector
-			if (-1 == pipe(temp.fd))
+			//no pipe just io
+			if (!findpipe(command))
 			{
-				perror("pipe 1");
-				exit(1);
+				temp.command = command;
+				temp.fd[0] = 0;
+				temp.fd[1] = 0;
+				temp.oldfd[0] = 0;
+				temp.oldfd[1] = 0;
+				v.push_back(temp);
+				last = true;
+				first = true;
+				redirio = true;
 			}
-			//push onto vector
-			v.push_back(temp);
-
+			//this loop seperates command into pieces 
+			//pieces are based off |
+			else
+			{
+				ispipe = true;
+				do
+				{
+					run = seperatep(command);
+					temp.command = run;
+					//make pipe for vector
+					if (-1 == pipe(temp.fd))
+					{
+						perror("pipe 1");
+						exit(1);
+					}
+					//push onto vector
+					v.push_back(temp);
+				}
+				while (findpipe(command));
+				temp.command = command;
+				if (-1 == pipe(temp.fd))
+				{
+				perror("pipe 2");
+				exit(1);
+				}
+				v.push_back(temp);
+			}
 		}
-		while (findpipe(command));
-		temp.command = command;
-		if (-1 == pipe(temp.fd))
-		{
-			perror("pipe 2");
-			exit(1);
-		}
-		v.push_back(temp);
-		
-		//debug
-		for (size_t i = 0; i < v.size(); i++)
-			std::cout << "v at " << i << " " 
-			<< "command " << v.at(i).command 
-			<< " pipe f[0] " << v.at(i).fd[0]
-			<< " pipe f[1] " << v.at(i).fd[1]
-			<< std::endl;
-		//end debug
-		
 		//runs iostart that redirects input and output
 		//if finds io
 		//only for starting and ending pipes
-		if (findio(v.at(0).command))
+		if (redirio && first)
 		{
-			redirio = true;
 			iostart(v.at(0).command);
 		}
-		if (findio(v.at(v.size() - 1).command))
+		//there is a pipe and the last statement wants to
+		//redirect io
+		if (last && findio(v.at(currentp).command))
 		{
 			redirio = true;
-			iostart(v.at(v.size() -1).command);
+			iostart(v.at(currentp).command);
 		}
-		//sets first and last pipe;
-		std::cout << (unsigned)currentp << std::endl;
-		std::cout << v.size() - 1 << std::endl;
-		if (currentp == 0)
-			first = true;
-		if (v.size() == 1 || (unsigned)currentp == v.size() - 1)
-			last = true;
-
-		//changes fd for current pipe
-		if (first)
+		//if it is first and is a pipe cannot send prev
+		//send current pipe instead
+		if (first && ispipe)
 			pipestart(v.at(currentp), first, v.at(currentp));
-		else
+		else if (ispipe)
 			pipestart(v.at(currentp), first, v.at(currentp-1));
 
-		
 		//sets command for execvp to run 
 		command = v.at(currentp).command;
-
 
 	}
 	void restoreallfd()
 	{
+		//restores all fd after pipe is ran
 		for(size_t i; i < v.size(); i++)
 		{
 			close(v.at(i).fd[0]);
@@ -272,6 +299,11 @@ namespace redirect
 			close(v.at(i).fd[1]);
 			dup2(v.at(i).oldfd[1], 1);
 		}
+	}
+	//clears vector at the end
+	void clearvector()
+	{
+		v.clear();
 	}
 
 
