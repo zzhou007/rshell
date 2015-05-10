@@ -1,9 +1,11 @@
 #include <string.h>
+#include <string>
 #include <iostream>
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
 #include <sys/wait.h>
+#include "redirect.h"
 using namespace std;
 
 //takes in 3 bools and 1 string 
@@ -108,6 +110,14 @@ int connector(bool &next, bool &orr, bool &andd, string const cmd)
 //returns -1 if unable to run command else 0
 int execb (string in)
 {
+	bool redirio = false;
+	if (in.find("|") != string::npos || 
+		in.find("<") != string::npos ||
+		in.find(">") != string::npos)
+	{
+		redirect::redir(in);
+		redirio = true;
+	}
 	int status = 0;
 	pid_t pid = fork();
 		if (pid == -1)
@@ -141,6 +151,8 @@ int execb (string in)
 				return -1;
 			}
 		}
+	if (redirio)
+		redirect::ioend();
 	return 0;
 }
 //will output true if program needs to be exited false otherwise
@@ -167,6 +179,8 @@ bool quit(string in)
 	}
 	return false;
 }
+//"in" is portion of cmd that does not contain connectors
+//"cmd" is everything the use inputs
 int main(int argc, char **argv)
 {
 	string cmd;
@@ -189,6 +203,9 @@ int main(int argc, char **argv)
 		int cut = connector(next, orr, andd, in);
 		while (cut != -1)
 		{	
+			//if not ; then it is || or &&
+			// ; = remove 1 form cmd
+			// || or && = remove 2 from cmd
 			if (next)
 			{
 				cmd = in.substr(0,cut);
@@ -229,7 +246,7 @@ int main(int argc, char **argv)
 		if (quit(in))
 		{
 			return 0;
-		}	
+		}
 		execb(in); //if (execb(in) == -1); if statement is empty does not matter if succecd or fail 
 	}
 	return 0;
