@@ -8,19 +8,19 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <vector>
+#include <sys/wait.h>
 
 #include "redirect.h"
 namespace redirect
 {
-
 	struct segment
 	{
 		std::string command;
 		int fd[2];
-		int oldfd[2];
 	};
 	std::vector<segment> v;
-
+	int pipefd[2];
+	bool ispipe = true;
 	//splits command to before first pipe and after first pipe
 	//returns before pipe
 	//sets command to after pipe
@@ -173,28 +173,34 @@ namespace redirect
 			return true;
 		return false;
 	}
-	void pipestart(segment &s, bool first, segment &p)
+	void pipestart(segment &s, bool first, bool last, segment &p)
 	{
-		//save read and write end of pipe	
-		if (-1 == (s.oldfd[0] = dup(0)))
-			perror("save fd 0");	
-		if (-1  == (s.oldfd[1] = dup(1)))
-			perror("save fd 1");
-		//close write end of fd
-		//set write end to write end of pipe
-		if (-1 == close(1))
-			perror("close 5");
-		if (-1 == dup2(s.fd[1], 1))
-			perror("dup2 3");
-		//if not first also close read end of fd
-		//set read end of fd to read end of pipe
+		//save std in and std out
+		if (first)
+		{
+			if (-1 == (pipefd[0] = dup(0)))
+				perror("save fd 0");	
+			if (-1  == (pipefd[1] = dup(1)))
+				perror("save fd 1");
+		}
+		if (!last)
+		{
+			//close write end of fd
+			//set write end to write end of pipe
+			if (-1 == dup2(s.fd[1], 1))
+				perror("dup2 3");
+		}
 		if (!first)
 		{
-			if (-1 == close(0))
-				perror("close 7");
+			//close read end of fd
+			//set read end to read end of previous pipe
 			if (-1 == dup2(p.fd[0], 0))
 				perror("dup2 5");
-	
+		}
+		if (last)
+		{	
+			if (-1 == dup2(pipefd[1], 1))
+				perror("restore write end of pipe");
 		}
 
 	}
@@ -217,7 +223,7 @@ namespace redirect
 		in = false;
 		out = false;
 		appen = false;
-		bool ispipe = false;
+		ispipe = true;
 		std::string run;
 		//only redirect io if first
 		//no construct pipe vector if first
@@ -229,12 +235,11 @@ namespace redirect
 				temp.command = command;
 				temp.fd[0] = 0;
 				temp.fd[1] = 0;
-				temp.oldfd[0] = 0;
-				temp.oldfd[1] = 0;
 				v.push_back(temp);
 				last = true;
 				first = true;
 				redirio = true;
+				ispipe = false;
 			}
 			//this loop seperates command into pieces 
 			//pieces are based off |
@@ -262,8 +267,17 @@ namespace redirect
 				exit(1);
 				}
 				v.push_back(temp);
+				if (findio(v.at(0).command))
+					redirio = true;
 			}
 		}
+		//if it is first and is a pipe cannot send prev
+		//send current pipe instead
+		if (first && ispipe)
+			pipestart(v.at(currentp), first, last, v.at(currentp));
+		else if (ispipe)
+			pipestart(v.at(currentp), first, last, v.at(currentp-1));
+
 		//runs iostart that redirects input and output
 		//if finds io
 		//only for starting and ending pipes
@@ -278,26 +292,28 @@ namespace redirect
 			redirio = true;
 			iostart(v.at(currentp).command);
 		}
-		//if it is first and is a pipe cannot send prev
-		//send current pipe instead
-		if (first && ispipe)
-			pipestart(v.at(currentp), first, v.at(currentp));
-		else if (ispipe)
-			pipestart(v.at(currentp), first, v.at(currentp-1));
-
+	
 		//sets command for execvp to run 
 		command = v.at(currentp).command;
+		removespace(command);
 
 	}
+
 	void restoreallfd()
 	{
-		//restores all fd after pipe is ran
-		for(size_t i; i < v.size(); i++)
+		if (ispipe)
 		{
-			close(v.at(i).fd[0]);
-			dup2(v.at(i).oldfd[0], 0);
-			close(v.at(i).fd[1]);
-			dup2(v.at(i).oldfd[1], 1);
+			for (size_t i = 0; i < v.size(); i++)
+			{
+				if (-1 == close(v.at(i).fd[0]))
+					perror("restore fail");
+				if (-1 == close(v.at(i).fd[1]))
+					perror("restore fail");
+			}
+			if (-1 == (dup2(pipefd[0], 0)))
+				perror("restore pipe read");
+			if (-1 == (dup2(pipefd[1], 1)))
+				perror("restore pipe write");
 		}
 	}
 	//clears vector at the end

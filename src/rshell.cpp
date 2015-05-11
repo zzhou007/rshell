@@ -118,7 +118,7 @@ int execb (string in)
 	bool redirio = false;
 	do
 	{
-		if (!first || !last || !redirio ||
+		if (!first || !last || redirio ||
 			in.find("|") != string::npos || 
 			in.find("<") != string::npos ||
 			in.find(">") != string::npos)
@@ -152,7 +152,7 @@ int execb (string in)
 			redirect::ioend();
 	}
 	while(!last);
-	int waits = waitpid(-1, &status, 0);
+	int waits = wait(&status);
 	if (waits == -1)
 		perror("no child");
 	if (status > 0)
