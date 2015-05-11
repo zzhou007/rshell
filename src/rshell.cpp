@@ -125,19 +125,29 @@ int execb (string in)
 		{
 			redirect::redir(in, currentp, first, last, redirio);
 		}
+		else
+		{
+			redirect::setispipe();
+		}
+		char **arg = new char*[in.length()];
+		char *temp = strdup(in.c_str());
+		int i;
+
 		pid_t pid = fork();
 		if (pid == -1)
 			perror("failed to fork");
 		else if (pid == 0)
 		{
-			char *arg[99];
-			char *temp = strdup(in.c_str());
 			arg[0] = strtok(temp, " ");
 			char *token = arg[0];
-			for (int i = 1; token != NULL; i++)
+			for (i = 1; token != NULL; i++)
 			{
-				arg[i] = strtok(NULL, " ");
+				arg[i] = strtok(NULL, " ") + NULL;
 				token = arg[i];
+			}
+			for (; i < in.length(); i ++)
+			{
+				arg[i] = NULL;
 			}
 			int execs = execvp(arg[0], arg);
 			if (execs == -1)
@@ -145,16 +155,18 @@ int execb (string in)
 				perror("cannot execute command");
 				exit(1);
 			}
-			delete temp;
-		}
+		}	
 		currentp++;
 		if (redirio)
 			redirect::ioend();
+		delete arg;
+		delete temp;
 	}
 	while(!last);
-	int waits = wait(&status);
-	if (waits == -1)
-		perror("no child");
+	int waits;
+	while ((waits = wait(&status)) > 0)
+		if (waits < -1)
+			perror("no child");
 	if (status > 0)
 	{
 		return -1;

@@ -8,6 +8,8 @@ namespace redirect
 	void ioend();
 	void restoreallfd();
 	void clearvector();
+	void closefirst();
+	void setispipe();
 
 }
 #endif

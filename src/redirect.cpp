@@ -20,7 +20,7 @@ namespace redirect
 	};
 	std::vector<segment> v;
 	int pipefd[2];
-	bool ispipe = true;
+	bool ispipe = false;
 	//splits command to before first pipe and after first pipe
 	//returns before pipe
 	//sets command to after pipe
@@ -189,6 +189,8 @@ namespace redirect
 			//set write end to write end of pipe
 			if (-1 == dup2(s.fd[1], 1))
 				perror("dup2 3");
+			if (-1 == close(s.fd[1]))
+				perror("close 11");
 		}
 		if (!first)
 		{
@@ -196,11 +198,15 @@ namespace redirect
 			//set read end to read end of previous pipe
 			if (-1 == dup2(p.fd[0], 0))
 				perror("dup2 5");
+			if (-1 == close(p.fd[0]))
+				perror("close 12");
 		}
 		if (last)
 		{	
 			if (-1 == dup2(pipefd[1], 1))
 				perror("restore write end of pipe");
+			if (-1 == close(s.fd[1]))
+				perror("close 13");
 		}
 
 	}
@@ -303,23 +309,24 @@ namespace redirect
 	{
 		if (ispipe)
 		{
-			for (size_t i = 0; i < v.size(); i++)
-			{
-				if (-1 == close(v.at(i).fd[0]))
-					perror("restore fail");
-				if (-1 == close(v.at(i).fd[1]))
-					perror("restore fail");
-			}
 			if (-1 == (dup2(pipefd[0], 0)))
 				perror("restore pipe read");
 			if (-1 == (dup2(pipefd[1], 1)))
 				perror("restore pipe write");
+			if (-1 == close(pipefd[0]))
+				perror("restore fail");
+			if (-1 == close(pipefd[1]))
+				perror("restore fail");
 		}
 	}
 	//clears vector at the end
 	void clearvector()
 	{
 		v.clear();
+	}
+	void setispipe()
+	{
+		ispipe = false;
 	}
 
 
