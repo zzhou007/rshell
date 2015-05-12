@@ -21,6 +21,7 @@ namespace redirect
 	std::vector<segment> v;
 	int pipefd[2];
 	bool ispipe = false;
+	int herestrp[2];
 	//splits command to before first pipe and after first pipe
 	//returns before pipe
 	//sets command to after pipe
@@ -52,12 +53,31 @@ namespace redirect
 		s = cmd;
 		
 	}
+	void removequotes(std::string &s)
+	{
+		std::string cmd;
+		size_t start = s.find_first_not_of("\"\'");
+		if (start != std::string::npos)
+		{
+			//removes leading white space
+			cmd = s.substr(start);
+		}
+		size_t end = cmd.find_last_not_of("\"\'");
+		if (end != std::string::npos)
+		{
+			//removes ending white spaces 
+			cmd = cmd.substr(0, end + 1);
+		}
+		s = cmd;
+		
+	}
+
 	//splits run to before seperator and after seperator
 	//removes extra spaces
 	//sets bool statement for in out and appen
 	//sets run to lefthand side
 	//return what is on the rhs 
-	std::string seperaterio(bool &in, bool &out, bool &appen, std::string &run)
+	std::string seperaterio(bool &in, bool &out, bool &appen, bool &sin, std::string &run)
 	{
 
 		int p = run.find(">>");
@@ -66,8 +86,16 @@ namespace redirect
 			p = run.find(">");
 			if (p == -1)
 			{
-				p = run.find("<");
-				in = true;
+				p = run.find("<<<");
+				if (p == -1)
+				{
+					p = run.find("<");
+					in = true;
+				}
+				else
+				{
+					sin = true;
+				}
 			}
 			else
 			{
@@ -81,8 +109,10 @@ namespace redirect
 		std::string rhs;
 		if (appen)
 			rhs = run.substr(p + 2);
-		else
+		else if (in || out)
 			rhs = run.substr(p + 1);
+		else 
+			rhs = run.substr(p + 3);
 		
 		//remove space debug
 		//std::cout << "rhs " << rhs << std::endl;
@@ -94,12 +124,19 @@ namespace redirect
 	}
 
 	int iofdold = 0;
-	bool in = false, out = false, appen = false;
+	bool in = false, out = false, appen = false,  sin = false;
 	//run changes to the lhs
+	void filtersin(std::string &in)
+	{
+		removespace(in);
+		removequotes(in);
+		in = in + "\n";
+
+	}
 	void iostart(std::string &run)
 	{
 		int iofdnew = 0;
-		std::string rhs = seperaterio(in, out, appen, run);
+		std::string rhs = seperaterio(in, out, appen, sin, run);
 		//seperateio debug
 		//std::cout << "rhs " << rhs << std::endl
 		//	<< "in out appen " << in << out << appen << std::endl
@@ -138,6 +175,35 @@ namespace redirect
 			if (iofdnew == -1)
 				perror("open 3");
 		}
+		if (sin)
+		{
+			//save old read
+			if (-1 == (iofdold = dup(0)))
+				perror("save sin failr");
+			//to get program to read from string instad of file
+			//make pipe
+			if (-1 == pipe(herestrp))
+				perror("here string");
+			//filter string rhs first 
+			filtersin(rhs);
+			//write rhs to write end of pipe
+			if (-1 == write(herestrp[1], rhs.c_str(), rhs.length()))
+				perror("here str write");
+			//close read end of stdio
+			if (-1 == close(0))
+				perror("close sin");
+			//set read end to read end of pipe
+			if (-1 == dup2(herestrp[0], 0))
+				perror("dup read");
+			//close extra pipe read end
+			if (-1 == close(herestrp[0]))
+				perror("close pipe");
+			//close write end of pipe we are done
+			if (-1 == close(herestrp[1]))
+				perror("close write end of pipe");
+
+
+		}
 	}
 	//rshell will call this and it well change everything back
 	void ioend()
@@ -148,6 +214,8 @@ namespace redirect
 				perror("close 5");
 			if (-1 == dup2(iofdold, 0))
 				perror("dup2 1");
+			if (-1 == close(iofdold))
+				perror("close in");
 		}
 		if (out || appen)
 		{
@@ -155,6 +223,20 @@ namespace redirect
 				perror("close 4");
 			if (-1 == dup2(iofdold, 1))
 				perror("dup2 2");
+			if (-1 == close(iofdold))
+				perror("close out/appen");
+		}
+		if (sin)
+		{
+			//close read end of std
+			if (-1 == close(0))
+				perror("close sin");
+			//dup old fd to read end
+			if (-1 == dup2(iofdold, 0))
+				perror("dup old");
+			//close pipe
+			if (-1 == close(iofdold))
+				perror("close extra");
 		}
 	}
 	bool findio(std::string run)
@@ -229,6 +311,7 @@ namespace redirect
 		in = false;
 		out = false;
 		appen = false;
+		sin = false;
 		ispipe = true;
 		std::string run;
 		//only redirect io if first

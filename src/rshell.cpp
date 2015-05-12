@@ -145,7 +145,7 @@ int execb (string in)
 				arg[i] = strtok(NULL, " ") + NULL;
 				token = arg[i];
 			}
-			for (; i < in.length(); i ++)
+			for (; (unsigned)i < in.length(); i ++)
 			{
 				arg[i] = NULL;
 			}
