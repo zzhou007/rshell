@@ -27,6 +27,26 @@ They work form left to right.
 		<td>;</td>
 		<td>right of connector will run no matter what</td>
 	</tr>
+	<tr>
+		<td>|</td>
+		<td>will pipe output of previous program to input of next program</td>
+	</tr>
+	<tr>
+		<td><</td>
+		<td>will have program take file as input</td>
+	</tr>
+	<tr>
+		<td><<<</td>
+		<td>will have program take string instad of file</td>
+	</tr>
+	<tr>
+		<td>></td>
+		<td>will have program output to file instead of screen</td>
+	</tr>
+	<tr>
+		<td>>></td>
+		<td>will have program output to file and append to file</td>
+	</tr>
 </table>
 
 ### Quitting Program 
