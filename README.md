@@ -8,7 +8,7 @@ in rshell folder, type `make` to build and type `/bin/rshell` to run
 cd command does not work 
 
 ### Connectors 
-Connectors are `&&` `||` and `;`.
+Connectors are `&&` `||` `<` `<<<` `>` `>>` `|` and `;`.
 They work form left to right.
 <table>
 	<tr>
@@ -57,6 +57,12 @@ If command has and characters trailing or leading it will not work.
 ### Bugs
 Program will always be in english.
 Program does not tell you what commands you inputed when wrong.
+Program will crash if you use io redirection when piping in the middle.
+That is because the output is already going to another program.
+ie `ls | grep r > file | sort`
+`<<<` will work with single and double quotes and even no quites.
+This means you cannott passing in flags if you use `<<<`.
+Instad the program will treat anything after `<<<` as input.
 
 ### Edge Cases
 If nothing is put before the connector, if is assumed to be false.
