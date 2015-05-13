@@ -135,7 +135,10 @@ int execb (string in)
 
 		pid_t pid = fork();
 		if (pid == -1)
+		{
 			perror("failed to fork");
+			exit(1);
+		}
 		else if (pid == 0)
 		{
 			arg[0] = strtok(temp, " ");
@@ -166,7 +169,10 @@ int execb (string in)
 	int waits;
 	while ((waits = wait(&status)) > 0)
 		if (waits < -1)
+		{
 			perror("no child");
+			exit(1);
+		}
 	if (status > 0)
 	{
 		return -1;

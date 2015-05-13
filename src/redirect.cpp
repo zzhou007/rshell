@@ -145,62 +145,110 @@ namespace redirect
 		if (in)
 		{
 			if (-1 == (iofdold = dup(0)))
+			{
 				perror("save fdold");
+				exit(1);
+			}
 			if (-1 == close(0))
+			{
 				perror("close 1");
+				exit(1);
+			}
 			iofdnew = open(rhs.c_str(), O_RDONLY);
 			if (iofdnew == -1)
+			{
 				perror("open 1");
+				exit(1);
+			}
 		}
 		if (out)
 		{
 			if (-1 == (iofdold = dup(1)))
+			{
 				perror("save fdold (1)");
+				exit(1);
+			}
 			//std::cout << "vector error here" << std::endl;
 			if (-1 == close(1))
+			{
 				perror("close 2");
+				exit(1);
+			}
 			//std::cout << "rhs " << rhs << std::endl;
 			iofdnew = open(rhs.c_str(), O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
 			//std::cout << "vector error here2" << std::endl;
 			if (iofdnew == -1)
+			{
 				perror("open 2");
+				exit(1);
+			}
 		}
 		if (appen)
 		{
 			if (-1 == (iofdold = dup(1)))
+			{
 				perror("save fd appen");
+				exit(1);
+			}
 			if (-1 == close(1))
+			{
 				perror("close 3");
+				exit(1);
+			}
 			iofdnew = open(rhs.c_str(), O_WRONLY | O_CREAT | O_APPEND, S_IRUSR | S_IWUSR);
 			if (iofdnew == -1)
+			{
 				perror("open 3");
+				exit(1);
+			}
 		}
 		if (sin)
 		{
 			//save old read
 			if (-1 == (iofdold = dup(0)))
+			{
 				perror("save sin failr");
+				exit(1);
+			}
 			//to get program to read from string instad of file
 			//make pipe
 			if (-1 == pipe(herestrp))
+			{
 				perror("here string");
+				exit(1);
+			}
 			//filter string rhs first 
 			filtersin(rhs);
 			//write rhs to write end of pipe
 			if (-1 == write(herestrp[1], rhs.c_str(), rhs.length()))
+			{
 				perror("here str write");
+				exit(1);
+			}
 			//close read end of stdio
 			if (-1 == close(0))
+			{
 				perror("close sin");
+				exit(1);
+			}
 			//set read end to read end of pipe
 			if (-1 == dup2(herestrp[0], 0))
+			{
 				perror("dup read");
+				exit(1);
+			}
 			//close extra pipe read end
 			if (-1 == close(herestrp[0]))
+			{
 				perror("close pipe");
+				exit(1);
+			}
 			//close write end of pipe we are done
 			if (-1 == close(herestrp[1]))
+			{
 				perror("close write end of pipe");
+				exit(1);
+			}
 
 
 		}
@@ -211,32 +259,59 @@ namespace redirect
 		if (in)
 		{
 			if (-1 == close(0))
+			{
 				perror("close 5");
+				exit(1);
+			}
 			if (-1 == dup2(iofdold, 0))
+			{
 				perror("dup2 1");
+				exit(1);
+			}
 			if (-1 == close(iofdold))
+			{
 				perror("close in");
+				exit(1);
+			}
 		}
 		if (out || appen)
 		{
 			if (-1 == close(1))
+			{
 				perror("close 4");
+				exit(1);
+			}
 			if (-1 == dup2(iofdold, 1))
+			{
 				perror("dup2 2");
+				exit(1);
+			}
 			if (-1 == close(iofdold))
+			{
 				perror("close out/appen");
+				exit(1);
+			}
 		}
 		if (sin)
 		{
 			//close read end of std
 			if (-1 == close(0))
+			{
 				perror("close sin");
+				exit(1);
+			}
 			//dup old fd to read end
 			if (-1 == dup2(iofdold, 0))
+			{
 				perror("dup old");
+				exit(1);
+			}
 			//close pipe
 			if (-1 == close(iofdold))
+			{
 				perror("close extra");
+				exit(1);
+			}
 		}
 	}
 	bool findio(std::string run)
@@ -261,34 +336,58 @@ namespace redirect
 		if (first)
 		{
 			if (-1 == (pipefd[0] = dup(0)))
+			{
 				perror("save fd 0");	
+				exit(1);
+			}
 			if (-1  == (pipefd[1] = dup(1)))
+			{
 				perror("save fd 1");
+				exit(1);
+			}
 		}
 		if (!last)
 		{
 			//close write end of fd
 			//set write end to write end of pipe
 			if (-1 == dup2(s.fd[1], 1))
+			{
 				perror("dup2 3");
+				exit(1);
+			}
 			if (-1 == close(s.fd[1]))
+			{
 				perror("close 11");
+				exit(1);
+			}
 		}
 		if (!first)
 		{
 			//close read end of fd
 			//set read end to read end of previous pipe
 			if (-1 == dup2(p.fd[0], 0))
+			{
 				perror("dup2 5");
+				exit(1);
+			}
 			if (-1 == close(p.fd[0]))
+			{
 				perror("close 12");
+				exit(1);
+			}
 		}
 		if (last)
 		{	
 			if (-1 == dup2(pipefd[1], 1))
+			{
 				perror("restore write end of pipe");
+				exit(1);
+			}
 			if (-1 == close(s.fd[1]))
+			{
 				perror("close 13");
+				exit(1);
+			}
 		}
 
 	}
@@ -352,8 +451,8 @@ namespace redirect
 				temp.command = command;
 				if (-1 == pipe(temp.fd))
 				{
-				perror("pipe 2");
-				exit(1);
+					perror("pipe 2");
+					exit(1);
 				}
 				v.push_back(temp);
 				if (findio(v.at(0).command))
@@ -393,13 +492,25 @@ namespace redirect
 		if (ispipe)
 		{
 			if (-1 == (dup2(pipefd[0], 0)))
+			{
 				perror("restore pipe read");
+				exit(1);
+			}
 			if (-1 == (dup2(pipefd[1], 1)))
+			{
 				perror("restore pipe write");
+				exit(1);
+			}
 			if (-1 == close(pipefd[0]))
+			{
 				perror("restore fail");
+				exit(1);
+			}
 			if (-1 == close(pipefd[1]))
+			{
 				perror("restore fail");
+				exit(1);
+			}
 		}
 	}
 	//clears vector at the end
