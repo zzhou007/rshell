@@ -162,6 +162,7 @@ int execb (string in)
 		currentp++;
 		if (redirio)
 			redirect::ioend();
+
 		delete arg;
 		delete temp;
 	}
