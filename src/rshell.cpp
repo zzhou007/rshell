@@ -1,9 +1,12 @@
 #include <string.h>
+#include <string>
 #include <iostream>
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
 #include <sys/wait.h>
+#include "redirect.h"
+#include <limits.h>
 using namespace std;
 
 //takes in 3 bools and 1 string 
@@ -108,20 +111,46 @@ int connector(bool &next, bool &orr, bool &andd, string const cmd)
 //returns -1 if unable to run command else 0
 int execb (string in)
 {
+	//at beginning 
+	int currentp = 0;
 	int status = 0;
-	pid_t pid = fork();
+	bool first = true, last = true;
+	bool redirio = false;
+	do
+	{
+		if (!first || !last || redirio ||
+			in.find("|") != string::npos || 
+			in.find("<") != string::npos ||
+			in.find(">") != string::npos)
+		{
+			redirect::redir(in, currentp, first, last, redirio);
+		}
+		else
+		{
+			redirect::setispipe();
+		}
+		char **arg = new char*[in.length()];
+		char *temp = strdup(in.c_str());
+		int i;
+
+		pid_t pid = fork();
 		if (pid == -1)
+		{
 			perror("failed to fork");
+			exit(1);
+		}
 		else if (pid == 0)
 		{
-			char *arg[99];
-			char *temp = strdup(in.c_str());
 			arg[0] = strtok(temp, " ");
 			char *token = arg[0];
-			for (int i = 1; token != NULL; i++)
+			for (i = 1; token != NULL; i++)
 			{
-				arg[i] = strtok(NULL, " ");
+				arg[i] = strtok(NULL, " ") + NULL;
 				token = arg[i];
+			}
+			for (; (unsigned)i < in.length(); i ++)
+			{
+				arg[i] = NULL;
 			}
 			int execs = execvp(arg[0], arg);
 			if (execs == -1)
@@ -129,18 +158,28 @@ int execb (string in)
 				perror("cannot execute command");
 				exit(1);
 			}
-			delete temp;
-		}
-		else 
+		}	
+		currentp++;
+		if (redirio)
+			redirect::ioend();
+
+		delete arg;
+		delete temp;
+	}
+	while(!last);
+	int waits;
+	while ((waits = wait(&status)) > 0)
+		if (waits < -1)
 		{
-			int waits = waitpid(-1, &status, 0);
-			if (waits == -1)
-				perror("no child");
-			if (status > 0)
-			{
-				return -1;
-			}
+			perror("no child");
+			exit(1);
 		}
+	if (status > 0)
+	{
+		return -1;
+	}
+	redirect::restoreallfd();
+	redirect::clearvector();
 	return 0;
 }
 //will output true if program needs to be exited false otherwise
@@ -167,6 +206,8 @@ bool quit(string in)
 	}
 	return false;
 }
+//"in" is portion of cmd that does not contain connectors
+//"cmd" is everything the use inputs
 int main(int argc, char **argv)
 {
 	string cmd;
@@ -182,6 +223,8 @@ int main(int argc, char **argv)
 		string in;
 		cout << "$";
 		getline(cin,in);
+		//flush getline
+		cin.clear();
 		size_t comment = in.find("#");
 		if (comment != string::npos)
 			in = in.substr(0, comment);
@@ -189,6 +232,9 @@ int main(int argc, char **argv)
 		int cut = connector(next, orr, andd, in);
 		while (cut != -1)
 		{	
+			//if not ; then it is || or &&
+			// ; = remove 1 form cmd
+			// || or && = remove 2 from cmd
 			if (next)
 			{
 				cmd = in.substr(0,cut);
@@ -229,7 +275,7 @@ int main(int argc, char **argv)
 		if (quit(in))
 		{
 			return 0;
-		}	
+		}
 		execb(in); //if (execb(in) == -1); if statement is empty does not matter if succecd or fail 
 	}
 	return 0;

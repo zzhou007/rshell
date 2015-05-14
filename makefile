@@ -3,21 +3,23 @@ CFLAGS = -Wall -Werror -ansi -pedantic -o
 all:
 	mkdir bin 
 	cd src; \
-	g++ $(CFLAGS) rshell rshell.cpp; \
 	g++ $(CFLAGS) ls ls_functions.cpp ls.cpp; \
 	g++ $(CFLAGS) cp cp.cpp ; \
 	g++ $(CFLAGS) rm rm.cpp; \
 	g++ $(CFLAGS) mv mv.cpp; \
-	mv mv ../bin; \
+	g++ $(CFLAGS) rshell redirect.cpp rshell.cpp; \
 	mv cp ../bin; \
-	mv rm ../bin; \
 	mv ls ../bin; \
 	mv rshell ../bin; \
+	mv rm ../bin; \
+	mv mv ../bin; \
 	cd -; \
 
 rshell: src/rshell.cpp
-	g++ $(CFLAGS) rshell src/rshell.cpp; \
-	mv src/rshell bin; \
+	cd src; \
+	g++ $(CFLAGS) rshell rshell.cpp redirect.cpp; \
+	mv rshell ../bin; \
+	cd -; \
 	
 ls: src/ls.cpp src/ls_functions.cpp src/ls.h
 	cd src; \
@@ -41,7 +43,6 @@ mv: src/mv.cpp
 	cd src; \
 	g++ $(CFLAGS) mv mv.cpp; \
 	mv mv ../bin; \
-	cd -; \
 
 clean:
 	rm -rf bin
