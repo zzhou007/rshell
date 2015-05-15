@@ -63,6 +63,10 @@ ie `ls | grep r > file | sort`
 `<<<` will work with single and double quotes and even no quites.
 This means you cannott passing in flags if you use `<<<`.
 Instad the program will treat anything after `<<<` as input.
+Quotes are registed are part of the input for ioredirection.
+For `<<<` quotes are compleatly removed.
+Connectors ';' '||' '&&' have priority and all input will be broken up based off commands.
+ie `echo "asdf ; "` will view 'echo "asdf` as one command and ' "' as another command.
 
 ### Edge Cases
 If nothing is put before the connector, if is assumed to be false.
