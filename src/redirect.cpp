@@ -77,9 +77,10 @@ namespace redirect
 	//sets bool statement for in out and appen
 	//sets run to lefthand side
 	//return what is on the rhs 
-	std::string seperaterio(bool &in, bool &out, bool &appen, bool &sin, std::string &run)
+	std::string seperaterio(bool &in, bool &out, bool &appen, bool &sin, bool &berr, std::string &run)
 	{
-
+	
+		int err = 0;
 		int p = run.find(">>");
 		if (p == -1)
 		{
@@ -100,11 +101,39 @@ namespace redirect
 			else
 			{
 				out = true;
+				err = run.find("2>");
+				if (err >= 0)
+				{
+					berr = true;
+					run = run.erase(err, 1);
+					p = run.find(">");
+				}
+				err = run.find("1>");
+				if (err >= 0)
+				{
+					run = run.erase(err, 1);
+					p = run.find(">");
+				}
 			}
 		}
 		else
 		{
 			appen = true;	
+			err = run.find("2>>");
+			if (err >= 0)
+			{
+				berr = true;
+				run = run.erase(err, 1);
+				p = run.find(">>");
+				std::cerr << run << p;
+			}
+			err = run.find("1>>");
+			if (err >= 0)
+			{
+				run = run.erase(err, 1);
+				p = run.find(">>");
+			}
+	
 		}
 		std::string rhs;
 		if (appen)
@@ -125,6 +154,7 @@ namespace redirect
 
 	int iofdold = 0;
 	bool in = false, out = false, appen = false,  sin = false;
+	bool berr = false;
 	//run changes to the lhs
 	void filtersin(std::string &in)
 	{
@@ -136,12 +166,12 @@ namespace redirect
 	void iostart(std::string &run)
 	{
 		int iofdnew = 0;
-		std::string rhs = seperaterio(in, out, appen, sin, run);
+		std::string rhs = seperaterio(in, out, appen, sin, berr, run);
 		//seperateio debug
 		//std::cout << "rhs " << rhs << std::endl
 		//	<< "in out appen " << in << out << appen << std::endl
 		//	<< "run " << run << std::endl;
-		//std::cout << "rhs " << rhs << "run " << run << std::endl;
+		std::cerr << "rhs " << rhs << "run " << run << std::endl;
 		if (in)
 		{
 			if (-1 == (iofdold = dup(0)))
@@ -163,43 +193,89 @@ namespace redirect
 		}
 		if (out)
 		{
-			if (-1 == (iofdold = dup(1)))
+			if (berr)
 			{
-				perror("save fdold (1)");
-				exit(1);
+				if ( -1 == (iofdold = dup(2)))
+				{
+					perror("extra credit");
+					exit(1);
+				}
+				if (-1 == close(2))
+				{
+					perror("extre cred close");
+					exit(1);
+				}
+				iofdnew = open(rhs.c_str(), O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
+				if (iofdnew == -1)
+				{
+						perror("extra err");
+						exit(1);
+				}
 			}
-			//std::cout << "vector error here" << std::endl;
-			if (-1 == close(1))
+			else
 			{
-				perror("close 2");
-				exit(1);
-			}
-			//std::cout << "rhs " << rhs << std::endl;
-			iofdnew = open(rhs.c_str(), O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
-			//std::cout << "vector error here2" << std::endl;
-			if (iofdnew == -1)
-			{
-				perror("open 2");
-				exit(1);
+
+				if (-1 == (iofdold = dup(1)))
+				{
+					perror("save fdold (1)");
+					exit(1);
+				}
+				//std::cout << "vector error here" << std::endl;
+				if (-1 == close(1))
+				{
+					perror("close 2");
+					exit(1);
+				}
+				//std::cout << "rhs " << rhs << std::endl;
+				iofdnew = open(rhs.c_str(), O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
+				//std::cout << "vector error here2" << std::endl;
+				if (iofdnew == -1)
+				{
+					perror("open 2");
+					exit(1);
+				}
 			}
 		}
 		if (appen)
 		{
-			if (-1 == (iofdold = dup(1)))
+			if (berr)
 			{
-				perror("save fd appen");
-				exit(1);
+				if (-1 == (iofdold = dup(2)))
+				{
+					perror("save extra err");
+					exit(1);
+				}
+				if (-1 == close(2))
+				{
+					perror("save extra err");
+					exit(1);
+				}
+				iofdnew = open(rhs.c_str(), O_WRONLY | O_CREAT | O_APPEND, S_IRUSR | S_IWUSR);
+				if (iofdnew == -1)
+				{
+					perror("open 3");
+					exit(1);
+				}
 			}
-			if (-1 == close(1))
+			else
 			{
-				perror("close 3");
-				exit(1);
-			}
-			iofdnew = open(rhs.c_str(), O_WRONLY | O_CREAT | O_APPEND, S_IRUSR | S_IWUSR);
-			if (iofdnew == -1)
-			{
-				perror("open 3");
-				exit(1);
+
+				if (-1 == (iofdold = dup(1)))
+				{
+					perror("save fd appen");
+					exit(1);
+				}
+				if (-1 == close(1))
+				{
+					perror("close 3");
+					exit(1);
+				}
+				iofdnew = open(rhs.c_str(), O_WRONLY | O_CREAT | O_APPEND, S_IRUSR | S_IWUSR);
+				if (iofdnew == -1)
+				{
+					perror("open 3");
+					exit(1);
+				}
 			}
 		}
 		if (sin)
@@ -276,20 +352,41 @@ namespace redirect
 		}
 		if (out || appen)
 		{
-			if (-1 == close(1))
+			if (berr)
 			{
-				perror("close 4");
-				exit(1);
+				if (-1 == close(2))
+				{
+					perror("close extra c");
+					exit(1);
+				}
+				if (-1 == dup2(iofdold, 2))
+				{
+					perror("dup 2");
+					exit(1);
+				}
+				if (-1 == close(iofdold))
+				{
+					perror("close error");
+					exit(1);
+				}
 			}
-			if (-1 == dup2(iofdold, 1))
+			else 
 			{
-				perror("dup2 2");
-				exit(1);
-			}
-			if (-1 == close(iofdold))
-			{
-				perror("close out/appen");
-				exit(1);
+				if (-1 == close(1))
+				{
+					perror("close 4");
+					exit(1);
+				}
+				if (-1 == dup2(iofdold, 1))
+				{
+					perror("dup2 2");
+					exit(1);
+				}
+				if (-1 == close(iofdold))
+				{
+					perror("close out/appen");
+					exit(1);
+				}
 			}
 		}
 		if (sin)
@@ -410,6 +507,7 @@ namespace redirect
 		in = false;
 		out = false;
 		appen = false;
+		berr = false;
 		sin = false;
 		ispipe = true;
 		std::string run;
