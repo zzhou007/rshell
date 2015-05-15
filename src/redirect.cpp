@@ -125,7 +125,6 @@ namespace redirect
 				berr = true;
 				run = run.erase(err, 1);
 				p = run.find(">>");
-				std::cerr << run << p;
 			}
 			err = run.find("1>>");
 			if (err >= 0)
@@ -171,7 +170,6 @@ namespace redirect
 		//std::cout << "rhs " << rhs << std::endl
 		//	<< "in out appen " << in << out << appen << std::endl
 		//	<< "run " << run << std::endl;
-		std::cerr << "rhs " << rhs << "run " << run << std::endl;
 		if (in)
 		{
 			if (-1 == (iofdold = dup(0)))

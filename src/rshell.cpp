@@ -174,10 +174,6 @@ int execb (string in)
 			perror("no child");
 			exit(1);
 		}
-	if (status > 0)
-	{
-		return -1;
-	}
 	redirect::restoreallfd();
 	redirect::clearvector();
 	return 0;
