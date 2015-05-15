@@ -1,12 +1,36 @@
-Script started on Wed 13 May 2015 09:22:02 PM PDT
+Script started on Thu 14 May 2015 07:15:22 PM PDT
 ]0;lolipopping@debian: ~/Documents/rshelllolipopping@debian:~/Documents/rshell$ bin/rshell
 lolipopping@debian$#input
 lolipopping@debian$ls
-bin  LICENSE  makefile	piping.script  README.md  src  testpipe  tests
+asdf.cpp  bin  LICENSE	makefile  piping.script  README.md  src  testerr  tests
+lolipopping@debian$ls > test
+lolipopping@debian$ls -a       cat < test
+asdf.cpp
+bin
+LICENSE
+makefile
+piping.script
+README.md
+src
+test
+testerr
+tests
+lolipopping@debian$cat < test
+asdf.cpp
+bin
+LICENSE
+makefile
+piping.script
+README.md
+src
+test
+testerr
+tests
 lolipopping@debian$ls -a > test
 lolipopping@debian$cat < test
 .
 ..
+asdf.cpp
 bin
 .git
 .gitignore
@@ -16,14 +40,15 @@ piping.script
 README.md
 src
 test
-testpipe
+testerr
 tests
 lolipopping@debian$cat < test2
 open 1: No such file or directory
 ]0;lolipopping@debian: ~/Documents/rshelllolipopping@debian:~/Documents/rshell$ bin/rshell
-lolipopping@debian$cat <     cat                          <                 test
+lolipopping@debian$cat                            <                                 test
 .
 ..
+asdf.cpp
 bin
 .git
 .gitignore
@@ -33,25 +58,12 @@ piping.script
 README.md
 src
 test
-testpipe
-tests
-lolipopping@debian$             cat                <            tes t  t                  
-.
-..
-bin
-.git
-.gitignore
-LICENSE
-makefile
-piping.script
-README.md
-src
-test
-testpipe
+testerr
 tests
 lolipopping@debian$cat<test
 .
 ..
+asdf.cpp
 bin
 .git
 .gitignore
@@ -61,17 +73,27 @@ piping.script
 README.md
 src
 test
-testpipe
+testerr
 tests
-lolipopping@debian$grep e<test
+lolipopping@debian$              cat           <             test           
+.
+..
+asdf.cpp
+bin
+.git
 .gitignore
+LICENSE
 makefile
+piping.script
+README.md
+src
 test
-testpipe
+testerr
 tests
 lolipopping@debian$ls -a | cat < test
 .
 ..
+asdf.cpp
 bin
 .git
 .gitignore
@@ -81,19 +103,35 @@ piping.script
 README.md
 src
 test
-testpipe
+testerr
 tests
-lolipopping@debian$cat < ts est | grep e
+lolipopping@debian$cat < test | cat
+.
+..
+asdf.cpp
+bin
+.git
+.gitignore
+LICENSE
+makefile
+piping.script
+README.md
+src
+test
+testerr
+tests
+lolipopping@debian$cat < test | grep e
 .gitignore
 makefile
 test
-testpipe
+testerr
 tests
-lolipopping@debian$#outtput
+lolipopping@debian$#ouput
 lolipopping@debian$ls -a > test
 lolipopping@debian$cat < test
 .
 ..
+asdf.cpp
 bin
 .git
 .gitignore
@@ -103,44 +141,13 @@ piping.script
 README.md
 src
 test
-testpipe
-tests
-lolipopping@debian$ls -a >> test2
-lolipopping@debian$ls    cat < test2
-.
-..
-bin
-.git
-.gitignore
-LICENSE
-makefile
-piping.script
-README.md
-src
-test
-test2
-testpipe
-tests
-lolipopping@debian$ls -a > test
-lolipopping@debian$cat < test
-.
-..
-bin
-.git
-.gitignore
-LICENSE
-makefile
-piping.script
-README.md
-src
-test
-test2
-testpipe
+testerr
 tests
 lolipopping@debian$ls -a >> test
 lolipopping@debian$cat < test
 .
 ..
+asdf.cpp
 bin
 .git
 .gitignore
@@ -150,11 +157,11 @@ piping.script
 README.md
 src
 test
-test2
-testpipe
+testerr
 tests
 .
 ..
+asdf.cpp
 bin
 .git
 .gitignore
@@ -164,28 +171,12 @@ piping.script
 README.md
 src
 test
-test2
-testpipe
-tests
-lolipopping@debian$ls -a < > test
-lolipopping@debian$cat < test
-.
-..
-bin
-.git
-.gitignore
-LICENSE
-makefile
-piping.script
-README.md
-src
-test
-test2
-testpipe
+testerr
 tests
 lolipopping@debian$cat < test
 .
 ..
+asdf.cpp
 bin
 .git
 .gitignore
@@ -195,12 +186,27 @@ piping.script
 README.md
 src
 test
-test2
-testpipe
+testerr
 tests
+.
+..
+asdf.cpp
+bin
+.git
+.gitignore
+LICENSE
+makefile
+piping.script
+README.md
+src
+test
+testerr
+tests
+lolipopping@debian$ls -a >> test2
 lolipopping@debian$cat < test2
 .
 ..
+asdf.cpp
 bin
 .git
 .gitignore
@@ -211,12 +217,13 @@ README.md
 src
 test
 test2
-testpipe
+testerr
 tests
-lolipopping@debian$ls -a > test2
-lolipopping@debian$cat < test2
+lolipopping@debian$ls -a > test3
+lolipopping@debian$cat < test3
 .
 ..
+asdf.cpp
 bin
 .git
 .gitignore
@@ -227,13 +234,14 @@ README.md
 src
 test
 test2
-testpipe
+test3
+testerr
 tests
-lolipopping@debian$ca  ls -a            >             test4
-lolipopping@debian$            ls          -a         >          test  4
-lolipopping@debian$cat M t   < test4
+lolipopping@debian$ls -a                    >                   test  3
+lolipopping@debian$                   cat M t   < test3
 .
 ..
+asdf.cpp
 bin
 .git
 .gitignore
@@ -244,58 +252,17 @@ README.md
 src
 test
 test2
-test4
-testpipe
+test3
+testerr
 tests
-lolipopping@debian$ls        > test5
-lolipopping@debian$       ;s    ;s    ls            >>    test5         
-lolipopping@debian$cat < test5
-bin
-LICENSE
-makefile
-piping.script
-README.md
-src
-test
-test2
-test4
-test5
-testpipe
-tests
-bin
-LICENSE
-makefile
-piping.script
-README.md
-src
-test
-test2
-test4
-test5
-testpipe
-tests
-lolipopping@debian$cat<test4
-.
-..
-bin
-.git
-.gitignore
-LICENSE
-makefile
-piping.script
-README.md
-src
-test
-test2
-test4
-testpipe
-tests
-lolipopping@debian$ls  >test4
+lolipopping@debian$        ls     -a      >     test3      
 lolipopping@debian$cat<test3
-open 1: No such file or directory
-]0;lolipopping@debian: ~/Documents/rshelllolipopping@debian:~/Documents/rshell$ c[Kbin/rshe[Kell
-lolipopping@debian$cat<test4
+.
+..
+asdf.cpp
 bin
+.git
+.gitignore
 LICENSE
 makefile
 piping.script
@@ -303,13 +270,20 @@ README.md
 src
 test
 test2
-test4
-test5
-testpipe
+test3
+testerr
 tests
-lolipopping@debian$ls>test    >test4
-lolipopping@debian$cat<test4
+lolipopping@debian$ls -a<  test3
+.   asdf.cpp  .git	  LICENSE   piping.script  src	 test2	testerr
+..  bin       .gitignore  makefile  README.md	   test  test3	tests
+lolipopping@debian$ls -a<<       ls -a>test3
+lolipopping@debian$cat<test3
+.
+..
+asdf.cpp
 bin
+.git
+.gitignore
 LICENSE
 makefile
 piping.script
@@ -317,11 +291,17 @@ README.md
 src
 test
 test2
-test4
-test5
-testpipe
+test3
+testerr
 tests
+lolipopping@debian$ls -a>test3
+lolipopping@debian$cat<test3
+.
+..
+asdf.cpp
 bin
+.git
+.gitignore
 LICENSE
 makefile
 piping.script
@@ -329,74 +309,331 @@ README.md
 src
 test
 test2
-test4
-test5
-testpipe
+test3
+testerr
 tests
-lolipopping@debian$ls
-bin	 makefile	README.md  test   test4  testpipe
-LICENSE  piping.script	src	   test2  test5  tests
-lolipopping@debian$rm test test4 test2 test5
+lolipopping@debian$echo hi | cat teest10
+cat: teest10: No such file or directory
+lolipopping@debian$echo ho | cat .>  > test10
+lolipopping@debian$cat <t  test10
+ho
+lolipopping@debian$cat < test10
+ho
+lolipopping@debian$ls-a>test3
+cannot execute command: No such file or directory
+lolipopping@debian$ca  ls -a>test3
+lolipopping@debian$cat<test3
+.
+..
+asdf.cpp
+bin
+.git
+.gitignore
+LICENSE
+makefile
+piping.script
+README.md
+src
+test
+test10
+test2
+test3
+testerr
+tests
+lolipopping@debian$ls -a>>test3
+lolipopping@debian$cat M   < test3
+.
+..
+asdf.cpp
+bin
+.git
+.gitignore
+LICENSE
+makefile
+piping.script
+README.md
+src
+test
+test10
+test2
+test3
+testerr
+tests
+.
+..
+asdf.cpp
+bin
+.git
+.gitignore
+LICENSE
+makefile
+piping.script
+README.md
+src
+test
+test10
+test2
+test3
+testerr
+tests
 lolipopping@debian$#piping
 lolipopping@debian$ls | grep e
 makefile
-testpipe
+test
+test10
+test2
+test3
+testerr
 tests
-lolipopping@debian$ls | grep e | grep p
-testpipe
-lolipopping@debian$cat | ac  cat | cat
-asdf
-asdf
-asdf
-asdf
-asdf
-asdf
-asdf
-asdf
-do
-do
-^C
-]0;lolipopping@debian: ~/Documents/rshelllolipopping@debian:~/Documents/rshell$ bin/rshell
-lolipopping@debian$ls \ grep        | grep e
+lolipopping@debian$ls | grep e | grep e
 makefile
-testpipe
+test
+test10
+test2
+test3
+testerr
 tests
-lolipopping@debian$cat|cat|cat|cat
-adsf
-adsf
-hi
-hi
+lolipopping@debian$ls | grep e | grep t
+test
+test10
+test2
+test3
+testerr
+tests
+lolipopping@debian$cat | cat | cat
+asdf
+asdf
+asdf
+asdf
+asdf
+asdf
 ^C
 ]0;lolipopping@debian: ~/Documents/rshelllolipopping@debian:~/Documents/rshell$ bin/rshell
+lolipopping@debian$ls              |           grep  e
+makefile
+test
+test10
+test2
+test3
+testerr
+tests
+lolipopping@debian$       ls           |           grep          e
+makefile
+test
+test10
+test2
+test3
+testerr
+tests
+lolipopping@debian$ls|grep e
+makefile
+test
+test10
+test2
+test3
+testerr
+tests
 lolipopping@debian$ls | grep e > test9
-lolipopping@debian$cat<test9
+lolipopping@debian$cat < test9
 makefile
+test
+test10
+test2
+test3
 test9
-testpipe
+testerr
 tests
-lolipopping@debian$cat<test9|grep e
+lolipopping@debian$ls | grep e >> test9
+lolipopping@debian$cat < test9
 makefile
+test
+test10
+test2
+test3
 test9
-testpipe
+testerr
 tests
-lolipopping@debian$cat     <      test  9      |           get  te  rep e | cat
 makefile
+test
+test10
+test2
+test3
 test9
-testpipe
+testerr
 tests
+makefile
+test
+test10
+test2
+test3
+test9
+testerr
+tests
+lolipopping@debian$cat < test9 | grep e
+makefile
+test
+test10
+test2
+test3
+test9
+testerr
+tests
+makefile
+test
+test10
+test2
+test3
+test9
+testerr
+tests
+makefile
+test
+test10
+test2
+test3
+test9
+testerr
+tests
+lolipopping@debian$cat<    < test9 | grep e | cat > test11
+lolipopping@debian$cat < test11
+makefile
+test
+test10
+test2
+test3
+test9
+testerr
+tests
+makefile
+test
+test10
+test2
+test3
+test9
+testerr
+tests
+makefile
+test
+test10
+test2
+test3
+test9
+testerr
+tests
+lolipopping@debian$ls|ls
+asdf.cpp  LICENSE   piping.script  src	 test10  test2	test9	 tests
+bin	  makefile  README.md	   test  test11  test3	testerr
+lolipopping@debian$ls    
+asdf.cpp  LICENSE   piping.script  src	 test10  test2	test9	 tests
+bin	  makefile  README.md	   test  test11  test3	testerr
+lolipopping@debian$ ls         |     ls
+asdf.cpp  LICENSE   piping.script  src	 test10  test2	test9	 tests
+bin	  makefile  README.md	   test  test11  test3	testerr
+lolipopping@debian$#extra credit 1
+lolipopping@debian$cat <<<<    " extra credit rocks"
+ extra credit rocks
+lolipopping@debian$cat <<  < asdf ; cat << asdf
+asdf
+open 1: No such file or directory
+]0;lolipopping@debian: ~/Documents/rshelllolipopping@debian:~/Documents/rshell$ asdf [K[K[K[K[Kvi[K[Kbin/rshell
+lolipopping@debian$cat <<< asdf ; cat <<< asdf
+asdf
+asdf
+lolipopping@debian$extra credit              #extra credit 2
+lolipopping@debian$ls
+asdf.cpp  LICENSE   piping.script  src	 test10  test2	test9	 tests
+bin	  makefile  README.md	   test  test11  test3	testerr
+lolipopping@debian$g++ asdf.cpp 2> ere rr
+lolipopping@debian$cat <<  errr
+asdf.cpp:2:1: error: stray ‘\342’ in program
+ asdf.cpp:1:2: error: ‘hohfoasdjfah’ does not name a type
+ ^
+asdf.cpp:2:1: error: stray ‘\200’ in program
+asdf.cpp:2:1: error: stray ‘\230’ in program
+asdf.cpp:2:1: error: stray ‘\342’ in program
+asdf.cpp:2:1: error: stray ‘\200’ in program
+asdf.cpp:2:1: error: stray ‘\231’ in program
+asdf.cpp:5:1: error: stray ‘\342’ in program
+ asdf.cpp:1:15: error: ‘s’ does not name a type
+ ^
+asdf.cpp:5:1: error: stray ‘\200’ in program
+asdf.cpp:5:1: error: stray ‘\230’ in program
+asdf.cpp:5:1: error: stray ‘\342’ in program
+asdf.cpp:5:1: error: stray ‘\200’ in program
+asdf.cpp:5:1: error: stray ‘\231’ in program
+asdf.cpp:1:2: error: ‘hohfoasdjfah’ does not name a type
+  hohfoasdjfah;s
+  ^
+asdf.cpp:1:15: error: ‘s’ does not name a type
+  hohfoasdjfah;s
+               ^
+asdf.cpp:3:16: error: ‘s’ does not name a type
+   hohfoasdjfah;s
+                ^
+asdf.cpp:6:16: error: ‘s’ does not name a type
+   hohfoasdjfah;s
+                ^
+lolipopping@debian$g++ asdf.cpp 2>> errr
+lolipopping@debian$cat < errr
+asdf.cpp:2:1: error: stray ‘\342’ in program
+ asdf.cpp:1:2: error: ‘hohfoasdjfah’ does not name a type
+ ^
+asdf.cpp:2:1: error: stray ‘\200’ in program
+asdf.cpp:2:1: error: stray ‘\230’ in program
+asdf.cpp:2:1: error: stray ‘\342’ in program
+asdf.cpp:2:1: error: stray ‘\200’ in program
+asdf.cpp:2:1: error: stray ‘\231’ in program
+asdf.cpp:5:1: error: stray ‘\342’ in program
+ asdf.cpp:1:15: error: ‘s’ does not name a type
+ ^
+asdf.cpp:5:1: error: stray ‘\200’ in program
+asdf.cpp:5:1: error: stray ‘\230’ in program
+asdf.cpp:5:1: error: stray ‘\342’ in program
+asdf.cpp:5:1: error: stray ‘\200’ in program
+asdf.cpp:5:1: error: stray ‘\231’ in program
+asdf.cpp:1:2: error: ‘hohfoasdjfah’ does not name a type
+  hohfoasdjfah;s
+  ^
+asdf.cpp:1:15: error: ‘s’ does not name a type
+  hohfoasdjfah;s
+               ^
+asdf.cpp:3:16: error: ‘s’ does not name a type
+   hohfoasdjfah;s
+                ^
+asdf.cpp:6:16: error: ‘s’ does not name a type
+   hohfoasdjfah;s
+                ^
+asdf.cpp:2:1: error: stray ‘\342’ in program
+ asdf.cpp:1:2: error: ‘hohfoasdjfah’ does not name a type
+ ^
+asdf.cpp:2:1: error: stray ‘\200’ in program
+asdf.cpp:2:1: error: stray ‘\230’ in program
+asdf.cpp:2:1: error: stray ‘\342’ in program
+asdf.cpp:2:1: error: stray ‘\200’ in program
+asdf.cpp:2:1: error: stray ‘\231’ in program
+asdf.cpp:5:1: error: stray ‘\342’ in program
+ asdf.cpp:1:15: error: ‘s’ does not name a type
+ ^
+asdf.cpp:5:1: error: stray ‘\200’ in program
+asdf.cpp:5:1: error: stray ‘\230’ in program
+asdf.cpp:5:1: error: stray ‘\342’ in program
+asdf.cpp:5:1: error: stray ‘\200’ in program
+asdf.cpp:5:1: error: stray ‘\231’ in program
+asdf.cpp:1:2: error: ‘hohfoasdjfah’ does not name a type
+  hohfoasdjfah;s
+  ^
+asdf.cpp:1:15: error: ‘s’ does not name a type
+  hohfoasdjfah;s
+               ^
+asdf.cpp:3:16: error: ‘s’ does not name a type
+   hohfoasdjfah;s
+                ^
+asdf.cpp:6:16: error: ‘s’ does not name a type
+   hohfoasdjfah;s
+                ^
 lolipopping@debian$clear
-[3;J[H[2Jlolipopping@debian$#extra credit
-lolipopping@debian$cat<<<      <<< "hello:"
-hello:
-lolipopping@debian$cat <<< hi ; cat <<< hi
-hi
-hi
-lolipopping@debian$cat <<< "extra credit rocks"
-extra credit rocks
-lolipopping@debian$cat <<< hi || cat <<< hi
-hi
-lolipopping@debian$exit
-]0;lolipopping@debian: ~/Documents/rshelllolipopping@debian:~/Documents/rshell$ eexi[K[K[Kxit
+[3;J[H[2Jlolipopping@debian$exit
+]0;lolipopping@debian: ~/Documents/rshelllolipopping@debian:~/Documents/rshell$ ei[Kxit
 exit
 
-Script done on Wed 13 May 2015 09:28:29 PM PDT
+Script done on Thu 14 May 2015 07:23:43 PM PDT
