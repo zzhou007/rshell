@@ -9,6 +9,8 @@
 #include <limits.h>
 using namespace std;
 
+//global variable for signal handler
+pid_t pid = 1;
 //takes in 3 bools and 1 string 
 //outputs the number for the closest connector
 //sets one or none of the 3 connector bools
@@ -106,11 +108,23 @@ int connector(bool &next, bool &orr, bool &andd, string const cmd)
 		}
 	}
 }
+//handles the ctrl + c signal
+//does noting for parent
+//kills child
+void killhandle(int signum)
+{
+	cout << endl;
+}
+void stophandle(int signum)
+{
+	cout << "plz stop" << endl;
+}
 //will fork and run cmd
 //will perror if system call faults
 //returns -1 if unable to run command else 0
 int execb (string in)
 {
+
 	//at beginning 
 	int currentp = 0;
 	int status = 0;
@@ -133,13 +147,13 @@ int execb (string in)
 		char *temp = strdup(in.c_str());
 		int i;
 
-		pid_t pid = fork();
+		pid = fork();
 		if (pid == -1)
 		{
 			perror("failed to fork");
 			exit(1);
 		}
-		else if (pid == 0)
+		else if (pid == 0) //child
 		{
 			arg[0] = strtok(temp, " ");
 			char *token = arg[0];
@@ -158,7 +172,7 @@ int execb (string in)
 				perror("cannot execute command");
 				exit(1);
 			}
-		}	
+		}//parent 
 		currentp++;
 		if (redirio)
 			redirect::ioend();
@@ -206,6 +220,22 @@ bool quit(string in)
 //"cmd" is everything the use inputs
 int main(int argc, char **argv)
 {
+	//sigk handles the kill signal sends to killhandle
+	struct sigaction sigk;
+	sigk.sa_handler = killhandle;
+	sigemptyset(&sigk.sa_mask);
+	sigk.sa_flags = SA_RESTART;
+	if (sigaction(SIGINT, &sigk, NULL) == -1)
+		perror("signal kill fail");
+	
+	//sigs handles the stop signal
+	struct sigaction sigs;
+	sigs.sa_handler = stophandle;
+	sigemptyset(&sigs.sa_mask);
+	sigk.sa_flags = SA_RESTART;
+	if (sigaction(SIGTSTP, &sigs, NULL) == -1)
+		perror("signal stop  fail");
+	
 	string cmd;
 	for(;;)
 	{
