@@ -13,7 +13,7 @@ using namespace std;
 pid_t pid = 1;
 //global variable for cd -
 string oldpwd;
-bool noprint = false;
+bool noprint;
 //takes in 3 bools and 1 string 
 //outputs the number for the closest connector
 //sets one or none of the 3 connector bools
@@ -145,15 +145,9 @@ void printprompt()
 //kills child
 void killhandle(int signum)
 {
-	if (pid > 0)
-	{
-		cout << endl;
-		printprompt();
-	}
-	if (pid == 1 || pid == 0)
-	{
-		noprint = true;
-	}
+	cout << endl;
+	printprompt();
+	noprint = true;
 
 }
 void stophandle(int signum)
@@ -412,6 +406,7 @@ bool quit(string in)
 
 int main(int argc, char **argv)
 {
+	noprint = false;
 	//sigk handles the kill signal sends to killhandle
 	struct sigaction sigk;
 	sigk.sa_handler = killhandle;
@@ -433,9 +428,9 @@ int main(int argc, char **argv)
 	{
 		finish:if (!noprint)
 			printprompt();
-		noprint = false;
 		string in;		
 		getline(cin,in);
+		noprint = false;
 		//flush getline
 		cin.clear();
 		size_t comment = in.find("#");
