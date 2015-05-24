@@ -10,6 +10,7 @@ namespace redirect
 	void clearvector();
 	void closefirst();
 	void setispipe();
+	void removespace(std::string &s);
 
 }
 #endif
