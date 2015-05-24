@@ -13,6 +13,7 @@ using namespace std;
 pid_t pid = 1;
 //global variable for cd -
 string oldpwd;
+bool noprint = false;
 //takes in 3 bools and 1 string 
 //outputs the number for the closest connector
 //sets one or none of the 3 connector bools
@@ -110,12 +111,50 @@ int connector(bool &next, bool &orr, bool &andd, string const cmd)
 		}
 	}
 }
+//prints the starting prompt
+void printprompt()
+{
+	char hostname[20];
+	if (-1 == (gethostname(hostname, 20)))
+		perror("get hostname fail");
+	char* log;
+	if (NULL == (log = getlogin()))
+		perror("get login fail");
+	cerr << log << "@" << hostname;
+	cerr << ":";
+	char* workingdir;
+	if (NULL == (workingdir = getenv("PWD")))
+	{
+		perror("getenv");
+		exit(1);
+	}
+	char* home;
+	if (NULL == (home = getenv("HOME")))
+	{
+		perror("getenv home");
+		exit(1);
+	}
+	string workingdirs = workingdir;
+	string homes = home;
+	if (homes == workingdirs.substr(0, homes.length()))
+		workingdirs = workingdirs.substr(homes.length());
+	cerr << "~" +  workingdirs + "$ ";
+}
 //handles the ctrl + c signal
 //does noting for parent
 //kills child
 void killhandle(int signum)
 {
-	cout << endl;
+	if (pid > 0)
+	{
+		cout << endl;
+		printprompt();
+	}
+	if (pid == 1 || pid == 0)
+	{
+		noprint = true;
+	}
+
 }
 void stophandle(int signum)
 {
@@ -370,6 +409,7 @@ bool quit(string in)
 }
 //"in" is portion of cmd that does not contain connectors
 //"cmd" is everything the use inputs
+
 int main(int argc, char **argv)
 {
 	//sigk handles the kill signal sends to killhandle
@@ -391,15 +431,10 @@ int main(int argc, char **argv)
 	string cmd;
 	for(;;)
 	{
-		finish:char hostname[20];
-		if (-1 == (gethostname(hostname, 20)))
-			perror("get hostname fail");
-		char* log;
-		if (NULL == (log = getlogin()))
-			perror("get login fail");
-		cout << log << "@" << hostname;
-		string in;
-		cout << "$";
+		finish:if (!noprint)
+			printprompt();
+		noprint = false;
+		string in;		
 		getline(cin,in);
 		//flush getline
 		cin.clear();
