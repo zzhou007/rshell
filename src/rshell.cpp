@@ -12,8 +12,8 @@ using namespace std;
 //global variable for signal handler
 pid_t pid = 1;
 //global variable for cd -
-string oldpwd;
 bool noprint;
+bool oldpwd = false;
 //takes in 3 bools and 1 string 
 //outputs the number for the closest connector
 //sets one or none of the 3 connector bools
@@ -137,8 +137,12 @@ void printprompt()
 	string workingdirs = workingdir;
 	string homes = home;
 	if (homes == workingdirs.substr(0, homes.length()))
+	{
 		workingdirs = workingdirs.substr(homes.length());
-	cerr << "~" +  workingdirs + "$ ";
+		cerr << "~" +  workingdirs + "$ ";
+	}
+	else
+		cerr << workingdirs + "$ ";
 }
 //handles the ctrl + c signal
 //does noting for parent
@@ -215,7 +219,11 @@ int changedir(string in)
 				exit(1);
 			}
 			//set oldpwd to tmp
-			oldpwd = tmp;
+			if (-1 == (setenv("OLDPWD", tmp, 1)))
+			{
+				perror("set old fail");
+				exit(1);
+			}
 			//set tmp to home
 			if (NULL == (tmp = getenv("HOME")))
 			{
@@ -234,6 +242,7 @@ int changedir(string in)
 				perror("cd");
 				exit(1);
 			}
+			oldpwd = true;
 		}
 		else if (cdp)//for cd path
 		{
@@ -245,8 +254,36 @@ int changedir(string in)
 				perror("getenv");
 				exit(1);
 			}
+			string pathl = tmp;
+			if (path.substr(0,1) != "/")
+			{
+				if (path.substr(0,2) == "..")
+				{
+					if (pathl == "/")
+					{
+						path = pathl;
+					}
+					else
+					{
+						unsigned split = pathl.find_last_of("/");
+						path = pathl.substr(0,split);
+					}
+				}
+				else if (path.substr(0,1) == ".")
+				{
+					path = pathl;
+				}
+				else
+				{
+					path = pathl + "/" + path;
+				}
+			}
 			//set oldpwd to tmp
-			oldpwd = tmp;
+			if (-1 == setenv("OLDPWD", tmp, 1))
+			{
+				perror("set old fail");
+				exit(1);
+			}
 			//set pwd to curr path
 			if (-1 == (setenv("PWD",path.c_str(),1)))
 			{
@@ -259,10 +296,11 @@ int changedir(string in)
 				perror("cd");
 				exit(1);
 			}
+			oldpwd = true;
 		}
 		else //for cd -
 		{
-			if (oldpwd == "")
+			if (!oldpwd)
 			{
 				cout << "no old pwd" << endl;
 				return -1;
@@ -275,20 +313,30 @@ int changedir(string in)
 				perror("getenv");
 				exit(1);
 			}
+			char *olddir;
+			if (NULL == (olddir = getenv("OLDPWD")))
+			{
+				perror("get env");
+				exit(1);
+			}
 			//set pwd to old dir
-			if (-1 == (setenv("PWD",oldpwd.c_str(),1)))
+			if (-1 == (setenv("PWD",olddir,1)))
 			{
 				perror("set env cd");
 				exit(1);
 			}
 			//change dir to old pwd
-			if (-1 == chdir(oldpwd.c_str()))
+			if (-1 == chdir(olddir))
 			{
 				perror("cd");
 				exit(1);
 			}
 			//set old pwd to current pwd
-			oldpwd = tmp;
+			if (-1 == (setenv("OLDPWD", tmp, 1)))
+			{
+				perror("cd");
+				exit(1);
+			}
 			
 		}
 
