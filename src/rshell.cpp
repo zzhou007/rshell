@@ -14,6 +14,7 @@ pid_t pid = 1;
 //global variable for cd -
 bool noprint;
 bool oldpwd = false;
+bool nostop = false;
 //takes in 3 bools and 1 string 
 //outputs the number for the closest connector
 //sets one or none of the 3 connector bools
@@ -156,7 +157,11 @@ void killhandle(int signum)
 }
 void stophandle(int signum)
 {
-	cout << "plz stop" << endl;
+	if (pid != 0)
+	{
+		kill(pid, SIGSTOP);
+		nostop = true;
+	}
 }
 //checks if command is cd dir 
 string checkdir(string in, bool &cd, bool &cdp, bool &cdd)
@@ -349,6 +354,31 @@ int changedir(string in)
 //returns -1 if unable to run command else 0
 int execb (string in)
 {
+	if (in == "bg")
+	{
+		if (pid != 0)
+		{
+			kill(pid, SIGCONT);
+			pid = 0;
+			nostop = false;
+		}
+		else
+		{
+			cout << "no process" << endl;
+		}
+	}
+	else if (in == "fg")
+	{
+		if (pid != 0)
+		{
+			kill(pid, SIGCONT);
+			nostop = false;
+		}
+		else
+		{
+			cout << "no process" << endl;
+		}
+	}
 	//function to handle cd
 	//returns true if in is cd
 	//exits with 0 if it is cd
@@ -414,13 +444,17 @@ int execb (string in)
 		delete temp;
 	}
 	while(!last);
-	int waits;
-	while ((waits = wait(&status)) > 0)
-		if (waits < -1)
-		{
-			perror("no child");
-			exit(1);
-		}
+	if (!nostop)
+	{
+		cout << "hi";
+		int waits;
+		while ((waits = wait(&status)) > 0)
+			if (waits < -1)
+			{
+				perror("no child");
+				exit(1);
+			}
+	}
 	redirect::restoreallfd();
 	redirect::clearvector();
 	return 0;

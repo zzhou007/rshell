@@ -4,8 +4,8 @@ command shell written with cpp
 ### How to Build and Run
 in rshell folder, type `make` to build and type `/bin/rshell` to run 
 
-### Known Bugs
-cd command does not work 
+### Signals
+ctrl + c will end the child program if there is one
 
 ### Connectors 
 Connectors are `&&` `||` `<` `<<<` `>` `>>` `|` and `;`.
@@ -48,6 +48,12 @@ They work form left to right.
 		<td>will have program output to file and append to file</td>
 	</tr>
 </table>
+
+### cd
+the `cd` command has been added to rshell
+`cd` takes you to home
+`cd -` takes you to previious folder if no previous folder will print error
+`cd path` will take to to direct or indirect path if no path exists rshell will end.
 
 ### Quitting Program 
 The program can be exited with the exit command.
