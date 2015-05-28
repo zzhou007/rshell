@@ -356,7 +356,7 @@ int execb (string in)
 {
 	if (in == "bg")
 	{
-		if (pid != 0)
+		if (pid != 0 && pid != 1)
 		{
 			kill(pid, SIGCONT);
 			pid = 0;
@@ -366,10 +366,11 @@ int execb (string in)
 		{
 			cout << "no process" << endl;
 		}
+		return 0;
 	}
 	else if (in == "fg")
 	{
-		if (pid != 0)
+		if (pid != 0 && pid != 1)
 		{
 			kill(pid, SIGCONT);
 			nostop = false;
@@ -378,6 +379,7 @@ int execb (string in)
 		{
 			cout << "no process" << endl;
 		}
+		return 0;
 	}
 	//function to handle cd
 	//returns true if in is cd
