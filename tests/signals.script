@@ -1,0 +1,109 @@
+Script started on Thu 28 May 2015 09:28:51 PM PDT
+]0;lolipopping@debian: ~/Documents/cs/rshelllolipopping@debian:~/Documents/cs/rshell$ bin/rshell
+lolipopping@debian:~/Documents/cs/rshell$ ps
+  PID TTY          TIME CMD
+ 2879 pts/1    00:00:00 bash
+ 2887 pts/1    00:00:00 rshell
+ 2888 pts/1    00:00:00 ps
+lolipopping@debian:~/Documents/cs/rshell$ cd asdf
+cd: No such file or directory
+]0;lolipopping@debian: ~/Documents/cs/rshelllolipopping@debian:~/Documents/cs/rshell$ ps
+  PID TTY          TIME CMD
+ 2879 pts/1    00:00:00 bash
+ 2889 pts/1    00:00:00 ps
+]0;lolipopping@debian: ~/Documents/cs/rshelllolipopping@debian:~/Documents/cs/rshell$ bin/rshell
+lolipopping@debian:~/Documents/cs/rshell$ cd -
+no old pwd
+lolipopping@debian:~/Documents/cs/rshell$ ps
+  PID TTY          TIME CMD
+ 2879 pts/1    00:00:00 bash
+ 2893 pts/1    00:00:00 rshell
+ 2897 pts/1    00:00:00 ps
+lolipopping@debian:~/Documents/cs/rshell$ cd tets  sts
+lolipopping@debian:~/Documents/cs/rshell/tests$ cd ..
+lolipopping@debian:~/Documents/cs/rshell$ cd -
+lolipopping@debian:~/Documents/cs/rshell/tests$ cd -
+lolipopping@debian:~/Documents/cs/rshell$ cd
+lolipopping@debian:~$        cd          
+lolipopping@debian:~$          cd / Documents
+lolipopping@debian:~/Documents$ ls
+cs  enroll
+lolipopping@debian:~/Documents$ cd -
+lolipopping@debian:~$ cd -
+lolipopping@debian:~/Documents$ cd -
+lolipopping@debian:~$ cd -
+lolipopping@debian:~/Documents$              cd         -
+lolipopping@debian:~$ cd         -
+lolipopping@debian:~/Documents$ ls
+cs  enroll
+lolipopping@debian:~/Documents$ cd cs
+lolipopping@debian:~/Documents/cs$ ;;s   ls
+links  rshell
+lolipopping@debian:~/Documents/cs$ cd rshell/tests
+lolipopping@debian:~/Documents/cs/rshell/tests$ ls
+exec.script  ls.script	piping.script
+lolipopping@debian:~/Documents/cs/rshell/tests$ cd ..
+lolipopping@debian:~/Documents/cs/rshell$ cd
+lolipopping@debian:~$ cd -
+lolipopping@debian:~/Documents/cs/rshell$ cd -
+lolipopping@debian:~$ cd -
+lolipopping@debian:~/Documents/cs/rshell$ clear
+[3;J[H[2Jlolipopping@debian:~/Documents/cs/rshell$ ls
+a.out  bin  LICENSE  makefile  README.md  signals.script  src  tests
+lolipopping@debian:~/Documents/cs/rshell$ #ctrl c
+lolipopping@debian:~/Documents/cs/rshell$ cat
+asdf
+asdf
+asdf
+asdf
+asdf
+asdf
+^C
+lolipopping@debian:~/Documents/cs/rshell$ ./a.out
+hi ;)
+hi ;)
+^C
+lolipopping@debian:~/Documents/cs/rshell$ ^C
+lolipopping@debian:~/Documents/cs/rshell$ ^C
+lolipopping@debian:~/Documents/cs/rshell$ ^C
+lolipopping@debian:~/Documents/cs/rshell$ ^C
+lolipopping@debian:~/Documents/cs/rshell$ ^C
+lolipopping@debian:~/Documents/cs/rshell$ clear
+[3;J[H[2Jlolipopping@debian:~/Documents/cs/rshell$ ps
+  PID TTY          TIME CMD
+ 2879 pts/1    00:00:00 bash
+ 2893 pts/1    00:00:00 rshell
+ 2945 pts/1    00:00:00 ps
+lolipopping@debian:~/Documents/cs/rshell$ ^C
+lolipopping@debian:~/Documents/cs/rshell$ clear
+[3;J[H[2Jlolipopping@debian:~/Documents/cs/rshell$ ./a.out
+hi ;)
+hi ;)
+^C
+lolipopping@debian:~/Documents/cs/rshell$ clear
+[3;J[H[2Jlolipopping@debian:~/Documents/cs/rshell$ ls
+a.out  bin  LICENSE  makefile  README.md  signals.script  src  tests
+lolipopping@debian:~/Documents/cs/rshell$ exit
+]0;lolipopping@debian: ~/Documents/cs/rshelllolipopping@debian:~/Documents/cs/rshell$ ls
+[0m[01;32ma.out[0m  [01;34mbin[0m  LICENSE  makefile  README.md  signals.script  [01;34msrc[0m  [01;34mtests[0m
+]0;lolipopping@debian: ~/Documents/cs/rshelllolipopping@debian:~/Documents/cs/rshell$ ps
+  PID TTY          TIME CMD
+ 2879 pts/1    00:00:00 bash
+ 2960 pts/1    00:00:00 ps
+]0;lolipopping@debian: ~/Documents/cs/rshelllolipopping@debian:~/Documents/cs/rshell$ bin/rshell
+lolipopping@debian:~/Documents/cs/rshell$ #extra credit
+lolipopping@debian:~/Documents/cs/rshell$ ./a.out
+hi ;)
+hi ;)
+hi ;)
+^Zlolipopping@debian:~/Documents/cs/rshell$ exit
+]0;lolipopping@debian: ~/Documents/cs/rshelllolipopping@debian:~/Documents/cs/rshell$ ps
+  PID TTY          TIME CMD
+ 2879 pts/1    00:00:00 bash
+ 2976 pts/1    00:00:00 ps
+]0;lolipopping@debian: ~/Documents/cs/rshelllolipopping@debian:~/Documents/cs/rshell$ ;[Kls
+[0m[01;32ma.out[0m  [01;34mbin[0m  LICENSE  makefile  README.md  signals.script  [01;34msrc[0m  [01;34mtests[0m
+]0;lolipopping@debian: ~/Documents/cs/rshelllolipopping@debian:~/Documents/cs/rshell$ exit
+exit
+
+Script done on Thu 28 May 2015 09:30:49 PM PDT
