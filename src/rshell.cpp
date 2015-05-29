@@ -448,7 +448,6 @@ int execb (string in)
 	while(!last);
 	if (!nostop)
 	{
-		cout << "hi";
 		int waits;
 		while ((waits = wait(&status)) > 0)
 			if (waits < -1)
